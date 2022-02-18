@@ -25,8 +25,12 @@ class ViewController: UIViewController {
             button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             button.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -10)
         ])
+        button.addTarget(self, action: #selector(requestSignIn), for: .touchUpInside)
     }
 
+    @objc private func requestSignIn() {
+        GoogleAuthManager.shared.signIn()
+    }
 
 }
 
