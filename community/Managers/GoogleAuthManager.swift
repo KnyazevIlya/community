@@ -8,6 +8,7 @@
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
+import RxSwift
 
 class GoogleAuthManager {
     
@@ -16,10 +17,12 @@ class GoogleAuthManager {
         case signedOut
     }
     
-    private init() {}
+    private init() {
+        state.on(.next(.signedOut))
+    }
     
     static let shared = GoogleAuthManager()
-    var state: SignInState = .signedOut
+    let state = PublishSubject<SignInState>()
     
     func signIn() {
         if !restoreUser() {
@@ -34,6 +37,11 @@ class GoogleAuthManager {
                 authenticateUser(for: user, with: error)
             }
         }
+    }
+    
+    func signOut() {
+        GIDSignIn.sharedInstance.signOut()
+        state.on(.next(.signedOut))
     }
     
     @discardableResult
@@ -60,10 +68,10 @@ class GoogleAuthManager {
         let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
 
         Auth.auth().signIn(with: credential) { [unowned self] (_, error) in
-                if let error = error {
+            if let error = error {
                 print(error.localizedDescription)
             } else {
-                self.state = .signedIn
+                state.on(.next(.signedIn))
                 let user = GIDSignIn.sharedInstance.currentUser
                 print(user?.profile?.name ?? "):")
             }

@@ -15,9 +15,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let vc = ViewController()
-        vc.view.backgroundColor = .systemBlue
-        window?.rootViewController = vc
+        let navigationController = UINavigationController()
+        let authRouter = AuthRouter(navigationController: navigationController)
+        authRouter.toSelf()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
