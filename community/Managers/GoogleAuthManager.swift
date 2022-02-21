@@ -45,7 +45,7 @@ class GoogleAuthManager {
     }
     
     @discardableResult
-    private func restoreUser() -> Bool {
+    func restoreUser() -> Bool {
         if GIDSignIn.sharedInstance.hasPreviousSignIn() {
             GIDSignIn.sharedInstance.restorePreviousSignIn { [unowned self] user, error in
                 authenticateUser(for: user, with: error)
