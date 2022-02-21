@@ -83,10 +83,23 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.isTranslucent = false
-        tabBar.backgroundColor = .systemGray5
+//        plain tabbar
+//        tabBar.isTranslucent = false
+//        tabBar.backgroundColor = .mainGray
+//        tabBar.unselectedItemTintColor = .white
+        
+//      blured tabbar
+        tabBar.isTranslucent = true
+        tabBar.barTintColor = .clear
+        tabBar.backgroundColor = .black
         tabBar.unselectedItemTintColor = .white
-        view.layoutIfNeeded()
+        tabBar.layer.backgroundColor = UIColor.clear.cgColor
+        
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = .flexibleWidth
+        tabBar.insertSubview(blurView, at: 0)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

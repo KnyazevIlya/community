@@ -22,6 +22,7 @@
 		06DFE59B27C2F8E7008454A7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DFE59A27C2F8E7008454A7 /* AuthViewModel.swift */; };
 		06DFE5A327C30AEF008454A7 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DFE5A127C30AEF008454A7 /* AuthController.swift */; };
 		06DFE5A427C30AEF008454A7 /* AuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06DFE5A227C30AEF008454A7 /* AuthController.xib */; };
+		06DFE5A727C39294008454A7 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DFE5A627C39293008454A7 /* UIColor + Extension.swift */; };
 		141DCED475F813B7B2F3D047 /* Pods_community.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F438ACEC52939E9CBD57FD05 /* Pods_community.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		06DFE59A27C2F8E7008454A7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		06DFE5A127C30AEF008454A7 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		06DFE5A227C30AEF008454A7 /* AuthController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthController.xib; sourceTree = "<group>"; };
+		06DFE5A627C39293008454A7 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		0D72C95A8C9D01F30441929C /* Pods-community.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-community.release.xcconfig"; path = "Target Support Files/Pods-community/Pods-community.release.xcconfig"; sourceTree = "<group>"; };
 		F438ACEC52939E9CBD57FD05 /* Pods_community.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_community.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F51FCB8BA6875150603E6570 /* Pods-community.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-community.debug.xcconfig"; path = "Target Support Files/Pods-community/Pods-community.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				06DFE59027C2E71D008454A7 /* Resources */,
 				06DFE58F27C2E6F9008454A7 /* Navigation */,
 				06DFE58A27C2E3BF008454A7 /* Common */,
+				06DFE5A627C39293008454A7 /* UIColor + Extension.swift */,
 			);
 			path = community;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				06DFE59527C2E9DB008454A7 /* Router.swift in Sources */,
 				06DFE5A327C30AEF008454A7 /* AuthController.swift in Sources */,
 				06DFE58C27C2E3CA008454A7 /* ViewController.swift in Sources */,
+				06DFE5A727C39294008454A7 /* UIColor + Extension.swift in Sources */,
 				06DFE59927C2F7FF008454A7 /* AuthRouter.swift in Sources */,
 				068F65F527BFF8B700F63EB0 /* Application.swift in Sources */,
 				068F65E127BFF88700F63EB0 /* AppDelegate.swift in Sources */,
