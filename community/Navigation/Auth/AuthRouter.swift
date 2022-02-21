@@ -16,12 +16,13 @@ class AuthRouter: Router {
     
     func toSelf() {
         let viewModel = AuthViewModel(router: self)
-        let controller = AuthViewController(viewModel: viewModel)
+        let controller = AuthController(viewModel: viewModel)
         navigationController?.pushViewController(controller, animated: true)
     }
     
     func toMainFlow() {
-        print("go to main flow")
+        let controller = TabBarController(initialTab: .map)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
 }

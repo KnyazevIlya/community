@@ -15,37 +15,12 @@ class TabBarController: UITabBarController {
         case profile
     }
     
-    private var initialTab: Tab
+    private var initialTab: Tab = .map
     
-    init(tab: Tab) {
-        self.initialTab = tab
+    init(initialTab tab: Tab) {
         super.init(nibName: nil, bundle: nil)
-        self.modalPresentationStyle = .overCurrentContext
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        print("🟢 \(#function) \(self)")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tabBar.isTranslucent = false
-        tabBar.backgroundColor = .systemGray5
-        tabBar.unselectedItemTintColor = .white
-        view.layoutIfNeeded()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewControllers?.removeAll()
-    }
-    
-    static func tabBarController(initialTab tab: Tab) -> TabBarController {
-        let tabBarController = TabBarController(tab: tab)
+        
+        initialTab = tab
         
         let feedNavigation = UINavigationController()
         let feedController = UIViewController()
@@ -62,13 +37,13 @@ class TabBarController: UITabBarController {
         profileViewController.view.backgroundColor = .systemPink
         profileNavigation.pushViewController(profileViewController, animated: false)
         
-        tabBarController.viewControllers = [
+        viewControllers = [
             feedNavigation,
             mapNavigation,
             profileNavigation
         ]
         
-        tabBarController.selectedIndex = tab.rawValue
+        selectedIndex = tab.rawValue
         
         setTabBarItem(
             title: "Feed",
@@ -96,11 +71,30 @@ class TabBarController: UITabBarController {
             vc: profileNavigation,
             current: tab == .profile
         )
-        
-        return tabBarController
     }
     
-    static private func setTabBarItem(title: String? = nil, image: UIImage?, selectedImage: UIImage?, tag: Int, vc: UIViewController?, current: Bool) {
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("🟢 \(#function) \(self)")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tabBar.isTranslucent = false
+        tabBar.backgroundColor = .systemGray5
+        tabBar.unselectedItemTintColor = .white
+        view.layoutIfNeeded()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewControllers?.removeAll()
+    }
+    
+    private func setTabBarItem(title: String? = nil, image: UIImage?, selectedImage: UIImage?, tag: Int, vc: UIViewController?, current: Bool) {
         
         let item = UITabBarItem(
             title: title,

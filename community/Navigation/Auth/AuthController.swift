@@ -8,8 +8,14 @@
 import UIKit
 import GoogleSignIn
 
-class AuthViewController: ViewController {
+class AuthController: ViewController {
 
+    @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var contentViewBottomOffset: NSLayoutConstraint!
+    @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
+    
+    
     private let viewModel: AuthViewModel
     
     init(viewModel: AuthViewModel) {
@@ -30,9 +36,11 @@ class AuthViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemIndigo
-        prepareGoogleButton()
         navigationController?.navigationBar.isHidden = true
+        contentView.layer.cornerRadius = 20
+        
+        prepareGoogleButton()
+        animateLogInAppearence()
     }
     
     override func bindViewModel() {
@@ -42,14 +50,23 @@ class AuthViewController: ViewController {
     }
     
     private func prepareGoogleButton() {
-        view.addSubview(button)
+        contentView.addSubview(button)
         
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -10)
+            button.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 50),
+            button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -10)
         ])
         button.addTarget(self, action: #selector(requestSignIn), for: .touchUpInside)
+    }
+    
+    private func animateLogInAppearence() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.contentViewBottomOffset.constant = self.contentViewHeightConstraint.constant
+            UIView.animate(withDuration: 1) {
+                self.view.layoutSubviews()
+            }
+        }
     }
 
     @objc private func requestSignIn() {

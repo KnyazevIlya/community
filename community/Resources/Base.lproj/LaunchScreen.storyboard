@@ -15,8 +15,28 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="city" highlightedImage="city" translatesAutoresizingMaskIntoConstraints="NO" id="fzD-yd-tvl">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="916"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTp-LW-9NV">
+                                <rect key="frame" x="0.0" y="100" width="414" height="57.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="48"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="fzD-yd-tvl" secondAttribute="bottom" constant="-20" id="6L4-eD-cXj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dTp-LW-9NV" secondAttribute="trailing" id="HOn-ZH-0tJ"/>
+                            <constraint firstItem="fzD-yd-tvl" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Ipd-C7-LST"/>
+                            <constraint firstItem="dTp-LW-9NV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="JXt-Fz-wBp"/>
+                            <constraint firstItem="fzD-yd-tvl" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" constant="20" id="gvF-yf-Oze"/>
+                            <constraint firstItem="fzD-yd-tvl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="moG-eo-S6L"/>
+                            <constraint firstItem="dTp-LW-9NV" firstAttribute="top" secondItem="fzD-yd-tvl" secondAttribute="top" constant="100" id="osQ-f2-hQg"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -25,6 +45,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="city" width="1125" height="2000"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
