@@ -28,9 +28,8 @@ class TabBarController: UITabBarController {
         feedNavigation.pushViewController(feedController, animated: false)
         
         let mapNavigation = UINavigationController()
-        let mapViewController = UIViewController()
-        mapViewController.view.backgroundColor = .systemGreen
-        mapNavigation.pushViewController(mapViewController, animated: false)
+        let mapRouter = MapRouter(navigationController: mapNavigation)
+        mapRouter.toSelf()
         
         let profileNavigation = UINavigationController()
         let profileViewController = UIViewController()

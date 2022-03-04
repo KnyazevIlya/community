@@ -43,12 +43,6 @@ class AuthController: ViewController {
         animateLogInAppearence()
     }
     
-    override func bindViewModel() {
-        super.bindViewModel()
-        
-        _ = viewModel.transform(AuthViewModel.Input())
-    }
-    
     private func prepareGoogleButton() {
         contentView.addSubview(button)
         

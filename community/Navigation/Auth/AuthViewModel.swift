@@ -7,18 +7,15 @@
 
 import RxSwift
 
-class AuthViewModel: ViewModel, ViewModelType {
-    struct Input {}
-    struct Output {}
+class AuthViewModel: ViewModel {
     
     private let disposeBag = DisposeBag()
     private var router: AuthRouter
     
     init(router: AuthRouter) {
         self.router = router
-    }
-    
-    func transform(_ input: Input) -> Output {
+        super.init()
+        
         GoogleAuthManager.shared.state
             .subscribe(onNext: { [weak self] state in
                 if state == .signedIn {
@@ -26,8 +23,6 @@ class AuthViewModel: ViewModel, ViewModelType {
                 }
             })
             .disposed(by: disposeBag)
-        
-        return Output()
     }
     
 }
