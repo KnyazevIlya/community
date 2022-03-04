@@ -47,7 +47,7 @@ class MapController: ViewController {
                     self.removeAnnotations(type: CreationAnnotation.self)
                     
                     let pin = CreationAnnotation(
-                        title: "lon: \(coords.longitude), lat: \(coords.latitude)",
+                        title: "Add",
                         coordinate: coords
                     )
                     self.mapView.addAnnotation(pin)
@@ -82,14 +82,16 @@ extension MapController: MKMapViewDelegate {
         if let annotation = annotation as? CreationAnnotation {
             if let creation = mapView.dequeueReusableAnnotationView(withIdentifier: CreationAnnotation.reuseIdentifier) as? MKMarkerAnnotationView {
                 creation.annotation = annotation
-                creation.tintColor = .systemBlue
-                creation.glyphImage = UIImage(systemName: "plus")
                 annotationView = creation
             } else {
                 annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: CreationAnnotation.reuseIdentifier)
-                annotationView?.tintColor = .systemBlue
-                annotationView?.glyphImage = UIImage(systemName: "plus")
             }
+            
+            annotationView?.tintColor = .systemBlue
+            annotationView?.glyphImage = UIImage(systemName: "plus")
+            annotationView?.canShowCallout = true
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .contactAdd)
+            annotationView?.titleVisibility = .hidden
         }
         
         return annotationView
