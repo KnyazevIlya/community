@@ -11,6 +11,7 @@
 		0629A06E27D1F43A005C655A /* PinCreationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0629A06C27D1F43A005C655A /* PinCreationController.xib */; };
 		0629A07127D23642005C655A /* CreationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0629A07027D23642005C655A /* CreationAnnotation.swift */; };
 		0629A07327D2599D005C655A /* FeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0629A07227D2599D005C655A /* FeedbackManager.swift */; };
+		0629A07627D28580005C655A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0629A07527D28580005C655A /* LocationManager.swift */; };
 		065EFC7C27C0601700EA00E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 065EFC7B27C0601700EA00E3 /* GoogleService-Info.plist */; };
 		068F65E127BFF88700F63EB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068F65E027BFF88700F63EB0 /* AppDelegate.swift */; };
 		068F65E327BFF88700F63EB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068F65E227BFF88700F63EB0 /* SceneDelegate.swift */; };
@@ -39,6 +40,7 @@
 		0629A06C27D1F43A005C655A /* PinCreationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinCreationController.xib; sourceTree = "<group>"; };
 		0629A07027D23642005C655A /* CreationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationAnnotation.swift; sourceTree = "<group>"; };
 		0629A07227D2599D005C655A /* FeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackManager.swift; sourceTree = "<group>"; };
+		0629A07527D28580005C655A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		065EFC7B27C0601700EA00E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		068F65DD27BFF88700F63EB0 /* community.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = community.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		068F65E027BFF88700F63EB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				068F65F827C0351300F63EB0 /* GoogleAuthManager.swift */,
 				0629A07227D2599D005C655A /* FeedbackManager.swift */,
+				0629A07527D28580005C655A /* LocationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				06DFE5CC27C55504008454A7 /* MapViewModel.swift in Sources */,
 				068F65E327BFF88700F63EB0 /* SceneDelegate.swift in Sources */,
 				06DFE5CF27C55551008454A7 /* MapController.swift in Sources */,
+				0629A07627D28580005C655A /* LocationManager.swift in Sources */,
 				06DFE58E27C2E4CC008454A7 /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -506,6 +510,8 @@
 				DEVELOPMENT_TEAM = 68W5DTBSDK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = community/Resources/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Let us use locations services to provide access to reporting on map";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Let us use locations services to provide access to reporting on map";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -538,6 +544,8 @@
 				DEVELOPMENT_TEAM = 68W5DTBSDK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = community/Resources/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Let us use locations services to provide access to reporting on map";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Let us use locations services to provide access to reporting on map";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

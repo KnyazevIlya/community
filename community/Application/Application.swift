@@ -12,7 +12,9 @@ class Application {
     
     static let shared = Application()
     
-    private init() {}
+    private init() {
+        LocationManager.shared.configure()
+    }
     
     func prepareInitialScreen(in window: UIWindow?) {
         let navigationController = UINavigationController()

@@ -10,7 +10,7 @@ import FirebaseAuth
 import GoogleSignIn
 import RxSwift
 
-class GoogleAuthManager {
+final class GoogleAuthManager {
     
     enum SignInState {
         case signedIn

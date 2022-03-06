@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FeedbackManager {
+final class FeedbackManager {
     
     static let shared = FeedbackManager()
     
@@ -18,6 +18,11 @@ class FeedbackManager {
     func giveSuccessFeedback() {
         notificationGenerator.prepare()
         notificationGenerator.notificationOccurred(.success)
+    }
+    
+    func giveErrorFeedback() {
+        notificationGenerator.prepare()
+        notificationGenerator.notificationOccurred(.error)
     }
     
 }

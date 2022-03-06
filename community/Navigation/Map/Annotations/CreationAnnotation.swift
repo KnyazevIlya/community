@@ -8,16 +8,14 @@
 import MapKit
 
 class CreationAnnotation: NSObject, MKAnnotation {
-    let title: String?
+    let title: String? = "Add"
     let coordinate: CLLocationCoordinate2D
 
     static let reuseIdentifier = String(describing: self)
 
     init(
-        title: String?,
         coordinate: CLLocationCoordinate2D
     ) {
-        self.title = title
         self.coordinate = coordinate
 
         super.init()
