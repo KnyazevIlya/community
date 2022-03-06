@@ -22,10 +22,14 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MXy-ex-FGz">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </mapView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0eo-Qb-Am8">
-                    <rect key="frame" x="342" y="150" width="52" height="31"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0eo-Qb-Am8" customClass="HideButton" customModule="community" customModuleProvider="target">
+                    <rect key="frame" x="342" y="781" width="52" height="31"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="31" id="UgP-f8-XCs"/>
+                        <constraint firstAttribute="width" constant="52" id="zGC-by-CJ2"/>
+                    </constraints>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="filled" image="eye.fill" catalog="system"/>
+                    <buttonConfiguration key="configuration" style="filled"/>
                     <connections>
                         <action selector="didTapVisibility:" destination="-1" eventType="touchUpInside" id="D9C-OI-xUC"/>
                     </connections>
@@ -37,7 +41,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0eo-Qb-Am8" secondAttribute="trailing" constant="20" id="3f6-pB-lZ5"/>
                 <constraint firstItem="MXy-ex-FGz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Cqb-l0-ZwK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MXy-ex-FGz" secondAttribute="trailing" id="JdI-05-3l6"/>
-                <constraint firstItem="0eo-Qb-Am8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="150" id="SKQ-6w-d0Z"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="0eo-Qb-Am8" secondAttribute="bottom" constant="50" id="T1t-up-lKC"/>
                 <constraint firstItem="MXy-ex-FGz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zZW-7T-EgY"/>
                 <constraint firstAttribute="bottom" secondItem="MXy-ex-FGz" secondAttribute="bottom" id="zhK-u0-mAO"/>
             </constraints>
@@ -45,7 +49,6 @@
         </view>
     </objects>
     <resources>
-        <image name="eye.fill" catalog="system" width="128" height="78"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

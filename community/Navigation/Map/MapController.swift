@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import RxSwift
 import Popover
+import Lottie
 
 class MapController: ViewController {
 
@@ -18,9 +19,10 @@ class MapController: ViewController {
     private let disposeBag = DisposeBag()
     private let viewModel: MapViewModel
     
-    private let spanDelta: CLLocationDegrees = 0.025
-    private let reachabilityRadius: CLLocationDistance = 2000
+    private let spanDelta: CLLocationDegrees = 0.125
+    private let reachabilityRadius: CLLocationDistance = 3000 //3km
     private let reachabilityAreaBorderWidth: CGFloat = 5
+    private var reachabilityOpacity: Float = 0.3
     
     init(viewModel: MapViewModel) {
         self.viewModel = viewModel
@@ -58,13 +60,47 @@ class MapController: ViewController {
             .disposed(by: disposeBag)
     }
     
-    @IBAction func didTapVisibility(_ sender: UIButton) {
-        let popoverOrigin = CGPoint(x: sender.frame.midX, y: sender.frame.maxY)
+    @IBAction func didTapVisibility(_ sender: HideButton) {
+        zoomToCurrentLocation(CLLocation(
+            latitude: mapView.userLocation.coordinate.latitude,
+            longitude: mapView.userLocation.coordinate.longitude)
+        )
+        
+        let popoverOrigin = CGPoint(x: sender.frame.minX - 2, y: sender.frame.midY)
         let viewOrigin = CGPoint(x: 32, y: sender.frame.maxY - 32)
-        let viewSize = CGSize(width: 250, height: 100)
+        let viewSize = CGSize(width: 150, height: 50)
         let popoverView = UIView(frame: CGRect(origin: viewOrigin, size: viewSize))
         
+        let slider = UISlider()
+        slider.value = reachabilityOpacity * 2
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        popoverView.addSubview(slider)
+        NSLayoutConstraint.activate([
+            slider.topAnchor.constraint(equalTo: popoverView.topAnchor, constant: 10),
+            slider.bottomAnchor.constraint(equalTo: popoverView.bottomAnchor, constant: -10),
+            slider.leftAnchor.constraint(equalTo: popoverView.leftAnchor, constant: 10),
+            slider.rightAnchor.constraint(equalTo: popoverView.rightAnchor, constant: -15)
+        ])
+
+        let sliderSubscription = slider.rx.value.subscribe(
+            onNext: { [weak self] value in
+                guard let self = self else { return }
+                
+                sender.isIconCrossed = value == 0.0
+                self.reachabilityOpacity = value / 2
+            },
+            onDisposed: {
+                print("🟢 slider disposed")
+            }
+        )
+        
         let popover = Popover()
+        popover.didDismissHandler = {
+            sliderSubscription.dispose()
+        }
+        
+        popover.popoverType = .left
+        popover.arrowSize = CGSize(width: 10, height: 5)
         popover.show(popoverView, point: popoverOrigin)
     }
     
@@ -95,6 +131,8 @@ class MapController: ViewController {
                         
                         FeedbackManager.shared.giveSuccessFeedback()
                     } else {
+                        //set center to avoid bug, link: https://developer.apple.com/forums/thread/126473
+                        self.mapView.setCenter(self.mapView.centerCoordinate, animated: false)
                         FeedbackManager.shared.giveErrorFeedback()
                     }                    
                 }
@@ -106,6 +144,7 @@ class MapController: ViewController {
     private func prepareMapView() {
         mapView.delegate = self
         mapView.showsUserLocation = true
+        mapView.pointOfInterestFilter = .excludingAll
         mapView.mapType = .hybrid
     }
     
@@ -167,7 +206,7 @@ extension MapController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let circle = overlay as? MKCircle {
             let circleRenderer = MKCircleRenderer(circle: circle)
-            circleRenderer.fillColor = .reachabilityFillColor
+            circleRenderer.fillColor = .systemBlue.withAlphaComponent(CGFloat(reachabilityOpacity))
             circleRenderer.strokeColor = .reachabilityStrokeColor
             circleRenderer.lineWidth = reachabilityAreaBorderWidth
             
