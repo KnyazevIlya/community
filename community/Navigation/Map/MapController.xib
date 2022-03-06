@@ -22,7 +22,7 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MXy-ex-FGz">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </mapView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0eo-Qb-Am8" customClass="HideButton" customModule="community" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0eo-Qb-Am8" customClass="VisibilityButton" customModule="community" customModuleProvider="target">
                     <rect key="frame" x="342" y="781" width="52" height="31"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="31" id="UgP-f8-XCs"/>

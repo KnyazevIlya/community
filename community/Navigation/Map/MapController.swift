@@ -60,7 +60,7 @@ class MapController: ViewController {
             .disposed(by: disposeBag)
     }
     
-    @IBAction func didTapVisibility(_ sender: HideButton) {
+    @IBAction func didTapVisibility(_ sender: VisibilityButton) {
         zoomToCurrentLocation(CLLocation(
             latitude: mapView.userLocation.coordinate.latitude,
             longitude: mapView.userLocation.coordinate.longitude)
