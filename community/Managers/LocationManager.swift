@@ -27,6 +27,30 @@ final class LocationManager: NSObject {
         }
     }
     
+    func geocode(coordinates: CLLocationCoordinate2D, completion: @escaping (String?) -> ()) {
+        let geocoder = CLGeocoder()
+        let location = CLLocation(coordinates: coordinates)
+        
+        geocoder.reverseGeocodeLocation(location, preferredLocale: Locale(identifier: "en_US")) { placemarks, error in
+            guard let currentPlacemark = placemarks?.first, error == nil else {
+                completion(nil)
+                return
+            }
+            
+            completion(
+                [
+                    currentPlacemark.subLocality,
+                    currentPlacemark.thoroughfare,
+                    currentPlacemark.locality,
+                    currentPlacemark.country,
+                ]
+                    .compactMap { $0 }
+                    .joined(separator: ", ")
+            )
+        }
+
+    }
+    
     deinit {
         manager.stopUpdatingLocation()
     }

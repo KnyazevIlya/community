@@ -118,7 +118,7 @@ class MapController: ViewController {
                     let coords = self.mapView.convert(touchLocation, toCoordinateFrom: self.mapView)
                     
                     //check if the user leaves a mark in the valid area
-                    let touchLocationOnMap = CLLocation(latitude: coords.latitude, longitude: coords.longitude)
+                    let touchLocationOnMap = CLLocation(coordinates: coords)
                     let distanceToTouchLocation = self.mapView.userLocation.location?.distance(from: touchLocationOnMap) ?? .infinity
                     if distanceToTouchLocation <= self.reachabilityRadius {
                         self.removeAnnotations(type: CreationAnnotation.self)
@@ -214,5 +214,16 @@ extension MapController: MKMapViewDelegate {
         }
         
         return MKOverlayRenderer()
+    }
+
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        let userView = mapView.view(for: mapView.userLocation)
+        userView?.isEnabled = false
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if view.annotation is CreationAnnotation, let coordinate = view.annotation?.coordinate {
+            viewModel.pinTrigger.on(.next(coordinate))
+        }
     }
 }

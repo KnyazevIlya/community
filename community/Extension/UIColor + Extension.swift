@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIColor {
-    static let mainGray = UIColor(red: 44/255, green: 44/255, blue: 26/255, alpha: 1)
-    static let reachabilityFillColor: UIColor = .systemBlue.withAlphaComponent(0.2)
+    static let mainGray = UIColor(named: "mainGray")!
+    static let secondaryGray = UIColor(named: "secondaryGray")!
     static let reachabilityStrokeColor:UIColor = .systemBlue.withAlphaComponent(0.7)
 }

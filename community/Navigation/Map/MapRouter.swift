@@ -23,9 +23,12 @@ class MapRouter: Router {
     }
     
     func toPinCreation(with coords: CLLocationCoordinate2D) {
-        let controller = PinCreationController()
-
-        navigationController?.present(controller, animated: true)
+        let creationNavigation = UINavigationController()
+        let viewModel = PinCreationViewModel()
+        let controller = PinCreationController(viewModel: viewModel)
+        creationNavigation.pushViewController(controller, animated: false)
+        controller.coordinates = coords
+        navigationController?.present(creationNavigation, animated: true)
     }
     
 }
