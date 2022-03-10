@@ -11,9 +11,4 @@ class MediaCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        imageView.contentMode = .scaleToFill
-    }
 }

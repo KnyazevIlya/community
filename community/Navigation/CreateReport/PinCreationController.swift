@@ -103,13 +103,13 @@ class PinCreationController: ViewController {
         mediaCollection.backgroundColor = .secondaryGray.withAlphaComponent(0.2)
         mediaCollection.layer.cornerRadius = 5
         mediaCollection.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        mediaCollection.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 2, bottom: -2, right: 2)
     }
     
     private func presentImagePicker(source: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(source) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
-            imagePicker.allowsEditing = true
             imagePicker.sourceType = source
             
             present(imagePicker, animated: true)
@@ -134,13 +134,13 @@ class PinCreationController: ViewController {
 //MARK: - UIImagePickerControllerDelegate
 extension PinCreationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        viewModel.acceptNewMedia(.photo(info[.editedImage] as? UIImage))
+        viewModel.acceptNewMedia(.photo(info[.originalImage] as? UIImage))
         dismiss(animated: true)
     }
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
-extension PinCreationController: UICollectionViewDelegateFlowLayout {
+extension PinCreationController: UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = collectionView.frame.height - 10
         let width = height * (3 / 4)
@@ -151,5 +151,10 @@ extension PinCreationController: UICollectionViewDelegateFlowLayout {
         showPickerAlert(completion: { [weak self] source in
             self?.presentImagePicker(source: source)
         })
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let verticalIndicatorView = (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0])
+        verticalIndicatorView.backgroundColor = .systemBlue.withAlphaComponent(0.8)
     }
 }

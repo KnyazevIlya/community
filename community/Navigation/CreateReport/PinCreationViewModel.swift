@@ -19,7 +19,7 @@ class PinCreationViewModel: ViewModel {
     let mediaObservable = BehaviorRelay<[MediaCollectionType]>(value: [.add])
     
     func acceptNewMedia(_ media: MediaCollectionType) {
-        mediaObservable.accept(mediaObservable.value + [media])
+        mediaObservable.accept([.add, media] + mediaObservable.value[1...])
     }
     
 }
