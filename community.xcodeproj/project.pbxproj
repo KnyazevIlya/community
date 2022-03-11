@@ -26,6 +26,9 @@
 		069EAD3627D7D6A2001619FC /* AddMediaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 069EAD3427D7D6A2001619FC /* AddMediaCell.xib */; };
 		069EAD3A27D7D753001619FC /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069EAD3827D7D753001619FC /* MediaCell.swift */; };
 		069EAD3B27D7D753001619FC /* MediaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 069EAD3927D7D753001619FC /* MediaCell.xib */; };
+		06A75C4827DA645300294369 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A75C4627DA645300294369 /* VideoCell.swift */; };
+		06A75C4927DA645300294369 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06A75C4727DA645300294369 /* VideoCell.xib */; };
+		06A75C5127DB384300294369 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A75C5027DB384300294369 /* PlayerView.swift */; };
 		06BDDD9C27D8AE7E00D7C7A4 /* PinCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDDD9B27D8AE7E00D7C7A4 /* PinCreationViewModel.swift */; };
 		06BDDD9E27D8B5B200D7C7A4 /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDDD9D27D8B5B200D7C7A4 /* Observable+Extension.swift */; };
 		06BDDDA027D8F56000D7C7A4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDDD9F27D8F56000D7C7A4 /* UIView+Extension.swift */; };
@@ -68,6 +71,9 @@
 		069EAD3427D7D6A2001619FC /* AddMediaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMediaCell.xib; sourceTree = "<group>"; };
 		069EAD3827D7D753001619FC /* MediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
 		069EAD3927D7D753001619FC /* MediaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MediaCell.xib; sourceTree = "<group>"; };
+		06A75C4627DA645300294369 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		06A75C4727DA645300294369 /* VideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
+		06A75C5027DB384300294369 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		06BDDD9B27D8AE7E00D7C7A4 /* PinCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCreationViewModel.swift; sourceTree = "<group>"; };
 		06BDDD9D27D8B5B200D7C7A4 /* Observable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
 		06BDDD9F27D8F56000D7C7A4 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -105,6 +111,7 @@
 		0629A06A27D13975005C655A /* CreateReport */ = {
 			isa = PBXGroup;
 			children = (
+				06A75C4F27DB383500294369 /* Subviews */,
 				069EAD3727D7D6AB001619FC /* cells */,
 				0629A06B27D1F43A005C655A /* PinCreationController.swift */,
 				0629A06C27D1F43A005C655A /* PinCreationController.xib */,
@@ -179,8 +186,18 @@
 				069EAD3427D7D6A2001619FC /* AddMediaCell.xib */,
 				069EAD3827D7D753001619FC /* MediaCell.swift */,
 				069EAD3927D7D753001619FC /* MediaCell.xib */,
+				06A75C4627DA645300294369 /* VideoCell.swift */,
+				06A75C4727DA645300294369 /* VideoCell.xib */,
 			);
 			path = cells;
+			sourceTree = "<group>";
+		};
+		06A75C4F27DB383500294369 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				06A75C5027DB384300294369 /* PlayerView.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		06DFE58A27C2E3BF008454A7 /* Common */ = {
@@ -350,6 +367,7 @@
 				069EAD3627D7D6A2001619FC /* AddMediaCell.xib in Resources */,
 				068F65ED27BFF88900F63EB0 /* LaunchScreen.storyboard in Resources */,
 				0629A06E27D1F43A005C655A /* PinCreationController.xib in Resources */,
+				06A75C4927DA645300294369 /* VideoCell.xib in Resources */,
 				069EAD3B27D7D753001619FC /* MediaCell.xib in Resources */,
 				068F65EA27BFF88900F63EB0 /* Assets.xcassets in Resources */,
 				065EFC7C27C0601700EA00E3 /* GoogleService-Info.plist in Resources */,
@@ -407,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				069EAD3227D7477B001619FC /* CoreLocation+Extension.swift in Sources */,
+				06A75C4827DA645300294369 /* VideoCell.swift in Sources */,
 				06DFE5CA27C554FA008454A7 /* MapRouter.swift in Sources */,
 				06DFE59527C2E9DB008454A7 /* Router.swift in Sources */,
 				06DFE5A327C30AEF008454A7 /* AuthController.swift in Sources */,
@@ -414,6 +433,7 @@
 				06DFE5A727C39294008454A7 /* UIColor + Extension.swift in Sources */,
 				0684FAE227D4EE5B002BB256 /* VisibilityButton.swift in Sources */,
 				0629A07127D23642005C655A /* CreationAnnotation.swift in Sources */,
+				06A75C5127DB384300294369 /* PlayerView.swift in Sources */,
 				06DFE59927C2F7FF008454A7 /* AuthRouter.swift in Sources */,
 				0629A06D27D1F43A005C655A /* PinCreationController.swift in Sources */,
 				069EAD3A27D7D753001619FC /* MediaCell.swift in Sources */,

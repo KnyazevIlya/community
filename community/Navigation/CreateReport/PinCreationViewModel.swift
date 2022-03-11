@@ -13,7 +13,7 @@ class PinCreationViewModel: ViewModel {
     enum MediaCollectionType {
         case add
         case photo(UIImage?)
-        case video
+        case video(URL)
     }
     
     let mediaObservable = BehaviorRelay<[MediaCollectionType]>(value: [.add])

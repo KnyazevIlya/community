@@ -13,7 +13,19 @@ extension UIView {
         return "\(self)"
     }
     
-    class var nib: UINib {
+    static var nib: UINib {
         return UINib(nibName: identifier, bundle: nil)
+    }
+    
+    func pin(toView view: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(self)
+        NSLayoutConstraint.activate([
+            topAnchor.constraint(equalTo: view.topAnchor),
+            leftAnchor.constraint(equalTo: view.leftAnchor),
+            bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
     }
 }

@@ -8,6 +8,8 @@
 import UIKit
 import CoreLocation
 import RxSwift
+import AVFoundation
+import AVKit
 
 class PinCreationController: ViewController {
 
@@ -84,8 +86,10 @@ class PinCreationController: ViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MediaCell.identifier, for: indexPath) as! MediaCell
                 cell.imageView.image = image
                 return cell
-            case .video:
-                fatalError("Video cell is not implemented yet")
+            case .video(let url):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.identifier, for: indexPath) as! VideoCell
+                cell.configure(withVideoUrl: url)
+                return cell
             }
         }
         .disposed(by: disposeBag)
@@ -95,7 +99,8 @@ class PinCreationController: ViewController {
     private func configureCollectionView() {
         mediaCollection.register(
             AddMediaCell.self,
-            MediaCell.self
+            MediaCell.self,
+            VideoCell.self
         )
         
         mediaCollection.delegate = self
@@ -111,7 +116,7 @@ class PinCreationController: ViewController {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = source
-            
+            imagePicker.mediaTypes = ["public.image", "public.movie"]
             present(imagePicker, animated: true)
         }
     }
@@ -134,7 +139,11 @@ class PinCreationController: ViewController {
 //MARK: - UIImagePickerControllerDelegate
 extension PinCreationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        viewModel.acceptNewMedia(.photo(info[.originalImage] as? UIImage))
+        if let image = info[.originalImage] as? UIImage {
+            viewModel.acceptNewMedia(.photo(image))
+        } else if let url = info[.mediaURL] as? URL {
+            viewModel.acceptNewMedia(.video(url))
+        }
         dismiss(animated: true)
     }
 }
