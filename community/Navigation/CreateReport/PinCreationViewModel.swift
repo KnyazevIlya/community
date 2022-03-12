@@ -7,6 +7,7 @@
 
 import RxSwift
 import RxCocoa
+import CoreLocation
 
 class PinCreationViewModel: ViewModel {
     
@@ -16,7 +17,19 @@ class PinCreationViewModel: ViewModel {
         case video(URL)
     }
     
+    var coordinates: CLLocationCoordinate2D! {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                LocationManager.shared.geocode(coordinates: self.coordinates) {
+                    self.locationObservable.accept($0)
+                }
+            }
+        }
+    }
+    
     let mediaObservable = BehaviorRelay<[MediaCollectionType]>(value: [.add])
+    let locationObservable = PublishRelay<String?>()
     
     func acceptNewMedia(_ media: MediaCollectionType) {
         mediaObservable.accept([.add, media] + mediaObservable.value[1...])

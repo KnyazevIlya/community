@@ -21,6 +21,7 @@ class PlayerView: UIView {
             DispatchQueue.main.async {
                 if let layer = self.layer as? AVPlayerLayer {
                     layer.player = self.assetPlayer
+                    self.assetPlayer?.isMuted = true
                 }
             }
         }

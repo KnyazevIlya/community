@@ -24,7 +24,6 @@ class PinCreationController: ViewController {
     @IBOutlet weak var mediaCollection: UICollectionView!
     
     //MARK: - properties
-    var coordinates: CLLocationCoordinate2D!
     private let viewModel: PinCreationViewModel
     private let disposeBag = DisposeBag()
     
@@ -38,16 +37,6 @@ class PinCreationController: ViewController {
     }
     
     //MARK: - life cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            LocationManager.shared.geocode(coordinates: self.coordinates) {
-                self.locationLabel.text = $0
-            }
-        }
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -68,6 +57,59 @@ class PinCreationController: ViewController {
         nameTextField.layer.cornerRadius = 5
         descriptionTextView.layer.cornerRadius = 5
         
+        
+        
+        nameTextField.rx.controlEvent(.editingDidBegin)
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                UIView.transition(with: self.nameLabel, duration: 0.15, options: .transitionCrossDissolve) {
+                    self.nameLabel.textColor = .systemBlue
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        nameTextField.rx.controlEvent(.editingDidEnd)
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                UIView.transition(with: self.nameLabel, duration: 0.15, options: .transitionCrossDissolve) {
+                    self.nameLabel.textColor = .secondaryGray
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        nameTextField.rx.controlEvent(.editingDidEndOnExit)
+            .subscribe(onNext: { [weak self] in
+                self?.descriptionTextView.becomeFirstResponder()
+            })
+            .disposed(by: disposeBag)
+        
+        descriptionTextView.rx.didBeginEditing
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                UIView.transition(with: self.descriptionLabel, duration: 0.15, options: .transitionCrossDissolve) {
+                    self.descriptionLabel.textColor = .systemBlue
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        descriptionTextView.rx.didEndEditing
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                UIView.transition(with: self.descriptionLabel, duration: 0.15, options: .transitionCrossDissolve) {
+                    self.descriptionLabel.textColor = .secondaryGray
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: nil)
+        tapRecognizer.cancelsTouchesInView = false
+        tapRecognizer.rx.event
+            .bind { [weak self] event in
+                self?.view.endEditing(false)
+            }
+            .disposed(by: disposeBag)
+        view.addGestureRecognizer(tapRecognizer)
+        
         configureCollectionView()
     }
     
@@ -84,7 +126,7 @@ class PinCreationController: ViewController {
                 return cell
             case .photo(let image):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MediaCell.identifier, for: indexPath) as! MediaCell
-                cell.imageView.image = image
+                cell.image = image
                 return cell
             case .video(let url):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.identifier, for: indexPath) as! VideoCell
@@ -93,6 +135,12 @@ class PinCreationController: ViewController {
             }
         }
         .disposed(by: disposeBag)
+        
+        viewModel.locationObservable
+            .subscribe(onNext: { [weak self] text in
+                self?.animateLocationTextAppearence(text: text)
+            })
+            .disposed(by: disposeBag)
     }
     
     //MARK: - private
@@ -133,6 +181,16 @@ class PinCreationController: ViewController {
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         present(ac, animated: true)
+    }
+    
+    private func animateLocationTextAppearence(text: String?) {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        animation.type = CATransitionType.push
+        animation.subtype = CATransitionSubtype.fromTop
+        locationLabel.text = text
+        animation.duration = 0.25
+        locationLabel.layer.add(animation, forKey: CATransitionType.push.rawValue)
     }
 }
 

@@ -16,6 +16,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="134" height="192"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LZF-Fm-dGZ">
+                        <rect key="frame" x="0.0" y="0.0" width="134" height="192"/>
+                    </imageView>
+                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wdC-P4-PT3">
+                        <rect key="frame" x="0.0" y="0.0" width="134" height="192"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="bOj-Nb-RRf">
+                            <rect key="frame" x="0.0" y="0.0" width="134" height="192"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <blurEffect style="systemUltraThinMaterialDark"/>
+                    </visualEffectView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ysj-vJ-K3k">
                         <rect key="frame" x="0.0" y="0.0" width="134" height="192"/>
                     </imageView>
@@ -24,13 +35,22 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" red="0.17299999296665192" green="0.17299999296665192" blue="0.18000000715255737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="wdC-P4-PT3" secondAttribute="bottom" id="4uX-Ta-lqs"/>
+                <constraint firstItem="wdC-P4-PT3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="GGK-Fb-0AU"/>
+                <constraint firstAttribute="trailing" secondItem="wdC-P4-PT3" secondAttribute="trailing" id="ZLM-Wz-gil"/>
+                <constraint firstItem="LZF-Fm-dGZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bmi-g8-grx"/>
+                <constraint firstItem="LZF-Fm-dGZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="eON-Ea-7eh"/>
+                <constraint firstAttribute="trailing" secondItem="LZF-Fm-dGZ" secondAttribute="trailing" id="gM7-AP-JH2"/>
                 <constraint firstItem="Ysj-vJ-K3k" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="h5F-AM-rTo"/>
                 <constraint firstAttribute="bottom" secondItem="Ysj-vJ-K3k" secondAttribute="bottom" id="ihu-OZ-4w5"/>
                 <constraint firstAttribute="trailing" secondItem="Ysj-vJ-K3k" secondAttribute="trailing" id="nbH-uE-E5o"/>
                 <constraint firstItem="Ysj-vJ-K3k" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="o6T-LJ-pwu"/>
+                <constraint firstItem="wdC-P4-PT3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="plV-uO-Ad9"/>
+                <constraint firstAttribute="bottom" secondItem="LZF-Fm-dGZ" secondAttribute="bottom" id="zBv-gf-h6D"/>
             </constraints>
             <size key="customSize" width="134" height="192"/>
             <connections>
+                <outlet property="backgroundImageView" destination="LZF-Fm-dGZ" id="qO8-PH-ldu"/>
                 <outlet property="imageView" destination="Ysj-vJ-K3k" id="zU1-sB-3Aw"/>
             </connections>
             <point key="canvasLocation" x="198.55072463768118" y="125.89285714285714"/>
