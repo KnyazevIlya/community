@@ -33,6 +33,7 @@
 		06BDDD9E27D8B5B200D7C7A4 /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDDD9D27D8B5B200D7C7A4 /* Observable+Extension.swift */; };
 		06BDDDA027D8F56000D7C7A4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDDD9F27D8F56000D7C7A4 /* UIView+Extension.swift */; };
 		06BDDDA227D8F6B000D7C7A4 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDDDA127D8F6B000D7C7A4 /* UICollectionView+Extension.swift */; };
+		06DABA7B27DE1429006EEC8A /* PinCreationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DABA7A27DE1429006EEC8A /* PinCreationRouter.swift */; };
 		06DFE58C27C2E3CA008454A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DFE58B27C2E3CA008454A7 /* ViewController.swift */; };
 		06DFE58E27C2E4CC008454A7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DFE58D27C2E4CC008454A7 /* ViewModel.swift */; };
 		06DFE59527C2E9DB008454A7 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DFE59427C2E9DB008454A7 /* Router.swift */; };
@@ -78,6 +79,7 @@
 		06BDDD9D27D8B5B200D7C7A4 /* Observable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
 		06BDDD9F27D8F56000D7C7A4 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		06BDDDA127D8F6B000D7C7A4 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		06DABA7A27DE1429006EEC8A /* PinCreationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCreationRouter.swift; sourceTree = "<group>"; };
 		06DFE58B27C2E3CA008454A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		06DFE58D27C2E4CC008454A7 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		06DFE59427C2E9DB008454A7 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				0629A06B27D1F43A005C655A /* PinCreationController.swift */,
 				0629A06C27D1F43A005C655A /* PinCreationController.xib */,
 				06BDDD9B27D8AE7E00D7C7A4 /* PinCreationViewModel.swift */,
+				06DABA7A27DE1429006EEC8A /* PinCreationRouter.swift */,
 			);
 			path = CreateReport;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				06BDDDA027D8F56000D7C7A4 /* UIView+Extension.swift in Sources */,
 				06BDDD9C27D8AE7E00D7C7A4 /* PinCreationViewModel.swift in Sources */,
 				0629A07327D2599D005C655A /* FeedbackManager.swift in Sources */,
+				06DABA7B27DE1429006EEC8A /* PinCreationRouter.swift in Sources */,
 				068F65F927C0351300F63EB0 /* GoogleAuthManager.swift in Sources */,
 				06BDDDA227D8F6B000D7C7A4 /* UICollectionView+Extension.swift in Sources */,
 				06DFE59B27C2F8E7008454A7 /* AuthViewModel.swift in Sources */,
@@ -598,7 +602,10 @@
 				DEVELOPMENT_TEAM = 68W5DTBSDK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = community/Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app usus camera";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Let us use locations services to provide access to reporting on map";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses location services";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app uses photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -631,7 +638,10 @@
 				DEVELOPMENT_TEAM = 68W5DTBSDK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = community/Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app usus camera";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Let us use locations services to provide access to reporting on map";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses location services";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app uses photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

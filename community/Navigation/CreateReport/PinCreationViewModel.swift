@@ -30,9 +30,15 @@ class PinCreationViewModel: ViewModel {
     
     let mediaObservable = BehaviorRelay<[MediaCollectionType]>(value: [.add])
     let locationObservable = PublishRelay<String?>()
+    private let router: PinCreationRouter
+    
+    init(router: PinCreationRouter) {
+        self.router = router
+    }
     
     func acceptNewMedia(_ media: MediaCollectionType) {
         mediaObservable.accept([.add, media] + mediaObservable.value[1...])
+        router.dismiss()
     }
     
 }

@@ -8,8 +8,7 @@
 import UIKit
 import CoreLocation
 import RxSwift
-import AVFoundation
-import AVKit
+import DropDown
 
 class PinCreationController: ViewController {
 
@@ -25,6 +24,7 @@ class PinCreationController: ViewController {
     
     //MARK: - properties
     private let viewModel: PinCreationViewModel
+//    private let dropDown = DropDown()
     private let disposeBag = DisposeBag()
     
     init(viewModel: PinCreationViewModel) {
@@ -50,18 +50,22 @@ class PinCreationController: ViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
-    
     override func customizeInterface() {
         super.customizeInterface()
+        
+//        dropDown.anchorView = nameTextField
+//        dropDown.dataSource = ["test1", "test2", "test3", "other"]
+//        dropDown.selectionAction = { index, item in
+//          print("Selected item: \(item) at index: \(index)")
+//        }
         
         nameTextField.layer.cornerRadius = 5
         descriptionTextView.layer.cornerRadius = 5
         
-        
-        
         nameTextField.rx.controlEvent(.editingDidBegin)
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
+//                self.dropDown.show()
                 UIView.transition(with: self.nameLabel, duration: 0.15, options: .transitionCrossDissolve) {
                     self.nameLabel.textColor = .systemBlue
                 }
@@ -71,6 +75,7 @@ class PinCreationController: ViewController {
         nameTextField.rx.controlEvent(.editingDidEnd)
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
+//                self.dropDown.hide()
                 UIView.transition(with: self.nameLabel, duration: 0.15, options: .transitionCrossDissolve) {
                     self.nameLabel.textColor = .secondaryGray
                 }
@@ -141,6 +146,15 @@ class PinCreationController: ViewController {
                 self?.animateLocationTextAppearence(text: text)
             })
             .disposed(by: disposeBag)
+        
+        mediaCollection.rx.itemSelected.subscribe(onNext: { [weak self] index in
+                if index.item == 0 {
+                    self?.showPickerAlert(completion: { source in
+                        self?.presentImagePicker(source: source)
+                    })
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     //MARK: - private
@@ -202,7 +216,6 @@ extension PinCreationController: UIImagePickerControllerDelegate, UINavigationCo
         } else if let url = info[.mediaURL] as? URL {
             viewModel.acceptNewMedia(.video(url))
         }
-        dismiss(animated: true)
     }
 }
 
@@ -212,12 +225,6 @@ extension PinCreationController: UICollectionViewDelegateFlowLayout, UIScrollVie
         let height = collectionView.frame.height - 10
         let width = height * (3 / 4)
         return CGSize(width: width, height: height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        showPickerAlert(completion: { [weak self] source in
-            self?.presentImagePicker(source: source)
-        })
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

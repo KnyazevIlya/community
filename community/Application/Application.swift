@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import DropDown
 
 class Application {
     
@@ -29,5 +29,13 @@ class Application {
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+    }
+    
+    func configureDropDown() {
+        DropDown.startListeningToKeyboard()
+        DropDown.appearance().backgroundColor = .mainGray
+        DropDown.appearance().textColor = .secondaryGray
+        DropDown.appearance().selectionBackgroundColor = .secondaryGray
+        DropDown.appearance().selectedTextColor = .mainGray
     }
 }
