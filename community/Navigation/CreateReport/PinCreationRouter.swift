@@ -10,7 +10,7 @@ import CoreLocation
 
 class PinCreationRouter: Router {
     
-    var navigationController: UINavigationController?
+    weak var navigationController: UINavigationController?
     var coordinates: CLLocationCoordinate2D!
     
     required init(navigationController: UINavigationController?) {
@@ -31,6 +31,10 @@ class PinCreationRouter: Router {
     
     func dismiss() {
         navigationController?.dismiss(animated: true)
+    }
+    
+    deinit {
+        print(navigationController?.viewControllers)
     }
     
 }

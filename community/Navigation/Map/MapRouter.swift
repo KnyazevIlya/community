@@ -9,7 +9,7 @@ import UIKit
 import CoreLocation
 
 class MapRouter: Router {
-    var navigationController: UINavigationController?
+    weak var navigationController: UINavigationController?
     
     required init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
