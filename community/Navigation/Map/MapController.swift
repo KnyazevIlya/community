@@ -40,15 +40,19 @@ class MapController: ViewController {
         configureGesture()
         prepareMapView()
         
+        StorageManager.shared.pins
+            .subscribe(onNext: { pins in
+                print("🟣", pins)
+            })
+            .disposed(by: disposeBag)
+        
         LocationManager.shared.currentLocation
             .take(1)
-            .do(onNext: { [weak self] location in
+            .subscribe(onNext: { [weak self] location in
                 if let location = location {
                     self?.zoomToCurrentLocation(location)
                 }
             })
-            .asDriver(onErrorJustReturn: nil)
-            .drive()
             .disposed(by: disposeBag)
                 
         LocationManager.shared.currentLocation
@@ -129,11 +133,11 @@ class MapController: ViewController {
                         self.mapView.addAnnotation(pin)
                         self.mapView.setCenter(coords, animated: true)
                         
-                        FeedbackManager.shared.giveSuccessFeedback()
+                        FeedbackManager().giveSuccessFeedback()
                     } else {
                         //set center to avoid bug, link: https://developer.apple.com/forums/thread/126473
                         self.mapView.setCenter(self.mapView.centerCoordinate, animated: false)
-                        FeedbackManager.shared.giveErrorFeedback()
+                        FeedbackManager().giveErrorFeedback()
                     }                    
                 }
             })

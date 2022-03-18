@@ -12,8 +12,10 @@
 		0629A07127D23642005C655A /* CreationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0629A07027D23642005C655A /* CreationAnnotation.swift */; };
 		0629A07327D2599D005C655A /* FeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0629A07227D2599D005C655A /* FeedbackManager.swift */; };
 		0629A07627D28580005C655A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0629A07527D28580005C655A /* LocationManager.swift */; };
+		062A4B3F27E4D29C0007AC8E /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062A4B3E27E4D29C0007AC8E /* StorageManager.swift */; };
 		065EFC7C27C0601700EA00E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 065EFC7B27C0601700EA00E3 /* GoogleService-Info.plist */; };
 		0673BD3B27D4F8BC00F744BD /* eye.json in Resources */ = {isa = PBXBuildFile; fileRef = 0673BD3A27D4F8BC00F744BD /* eye.json */; };
+		067EE08827E50259004456A5 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067EE08727E50259004456A5 /* Pin.swift */; };
 		0684FAE227D4EE5B002BB256 /* VisibilityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0684FAE127D4EE5A002BB256 /* VisibilityButton.swift */; };
 		068F65E127BFF88700F63EB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068F65E027BFF88700F63EB0 /* AppDelegate.swift */; };
 		068F65E327BFF88700F63EB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068F65E227BFF88700F63EB0 /* SceneDelegate.swift */; };
@@ -56,8 +58,10 @@
 		0629A07027D23642005C655A /* CreationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationAnnotation.swift; sourceTree = "<group>"; };
 		0629A07227D2599D005C655A /* FeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackManager.swift; sourceTree = "<group>"; };
 		0629A07527D28580005C655A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		062A4B3E27E4D29C0007AC8E /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		065EFC7B27C0601700EA00E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0673BD3A27D4F8BC00F744BD /* eye.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eye.json; sourceTree = "<group>"; };
+		067EE08727E50259004456A5 /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		0684FAE127D4EE5A002BB256 /* VisibilityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilityButton.swift; sourceTree = "<group>"; };
 		068F65DD27BFF88700F63EB0 /* community.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = community.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		068F65E027BFF88700F63EB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +135,14 @@
 			path = Annotations;
 			sourceTree = "<group>";
 		};
+		067EE08627E501EB004456A5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				067EE08727E50259004456A5 /* Pin.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		0684FAE027D4EDFA002BB256 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +172,7 @@
 		068F65DF27BFF88700F63EB0 /* community */ = {
 			isa = PBXGroup;
 			children = (
+				067EE08627E501EB004456A5 /* Models */,
 				069EAD3027D7475F001619FC /* Extension */,
 				06DFE59227C2E77E008454A7 /* Application */,
 				06DFE59127C2E762008454A7 /* Managers */,
@@ -242,6 +255,7 @@
 				068F65F827C0351300F63EB0 /* GoogleAuthManager.swift */,
 				0629A07227D2599D005C655A /* FeedbackManager.swift */,
 				0629A07527D28580005C655A /* LocationManager.swift */,
+				062A4B3E27E4D29C0007AC8E /* StorageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -438,6 +452,7 @@
 				0629A07127D23642005C655A /* CreationAnnotation.swift in Sources */,
 				06A75C5127DB384300294369 /* PlayerView.swift in Sources */,
 				06DFE59927C2F7FF008454A7 /* AuthRouter.swift in Sources */,
+				067EE08827E50259004456A5 /* Pin.swift in Sources */,
 				0629A06D27D1F43A005C655A /* PinCreationController.swift in Sources */,
 				069EAD3A27D7D753001619FC /* MediaCell.swift in Sources */,
 				068F65F527BFF8B700F63EB0 /* Application.swift in Sources */,
@@ -449,6 +464,7 @@
 				06DABA7B27DE1429006EEC8A /* PinCreationRouter.swift in Sources */,
 				068F65F927C0351300F63EB0 /* GoogleAuthManager.swift in Sources */,
 				06BDDDA227D8F6B000D7C7A4 /* UICollectionView+Extension.swift in Sources */,
+				062A4B3F27E4D29C0007AC8E /* StorageManager.swift in Sources */,
 				06DFE59B27C2F8E7008454A7 /* AuthViewModel.swift in Sources */,
 				06DFE59727C2EAB5008454A7 /* TabBarConntroller.swift in Sources */,
 				06DFE5CC27C55504008454A7 /* MapViewModel.swift in Sources */,

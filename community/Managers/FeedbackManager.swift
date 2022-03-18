@@ -9,11 +9,9 @@ import UIKit
 
 final class FeedbackManager {
     
-    static let shared = FeedbackManager()
-    
     private let notificationGenerator = UINotificationFeedbackGenerator()
     
-    private init() {}
+    init() {}
     
     func giveSuccessFeedback() {
         notificationGenerator.prepare()
