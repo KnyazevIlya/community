@@ -9,7 +9,15 @@ import RxSwift
 import RxCocoa
 import CoreLocation
 
-class PinCreationViewModel: ViewModel {
+class PinCreationViewModel: ViewModel, ViewModelType {
+    
+    struct Input {
+        let sendTap: Driver<Void>
+    }
+    
+    struct Output {
+        let sendTapped: Driver<Void>
+    }
     
     enum MediaCollectionType {
         case add
@@ -39,6 +47,15 @@ class PinCreationViewModel: ViewModel {
     func acceptNewMedia(_ media: MediaCollectionType) {
         mediaObservable.accept([.add, media] + mediaObservable.value[1...])
         router.dismiss()
+    }
+    
+    func transform(_ input: Input) -> Output {
+        let sendTapped = input.sendTap
+            .do(onNext: {
+                
+            })
+        
+        return Output(sendTapped: sendTapped)
     }
     
 }

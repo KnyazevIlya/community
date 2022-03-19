@@ -17,8 +17,8 @@ class MapController: ViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     private let disposeBag = DisposeBag()
-    private var uuidsOnMap = Set<UUID>()
-    private var annotationsBag = [UUID : IncidentAnnotation]()
+    private var idsOnMap = Set<String>()
+    private var annotationsBag = [String : IncidentAnnotation]()
     private let viewModel: MapViewModel
     
     private let spanDelta: CLLocationDegrees = 0.125
@@ -46,15 +46,15 @@ class MapController: ViewController {
             .subscribe(onNext: { [weak self] pins in
                 guard let self = self else { return }
                 
-                var uuidBag = Set<UUID>()
+                var idBag = Set<String>()
                 
                 print("🟣")
                 for pin in pins {
                     print(pin)
-                    self.addUniquePin(pin: pin, uuidBag: &uuidBag)
+                    self.addUniquePin(pin: pin, idBag: &idBag)
                 }
                 
-                let uuidsToRemove = self.uuidsOnMap.subtracting(uuidBag)
+                let uuidsToRemove = self.idsOnMap.subtracting(idBag)
                 for uuid in uuidsToRemove {
                     if let annotation = self.annotationsBag[uuid] {
                         self.mapView.removeAnnotation(annotation)
@@ -63,7 +63,7 @@ class MapController: ViewController {
                     self.annotationsBag[uuid] = nil
                 }
                 
-                self.uuidsOnMap = uuidBag
+                self.idsOnMap = idBag
             })
             .disposed(by: disposeBag)
         
@@ -199,16 +199,15 @@ class MapController: ViewController {
         mapView.addOverlay(circle)
     }
     
-    private func addUniquePin(pin: Pin, uuidBag: inout Set<UUID>) {
-        guard let uuid = UUID(uuidString: pin.uuid) else { return }
-        uuidBag.insert(uuid)
+    private func addUniquePin(pin: Pin, idBag: inout Set<String>) {
+        guard let id = pin.id else { return }
+        idBag.insert(id)
         
-        if annotationsBag[uuid] != nil { return }
+        if annotationsBag[id] != nil { return }
         
         let newAnnotation = IncidentAnnotation(pin: pin)
         mapView.addAnnotation(newAnnotation)
-        annotationsBag[uuid] = newAnnotation
-        uuidBag.insert(uuid)
+        annotationsBag[id] = newAnnotation
     }
       
 }

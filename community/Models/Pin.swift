@@ -6,11 +6,13 @@
 //
 
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 struct Pin: Codable {
+    @DocumentID var id: String?
+    @ServerTimestamp var timestamp: Timestamp?
     let name: String
     let description: String
     let coordinates: GeoPoint
-    let timestamp: Timestamp
-    let uuid: String
+//    let uuid: String
 }

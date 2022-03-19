@@ -33,8 +33,4 @@ class PinCreationRouter: Router {
         navigationController?.dismiss(animated: true)
     }
     
-    deinit {
-        print(navigationController?.viewControllers)
-    }
-    
 }
