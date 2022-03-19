@@ -12,4 +12,5 @@ struct Pin: Codable {
     let description: String
     let coordinates: GeoPoint
     let timestamp: Timestamp
+    let uuid: String
 }

@@ -27,4 +27,6 @@ class MapViewModel: ViewModel {
             .disposed(by: disposeBag)
     }
     
+    
+    
 }
