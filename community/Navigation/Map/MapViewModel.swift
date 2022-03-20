@@ -12,6 +12,7 @@ import CoreLocation
 class MapViewModel: ViewModel {
     
     let pinTrigger = PublishSubject<CLLocationCoordinate2D>()
+    let sendTrigger = PublishSubject<Void>()
     
     private let router: MapRouter
     private let disposeBag = DisposeBag()
@@ -22,11 +23,10 @@ class MapViewModel: ViewModel {
         
         pinTrigger
             .subscribe(onNext: { [weak self] coords in
-                self?.router.toPinCreation(with: coords)
+                guard let self = self else { return }
+                self.router.toPinCreation(with: coords, sendTrigger: self.sendTrigger)
             })
             .disposed(by: disposeBag)
     }
-    
-    
     
 }

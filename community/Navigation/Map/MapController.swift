@@ -129,6 +129,14 @@ class MapController: ViewController {
         popover.show(popoverView, point: popoverOrigin)
     }
     
+    override func bindViewModel() {
+        viewModel.sendTrigger
+            .subscribe(onNext: { [weak self] in
+                self?.removeAnnotations(type: CreationAnnotation.self)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     //MARK: - gestures
     private func configureGesture() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: nil)

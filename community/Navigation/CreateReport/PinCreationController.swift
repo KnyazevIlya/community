@@ -9,6 +9,7 @@ import UIKit
 import CoreLocation
 import RxSwift
 import DropDown
+import FirebaseFirestore
 
 class PinCreationController: ViewController {
 
@@ -21,6 +22,7 @@ class PinCreationController: ViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var mediaCollection: UICollectionView!
+    @IBOutlet weak var sendButton: UIButton!
     
     //MARK: - properties
     private let viewModel: PinCreationViewModel
@@ -155,6 +157,32 @@ class PinCreationController: ViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        nameTextField.rx.text
+            .orEmpty
+            .bind(to: viewModel.nameRelay)
+            .disposed(by: disposeBag)
+        
+        descriptionTextView.rx.text
+            .orEmpty
+            .bind(to: viewModel.descriptionRelay)
+            .disposed(by: disposeBag)
+        
+        let input = PinCreationViewModel.Input(
+            sendTap: sendButton.rx.tap.asDriver()
+        )
+        
+        let output = viewModel.transform(input)
+        
+        output.sendTapped
+            .drive(onNext: { [weak self] in
+                if let text = self?.nameTextField.text, !text.isEmpty {
+                    self?.dismiss(animated: true)
+                } else {
+                    self?.alertEmptyName()
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     //MARK: - private
@@ -205,6 +233,15 @@ class PinCreationController: ViewController {
         locationLabel.text = text
         animation.duration = 0.25
         locationLabel.layer.add(animation, forKey: CATransitionType.push.rawValue)
+    }
+    
+    private func alertEmptyName() {
+        nameTextField.layer.borderWidth = 3
+        nameTextField.layer.borderColor = UIColor.red.cgColor
+        
+        UIView.transition(with: nameLabel, duration: 0.15, options: .transitionCrossDissolve) {
+            self.nameLabel.textColor = .red
+        }
     }
 }
 

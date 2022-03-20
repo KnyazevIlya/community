@@ -17,6 +17,7 @@
                 <outlet property="mediaCollection" destination="fjF-wG-Vvh" id="EUm-VM-rX3"/>
                 <outlet property="nameLabel" destination="Eu8-K4-oNm" id="gRh-Jw-ZjU"/>
                 <outlet property="nameTextField" destination="LHr-Sf-umf" id="U6t-16-OXe"/>
+                <outlet property="sendButton" destination="QHM-co-5C4" id="ieA-tN-rOJ"/>
                 <outlet property="titleLabel" destination="Z79-rb-0qt" id="s1i-Ll-cox"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import RxSwift
 
 class MapRouter: Router {
     weak var navigationController: UINavigationController?
@@ -22,9 +23,9 @@ class MapRouter: Router {
         navigationController?.pushViewController(mapViewController, animated: false)
     }
     
-    func toPinCreation(with coords: CLLocationCoordinate2D) {
+    func toPinCreation(with coords: CLLocationCoordinate2D, sendTrigger: PublishSubject<Void>) {
         let creationNavigation = UINavigationController()
-        let router = PinCreationRouter(navigationController: creationNavigation, coordinates: coords)
+        let router = PinCreationRouter(navigationController: creationNavigation, coordinates: coords, sendTrigger: sendTrigger)
         router.toSelf()
         navigationController?.present(creationNavigation, animated: true)
     }
