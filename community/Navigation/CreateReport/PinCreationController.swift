@@ -250,8 +250,44 @@ extension PinCreationController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             viewModel.acceptNewMedia(.photo(image))
+            
+            DispatchQueue.main.async {
+                let data = image.jpegData(compressionQuality: 0.5)
+                
+                if let url = info[.imageURL] as? URL, let data = data {
+                    DispatchQueue.global(qos: .utility).async {
+                        let filename = url.lastPathComponent
+                        
+                        StorageManager.shared.uploadData(pinId: "testId", data: data, type: .image(filename)) { result in
+                            switch result {
+                            case .success(let path):
+                                print("🟢", path)
+                            case .failure(let error):
+                                print("🔴",  error)
+                            }
+                        }
+                    }
+                }
+            }
         } else if let url = info[.mediaURL] as? URL {
             viewModel.acceptNewMedia(.video(url))
+            
+            DispatchQueue.global(qos: .utility).async {
+                guard let data = try? Data(contentsOf: url) else {
+                    return
+                }
+                
+                let filename = url.lastPathComponent
+                StorageManager.shared.uploadData(pinId: "testId", data: data, type: .video(filename)) { result in
+                    switch result {
+                    case .success(let path):
+                        print("🟢", path)
+                    case .failure(let error):
+                        print("🔴",  error)
+                    }
+                }
+            }
+            
         }
     }
 }

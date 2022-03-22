@@ -78,7 +78,7 @@ class PinCreationViewModel: ViewModel, ViewModelType {
                     description: self.descriptionRelay.value,
                     coordinates: GeoPoint(latitude: self.coordinates.latitude, longitude: self.coordinates.longitude)
                 )
-                StorageManager.shared.createRecord(data: pin, collectionName: "pins")
+                StorageManager.shared.createRecord(data: pin, collection: StorageManager.Collection.pins)
                 self.sendTrigger?.on(.next(()))
             })
         
