@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0623784727EB46D400D75DBB /* UploadDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623784627EB46D400D75DBB /* UploadDataItem.swift */; };
 		0629A06D27D1F43A005C655A /* PinCreationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0629A06B27D1F43A005C655A /* PinCreationController.swift */; };
 		0629A06E27D1F43A005C655A /* PinCreationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0629A06C27D1F43A005C655A /* PinCreationController.xib */; };
 		0629A07127D23642005C655A /* CreationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0629A07027D23642005C655A /* CreationAnnotation.swift */; };
@@ -14,6 +15,7 @@
 		0629A07627D28580005C655A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0629A07527D28580005C655A /* LocationManager.swift */; };
 		062A4B3F27E4D29C0007AC8E /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062A4B3E27E4D29C0007AC8E /* StorageManager.swift */; };
 		062DC20027E9B2A600FCD957 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062DC1FF27E9B2A600FCD957 /* UserDefaults+Extension.swift */; };
+		062DC20327E9CC0700FCD957 /* UploadQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062DC20227E9CC0700FCD957 /* UploadQueueManager.swift */; };
 		065EFC7C27C0601700EA00E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 065EFC7B27C0601700EA00E3 /* GoogleService-Info.plist */; };
 		0673BD3B27D4F8BC00F744BD /* eye.json in Resources */ = {isa = PBXBuildFile; fileRef = 0673BD3A27D4F8BC00F744BD /* eye.json */; };
 		0677ECAA27E5DA5600B018B9 /* IncidentAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0677ECA927E5DA5600B018B9 /* IncidentAnnotation.swift */; };
@@ -55,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0623784627EB46D400D75DBB /* UploadDataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDataItem.swift; sourceTree = "<group>"; };
 		0629A06B27D1F43A005C655A /* PinCreationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCreationController.swift; sourceTree = "<group>"; };
 		0629A06C27D1F43A005C655A /* PinCreationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinCreationController.xib; sourceTree = "<group>"; };
 		0629A07027D23642005C655A /* CreationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationAnnotation.swift; sourceTree = "<group>"; };
@@ -62,6 +65,7 @@
 		0629A07527D28580005C655A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		062A4B3E27E4D29C0007AC8E /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		062DC1FF27E9B2A600FCD957 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		062DC20227E9CC0700FCD957 /* UploadQueueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadQueueManager.swift; sourceTree = "<group>"; };
 		065EFC7B27C0601700EA00E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0673BD3A27D4F8BC00F744BD /* eye.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eye.json; sourceTree = "<group>"; };
 		0677ECA927E5DA5600B018B9 /* IncidentAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentAnnotation.swift; sourceTree = "<group>"; };
@@ -140,10 +144,18 @@
 			path = Annotations;
 			sourceTree = "<group>";
 		};
+		062DC20127E9BCE600FCD957 /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
 		067EE08627E501EB004456A5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				067EE08727E50259004456A5 /* Pin.swift */,
+				0623784627EB46D400D75DBB /* UploadDataItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -235,6 +247,7 @@
 		06DFE58F27C2E6F9008454A7 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				062DC20127E9BCE600FCD957 /* Queue */,
 				06DFE59C27C3035E008454A7 /* TabBar */,
 				06DFE59327C2E842008454A7 /* Auth */,
 				06DFE5C827C55152008454A7 /* Map */,
@@ -262,6 +275,7 @@
 				0629A07227D2599D005C655A /* FeedbackManager.swift */,
 				0629A07527D28580005C655A /* LocationManager.swift */,
 				062A4B3E27E4D29C0007AC8E /* StorageManager.swift */,
+				062DC20227E9CC0700FCD957 /* UploadQueueManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -464,6 +478,7 @@
 				069EAD3A27D7D753001619FC /* MediaCell.swift in Sources */,
 				068F65F527BFF8B700F63EB0 /* Application.swift in Sources */,
 				06BDDD9E27D8B5B200D7C7A4 /* Observable+Extension.swift in Sources */,
+				0623784727EB46D400D75DBB /* UploadDataItem.swift in Sources */,
 				068F65E127BFF88700F63EB0 /* AppDelegate.swift in Sources */,
 				06BDDDA027D8F56000D7C7A4 /* UIView+Extension.swift in Sources */,
 				06BDDD9C27D8AE7E00D7C7A4 /* PinCreationViewModel.swift in Sources */,
@@ -471,6 +486,7 @@
 				06DABA7B27DE1429006EEC8A /* PinCreationRouter.swift in Sources */,
 				068F65F927C0351300F63EB0 /* GoogleAuthManager.swift in Sources */,
 				0677ECAA27E5DA5600B018B9 /* IncidentAnnotation.swift in Sources */,
+				062DC20327E9CC0700FCD957 /* UploadQueueManager.swift in Sources */,
 				06BDDDA227D8F6B000D7C7A4 /* UICollectionView+Extension.swift in Sources */,
 				062A4B3F27E4D29C0007AC8E /* StorageManager.swift in Sources */,
 				06DFE59B27C2F8E7008454A7 /* AuthViewModel.swift in Sources */,

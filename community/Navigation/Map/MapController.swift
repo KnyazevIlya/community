@@ -15,6 +15,7 @@ class MapController: ViewController {
 
     //MARK: - properties
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var queueButton: VisibilityButton!
     
     private let disposeBag = DisposeBag()
     private var idsOnMap = Set<String>()
@@ -85,6 +86,19 @@ class MapController: ViewController {
             .disposed(by: disposeBag)
     }
     
+    override func bindViewModel() {
+        viewModel.sendTrigger
+            .subscribe(onNext: { [weak self] in
+                self?.removeAnnotations(type: CreationAnnotation.self)
+            })
+            .disposed(by: disposeBag)
+        
+        let input = MapViewModel.Input(queueTap: queueButton.rx.tap.asDriver())
+        let output = viewModel.transform(input)
+        output.queueTapped.drive().disposed(by: disposeBag)
+    }
+    
+    //MARK: - visibility btn
     @IBAction func didTapVisibility(_ sender: VisibilityButton) {
         zoomToCurrentLocation(CLLocation(
             latitude: mapView.userLocation.coordinate.latitude,
@@ -127,14 +141,6 @@ class MapController: ViewController {
         popover.popoverType = .left
         popover.arrowSize = CGSize(width: 10, height: 5)
         popover.show(popoverView, point: popoverOrigin)
-    }
-    
-    override func bindViewModel() {
-        viewModel.sendTrigger
-            .subscribe(onNext: { [weak self] in
-                self?.removeAnnotations(type: CreationAnnotation.self)
-            })
-            .disposed(by: disposeBag)
     }
     
     //MARK: - gestures

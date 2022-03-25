@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapController" customModule="community" customModuleProvider="target">
             <connections>
                 <outlet property="mapView" destination="MXy-ex-FGz" id="E04-NA-q3g"/>
+                <outlet property="queueButton" destination="f8S-bB-qkq" id="w7O-b9-Pxc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -34,11 +35,22 @@
                         <action selector="didTapVisibility:" destination="-1" eventType="touchUpInside" id="D9C-OI-xUC"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8S-bB-qkq" customClass="VisibilityButton" customModule="community" customModuleProvider="target">
+                    <rect key="frame" x="20" y="781" width="52" height="31"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="52" id="Hxk-k9-BHb"/>
+                        <constraint firstAttribute="height" constant="31" id="yHs-MY-t07"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled"/>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0eo-Qb-Am8" secondAttribute="trailing" constant="20" id="3f6-pB-lZ5"/>
+                <constraint firstItem="f8S-bB-qkq" firstAttribute="centerY" secondItem="0eo-Qb-Am8" secondAttribute="centerY" id="5Du-TB-mzY"/>
+                <constraint firstItem="f8S-bB-qkq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="8y2-EO-woV"/>
                 <constraint firstItem="MXy-ex-FGz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Cqb-l0-ZwK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MXy-ex-FGz" secondAttribute="trailing" id="JdI-05-3l6"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="0eo-Qb-Am8" secondAttribute="bottom" constant="50" id="T1t-up-lKC"/>

@@ -30,4 +30,8 @@ class MapRouter: Router {
         navigationController?.present(creationNavigation, animated: true)
     }
     
+    func toQueue() {
+        
+    }
+    
 }

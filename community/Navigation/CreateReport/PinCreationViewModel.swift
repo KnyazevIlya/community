@@ -73,13 +73,53 @@ class PinCreationViewModel: ViewModel, ViewModelType {
             .do(onNext: { [weak self] in
                 guard let self = self, !self.nameRelay.value.isEmpty else { return }
                 
+                let id = UUID().uuidString
                 let pin = Pin(
+                    id: id,
                     name: self.nameRelay.value,
                     description: self.descriptionRelay.value,
                     coordinates: GeoPoint(latitude: self.coordinates.latitude, longitude: self.coordinates.longitude)
                 )
                 StorageManager.shared.createRecord(data: pin, collection: StorageManager.Collection.pins)
-                self.sendTrigger?.on(.next(()))
+                
+                DispatchQueue.global(qos: .utility).async {
+                    var items: [UploadDataItem] = []
+                    for media in self.mediaObservable.value {
+                        var item: UploadDataItem?
+                        switch media {
+                        case .photo(let image):
+                            if let data = image?.jpegData(compressionQuality: 0.5) {
+                                item = UploadDataItem(type: .image("\(UUID().uuidString).jpeg"), data: data)
+                            }
+                        case .video(let url):
+                            if let data = try? Data(contentsOf: url) {
+                                item = UploadDataItem(type: .video(url.lastPathComponent), data: data)
+                            }
+                        default:
+                            break
+                        }
+                        
+                        if let item = item {
+                            items.append(item)
+                        }
+                    }
+                    
+                    var queueIds: [String] = UserPreferences.uploadQueue.getData() ?? []
+                    queueIds.append(id)
+                    UserPreferences.uploadQueue.saveData(of: queueIds)
+                    
+                    let dataItems = UploadDataItems(items: items)
+                    UploadQueueManager.shared.cache(value: dataItems, forKey: NSString(string: id))
+                    
+                    print("⏺ \(id)", UploadQueueManager.shared.cache.object(forKey: NSString(string: id)))
+                    
+                    UploadQueueManager.shared.synchronizeQueue()
+                    
+                    DispatchQueue.main.async {
+                        self.sendTrigger?.on(.next(()))
+                    }
+                    
+                }
             })
         
         return Output(
