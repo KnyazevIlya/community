@@ -13,6 +13,7 @@
 		0623785527EF548900D75DBB /* UploadItemDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623785427EF548900D75DBB /* UploadItemDataSourceImpl.swift */; };
 		0623785827EF56C800D75DBB /* UploadItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623785727EF56C800D75DBB /* UploadItemRepository.swift */; };
 		0623785A27EF56D400D75DBB /* UploadItemRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623785927EF56D400D75DBB /* UploadItemRepositoryImpl.swift */; };
+		0623785D27EF803500D75DBB /* UploadItemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623785C27EF803500D75DBB /* UploadItemError.swift */; };
 		0629A06D27D1F43A005C655A /* PinCreationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0629A06B27D1F43A005C655A /* PinCreationController.swift */; };
 		0629A06E27D1F43A005C655A /* PinCreationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0629A06C27D1F43A005C655A /* PinCreationController.xib */; };
 		0629A07127D23642005C655A /* CreationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0629A07027D23642005C655A /* CreationAnnotation.swift */; };
@@ -68,6 +69,7 @@
 		0623785427EF548900D75DBB /* UploadItemDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemDataSourceImpl.swift; sourceTree = "<group>"; };
 		0623785727EF56C800D75DBB /* UploadItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemRepository.swift; sourceTree = "<group>"; };
 		0623785927EF56D400D75DBB /* UploadItemRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemRepositoryImpl.swift; sourceTree = "<group>"; };
+		0623785C27EF803500D75DBB /* UploadItemError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemError.swift; sourceTree = "<group>"; };
 		0629A06B27D1F43A005C655A /* PinCreationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCreationController.swift; sourceTree = "<group>"; };
 		0629A06C27D1F43A005C655A /* PinCreationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinCreationController.xib; sourceTree = "<group>"; };
 		0629A07027D23642005C655A /* CreationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationAnnotation.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				0623784627EB46D400D75DBB /* UploadDataItem.swift */,
+				0623785C27EF803500D75DBB /* UploadItemError.swift */,
 			);
 			path = UploadDataItem;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				06DFE5CC27C55504008454A7 /* MapViewModel.swift in Sources */,
 				068F65E327BFF88700F63EB0 /* SceneDelegate.swift in Sources */,
 				06DFE5CF27C55551008454A7 /* MapController.swift in Sources */,
+				0623785D27EF803500D75DBB /* UploadItemError.swift in Sources */,
 				0629A07627D28580005C655A /* LocationManager.swift in Sources */,
 				069EAD3527D7D6A2001619FC /* AddMediaCell.swift in Sources */,
 				06DFE58E27C2E4CC008454A7 /* ViewModel.swift in Sources */,
