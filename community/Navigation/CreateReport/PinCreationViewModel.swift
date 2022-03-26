@@ -83,17 +83,17 @@ class PinCreationViewModel: ViewModel, ViewModelType {
                 StorageManager.shared.createRecord(data: pin, collection: StorageManager.Collection.pins)
                 
                 DispatchQueue.global(qos: .utility).async {
-                    var items: [UploadDataItem] = []
+                    var items: [UploadItem] = []
                     for media in self.mediaObservable.value {
-                        var item: UploadDataItem?
+                        var item: UploadItem?
                         switch media {
                         case .photo(let image):
                             if let data = image?.jpegData(compressionQuality: 0.5) {
-                                item = UploadDataItem(type: .image("\(UUID().uuidString).jpeg"), data: data)
+                                item = UploadItem(type: .image("\(UUID().uuidString).jpeg"), data: data)
                             }
                         case .video(let url):
                             if let data = try? Data(contentsOf: url) {
-                                item = UploadDataItem(type: .video(url.lastPathComponent), data: data)
+                                item = UploadItem(type: .video(url.lastPathComponent), data: data)
                             }
                         default:
                             break
@@ -108,12 +108,12 @@ class PinCreationViewModel: ViewModel, ViewModelType {
                     queueIds.append(id)
                     UserPreferences.uploadQueue.saveData(of: queueIds)
                     
-                    let dataItems = UploadDataItems(items: items)
-                    UploadQueueManager.shared.cache(value: dataItems, forKey: NSString(string: id))
-                    
-                    print("⏺ \(id)", UploadQueueManager.shared.cache.object(forKey: NSString(string: id)))
-                    
-                    UploadQueueManager.shared.synchronizeQueue()
+//                    let dataItems = UploadItems(items: items)
+//                    UploadQueueManager.shared.cache(value: dataItems, forKey: NSString(string: id))
+//                    
+//                    print("⏺ \(id)", UploadQueueManager.shared.cache.object(forKey: NSString(string: id)))
+//                    
+//                    UploadQueueManager.shared.synchronizeQueue()
                     
                     DispatchQueue.main.async {
                         self.sendTrigger?.on(.next(()))
