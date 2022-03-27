@@ -72,3 +72,9 @@
 //    }
 //
 //}
+
+import Foundation
+
+final class UploadQueueManager {
+    
+}

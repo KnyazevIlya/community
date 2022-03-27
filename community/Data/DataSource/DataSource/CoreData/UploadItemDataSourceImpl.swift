@@ -25,14 +25,28 @@ class UploadItemDataSourceImpl: UploadItemDataSource {
         let request = UploadItemCoreDataEntity.fetchRequest()
         return try container.viewContext
             .fetch(request)
-            .map({ coreDataEntity in
-                try mapToUploadItem(coreDataEntity)
-            })
+            .map(mapToUploadItem)
     }
 
     func getById(_ id: String) async throws -> UploadItem? {
         guard let coreDataEntity = try getEntityById(id) else { return nil }
         return try mapToUploadItem(coreDataEntity)
+    }
+    
+    func getByQueueId(_ queue: String) async throws -> [UploadItem] {
+        let request = QueueItemCoreDataEntity.fetchRequest()
+        request.fetchLimit = 1
+        request.predicate = NSPredicate(
+            format: "id = %@", queue
+        )
+        let context =  container.viewContext
+        let queueItemCoreDataEntity = try context.fetch(request)[0]
+        
+        if let result = queueItemCoreDataEntity.uploadItems?.allObjects as? [UploadItem] {
+            return result
+        }
+        
+        throw UploadItemError.FetchError
     }
 
     func delete(_ id: String) async throws {
@@ -95,15 +109,15 @@ class UploadItemDataSourceImpl: UploadItemDataSource {
         return UploadItem(type: type, data: data)
     }
     
-    private func saveContext(){
-            let context = container.viewContext
-            if context.hasChanges {
-                do{
-                    try context.save()
-                }catch{
-                    fatalError("Error: \(error.localizedDescription)")
-                }
+    private func saveContext() {
+        let context = container.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                fatalError("Error: \(error.localizedDescription)")
             }
         }
+    }
     
 }
