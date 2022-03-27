@@ -15,36 +15,45 @@ class UploadItemRepositoryImpl: UploadItemRepository {
         self.dataSource = dataSource
     }
     
-    func getUploadItems() async -> Result<[UploadItem], UploadItemError> {
+    func getUploadItems() -> Result<[UploadItem], UploadItemError> {
         do {
-            let items = try await dataSource.getAll()
+            let items = try dataSource.getAll()
             return .success(items)
         } catch {
             return .failure(.FetchError)
         }
     }
     
-    func getUploadItem(id: String) async -> Result<UploadItem?, UploadItemError> {
+    func getUploadItem(id: String) -> Result<UploadItem?, UploadItemError> {
         do {
-            let item = try await dataSource.getById(id)
+            let item = try dataSource.getById(id)
             return .success(item)
         } catch {
             return .failure(.FetchError)
         }
     }
     
-    func deleteUploadItem(_ id: String) async -> Result<Bool, UploadItemError> {
+    func getUploadItemsByQueue(id: String) -> Result<[UploadItem], UploadItemError> {
         do {
-            try await dataSource.delete(id)
+            let items = try dataSource.getByQueueId(id)
+            return .success(items)
+        } catch {
+            return .failure(.FetchError)
+        }
+    }
+    
+    func deleteUploadItem(_ id: String) -> Result<Bool, UploadItemError> {
+        do {
+            try dataSource.delete(id)
             return .success(true)
         } catch {
             return .failure(.DeleteError)
         }
     }
     
-    func createUploadItem(_ item: UploadItem) async -> Result<Bool, UploadItemError> {
+    func createUploadItem(_ item: UploadItem) -> Result<Bool, UploadItemError> {
         do {
-            try await dataSource.create(item: item)
+            try dataSource.create(item: item)
             return .success(true)
         } catch {
             return .failure(.CreateError)

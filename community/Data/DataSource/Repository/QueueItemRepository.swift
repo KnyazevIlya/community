@@ -9,7 +9,7 @@ import Foundation
 
 protocol QueueItemRepository {
     var dataSource: QueueItemDataSource { get set }
-    func getUploadItems() async -> Result<[QueueItem], QueueItemError>
-    func deleteUploadItem(_ id: String) async -> Result<Bool, QueueItemError>
-    func createUploadItem(_ item: UploadItem) async -> Result<Bool, QueueItemError>
+    func getQueueItems() -> Result<[QueueItem], QueueItemError>
+    func deleteQueueItem(_ id: String) -> Result<Bool, QueueItemError>
+    func createQueueItem(_ item: QueueItem) -> Result<Bool, QueueItemError>
 }

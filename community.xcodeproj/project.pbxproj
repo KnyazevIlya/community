@@ -17,7 +17,6 @@
 		0623785F27F063F200D75DBB /* QueueItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623785E27F063F200D75DBB /* QueueItemRepository.swift */; };
 		0623786127F065AA00D75DBB /* QueueItemDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623786027F065AA00D75DBB /* QueueItemDataSource.swift */; };
 		0623786427F0687600D75DBB /* QueueItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623786327F0687600D75DBB /* QueueItem.swift */; };
-		0623786627F069CC00D75DBB /* QueueItemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623786527F069CC00D75DBB /* QueueItemError.swift */; };
 		0623786827F06E8700D75DBB /* QueueItemRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623786727F06E8700D75DBB /* QueueItemRepositoryImpl.swift */; };
 		0623786A27F06EA300D75DBB /* QueueItemDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623786927F06EA300D75DBB /* QueueItemDataSourceImpl.swift */; };
 		0629A06D27D1F43A005C655A /* PinCreationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0629A06B27D1F43A005C655A /* PinCreationController.swift */; };
@@ -31,6 +30,7 @@
 		065EFC7C27C0601700EA00E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 065EFC7B27C0601700EA00E3 /* GoogleService-Info.plist */; };
 		0673BD3B27D4F8BC00F744BD /* eye.json in Resources */ = {isa = PBXBuildFile; fileRef = 0673BD3A27D4F8BC00F744BD /* eye.json */; };
 		0677ECAA27E5DA5600B018B9 /* IncidentAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0677ECA927E5DA5600B018B9 /* IncidentAnnotation.swift */; };
+		067E118F27F0E42100743D05 /* QueueItemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067E118E27F0E42100743D05 /* QueueItemError.swift */; };
 		067EE08827E50259004456A5 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067EE08727E50259004456A5 /* Pin.swift */; };
 		0684FAE227D4EE5B002BB256 /* VisibilityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0684FAE127D4EE5A002BB256 /* VisibilityButton.swift */; };
 		068F65E127BFF88700F63EB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068F65E027BFF88700F63EB0 /* AppDelegate.swift */; };
@@ -79,7 +79,6 @@
 		0623785E27F063F200D75DBB /* QueueItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueItemRepository.swift; sourceTree = "<group>"; };
 		0623786027F065AA00D75DBB /* QueueItemDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueItemDataSource.swift; sourceTree = "<group>"; };
 		0623786327F0687600D75DBB /* QueueItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueItem.swift; sourceTree = "<group>"; };
-		0623786527F069CC00D75DBB /* QueueItemError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueItemError.swift; sourceTree = "<group>"; };
 		0623786727F06E8700D75DBB /* QueueItemRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueItemRepositoryImpl.swift; sourceTree = "<group>"; };
 		0623786927F06EA300D75DBB /* QueueItemDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueItemDataSourceImpl.swift; sourceTree = "<group>"; };
 		0629A06B27D1F43A005C655A /* PinCreationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCreationController.swift; sourceTree = "<group>"; };
@@ -93,6 +92,7 @@
 		065EFC7B27C0601700EA00E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0673BD3A27D4F8BC00F744BD /* eye.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eye.json; sourceTree = "<group>"; };
 		0677ECA927E5DA5600B018B9 /* IncidentAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentAnnotation.swift; sourceTree = "<group>"; };
+		067E118E27F0E42100743D05 /* QueueItemError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueItemError.swift; sourceTree = "<group>"; };
 		067EE08727E50259004456A5 /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		0684FAE127D4EE5A002BB256 /* VisibilityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilityButton.swift; sourceTree = "<group>"; };
 		068F65DD27BFF88700F63EB0 /* community.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = community.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,7 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				0623786327F0687600D75DBB /* QueueItem.swift */,
-				0623786527F069CC00D75DBB /* QueueItemError.swift */,
+				067E118E27F0E42100743D05 /* QueueItemError.swift */,
 			);
 			path = QueueItem;
 			sourceTree = "<group>";
@@ -582,8 +582,8 @@
 				06BDDDA027D8F56000D7C7A4 /* UIView+Extension.swift in Sources */,
 				06BDDD9C27D8AE7E00D7C7A4 /* PinCreationViewModel.swift in Sources */,
 				0629A07327D2599D005C655A /* FeedbackManager.swift in Sources */,
+				067E118F27F0E42100743D05 /* QueueItemError.swift in Sources */,
 				06DABA7B27DE1429006EEC8A /* PinCreationRouter.swift in Sources */,
-				0623786627F069CC00D75DBB /* QueueItemError.swift in Sources */,
 				068F65F927C0351300F63EB0 /* GoogleAuthManager.swift in Sources */,
 				0677ECAA27E5DA5600B018B9 /* IncidentAnnotation.swift in Sources */,
 				062DC20327E9CC0700FCD957 /* UploadQueueManager.swift in Sources */,

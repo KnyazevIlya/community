@@ -21,19 +21,19 @@ class UploadItemDataSourceImpl: UploadItemDataSource {
         }
     }
 
-    func getAll() async throws -> [UploadItem] {
+    func getAll() throws -> [UploadItem] {
         let request = UploadItemCoreDataEntity.fetchRequest()
         return try container.viewContext
             .fetch(request)
             .map(mapToUploadItem)
     }
 
-    func getById(_ id: String) async throws -> UploadItem? {
+    func getById(_ id: String) throws -> UploadItem? {
         guard let coreDataEntity = try getEntityById(id) else { return nil }
         return try mapToUploadItem(coreDataEntity)
     }
     
-    func getByQueueId(_ queue: String) async throws -> [UploadItem] {
+    func getByQueueId(_ queue: String) throws -> [UploadItem] {
         let request = QueueItemCoreDataEntity.fetchRequest()
         request.fetchLimit = 1
         request.predicate = NSPredicate(
@@ -49,7 +49,7 @@ class UploadItemDataSourceImpl: UploadItemDataSource {
         throw UploadItemError.FetchError
     }
 
-    func delete(_ id: String) async throws {
+    func delete(_ id: String) throws {
         let coreDataEntity = try getEntityById(id)!
         let context = container.viewContext
         context.delete(coreDataEntity)
@@ -61,7 +61,7 @@ class UploadItemDataSourceImpl: UploadItemDataSource {
         }
     }
 
-    func create(item: UploadItem) async throws {
+    func create(item: UploadItem) throws {
         let coreDataEntity = UploadItemCoreDataEntity(context: container.viewContext)
         let filename: String
         let isImage: Bool

@@ -21,7 +21,7 @@ class QueueItemDataSourceImpl: QueueItemDataSource {
         }
     }
     
-    func getAll() async throws -> [QueueItem] {
+    func getAll() throws -> [QueueItem] {
         let request = QueueItemCoreDataEntity.fetchRequest()
         let sorting = NSSortDescriptor(key: "timestamp", ascending: false)
         request.sortDescriptors = [sorting]
@@ -31,7 +31,7 @@ class QueueItemDataSourceImpl: QueueItemDataSource {
             .map(mapToQueueItem)
     }
     
-    func delete(_ id: String) async throws {
+    func delete(_ id: String) throws {
         let coreDataEntity = try getEntityById(id)!
         let context = container.viewContext
         context.delete(coreDataEntity)
@@ -43,7 +43,7 @@ class QueueItemDataSourceImpl: QueueItemDataSource {
         }
     }
     
-    func create(item: QueueItem) async throws {
+    func create(item: QueueItem) throws {
         let coreDataEntity = QueueItemCoreDataEntity(context: container.viewContext)
         
         coreDataEntity.id = item.id

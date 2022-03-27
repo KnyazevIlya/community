@@ -8,7 +8,7 @@
 import Foundation
 
 protocol QueueItemDataSource {
-    func getAll() async throws -> [QueueItem]
-    func delete(_ id: String) async throws -> ()
-    func create(item: QueueItem) async throws -> ()
+    func getAll() throws -> [QueueItem]
+    func delete(_ id: String) throws -> ()
+    func create(item: QueueItem) throws -> ()
 }

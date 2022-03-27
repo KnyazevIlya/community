@@ -6,10 +6,10 @@
 //
 
 protocol UploadItemDataSource {
-    func getAll() async throws -> [UploadItem]
-    func getById(_ id: String) async throws -> UploadItem?
-    func getByQueueId(_ queue: String) async throws -> [UploadItem]
-    func delete(_ id: String) async throws -> ()
-    func create(item: UploadItem) async throws -> ()
+    func getAll() throws -> [UploadItem]
+    func getById(_ id: String) throws -> UploadItem?
+    func getByQueueId(_ queue: String) throws -> [UploadItem]
+    func delete(_ id: String) throws -> ()
+    func create(item: UploadItem) throws -> ()
 //    func update(id: String, item: UploadItem) async throws -> ()
 }
