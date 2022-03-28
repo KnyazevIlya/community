@@ -83,7 +83,7 @@ class PinCreationViewModel: ViewModel, ViewModelType {
                 StorageManager.shared.createRecord(data: pin, collection: StorageManager.Collection.pins)
                 
                 DispatchQueue.global(qos: .utility).async {
-                    let queue = QueueItem(id: UUID().uuidString, timestamp: Date())
+                    let queue = QueueItem(id: id, timestamp: Date())
                     switch self.queueItemRepository.createQueueItem(queue) {
                     case .failure(let error):
                         print("🔴 Error creating a queue: ", error)
@@ -94,14 +94,15 @@ class PinCreationViewModel: ViewModel, ViewModelType {
                     
                     for media in self.mediaObservable.value {
                         var item: UploadItem?
+                        let itemId = UUID().uuidString
                         switch media {
                         case .photo(let image):
                             if let data = image?.jpegData(compressionQuality: 0.5) {
-                                item = UploadItem(type: .image("\(UUID().uuidString).jpeg"), data: data)
+                                item = UploadItem(id: itemId, type: .image("\(UUID().uuidString).jpeg"), data: data)
                             }
                         case .video(let url):
                             if let data = try? Data(contentsOf: url) {
-                                item = UploadItem(type: .video(url.lastPathComponent), data: data)
+                                item = UploadItem(id: itemId, type: .video(url.lastPathComponent), data: data)
                             }
                         default:
                             break
@@ -111,6 +112,8 @@ class PinCreationViewModel: ViewModel, ViewModelType {
                             _ = self.queueItemRepository.set(item: item, forQueueId: queue.id)
                         }
                     }
+                    
+                    UploadQueueManager.shared.uploadQueueItems(queue)
 
                     DispatchQueue.main.async {
                         self.sendTrigger?.on(.next(()))

@@ -8,6 +8,7 @@
 import Foundation
 
 struct UploadItem {
+    let id: String
     let type: StorageManager.DataType
     let data: Data
 }

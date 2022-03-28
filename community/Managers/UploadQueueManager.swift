@@ -1,80 +1,64 @@
-////
-////  UploadQueueManager.swift
-////  community
-////
-////  Created by Illia Kniaziev on 22.03.2022.
-////
 //
-//import Foundation
+//  UploadQueueManager.swift
+//  community
 //
-//final class UploadQueueManager {
+//  Created by Illia Kniaziev on 22.03.2022.
 //
-//    static let shared = UploadQueueManager()
-//
-//    /* private */let cache = NSCache<NSString, UploadItems>()
-//    private let queue = DispatchQueue(label: "UploadQueue", qos: .utility, attributes: .concurrent)
-//    private let semaphore = DispatchSemaphore(value: 3)
-//    private var isBusy = false
-//
-//    private init() {
-//        synchronizeQueue()
-//    }
-//
-//    func cache(value: UploadItems, forKey key: NSString) {
-//        cache.setObject(value, forKey: key)
-//    }
-//
-//    func synchronizeQueue() {
-//        if isBusy { return }
-//        print("0️⃣")
-//        isBusy = true
-//        if var uploadQueueIds: [String] = UserPreferences.uploadQueue.getData() {
-//            print("1️⃣", uploadQueueIds)
-//            for (idIndex, id) in uploadQueueIds.enumerated() {
-//                print("2️⃣", id)
-//                print(cache.object(forKey: NSString(string: id)))
-//                if let mediaItems = cache.object(forKey: NSString(string: id)) {
-//                    print("3️⃣", mediaItems)
-//                    var mediaItemsCollection = mediaItems.items
-//                    for (index, mediaItem) in mediaItemsCollection.enumerated() {
-//                        print("4️⃣", index, mediaItem)
-//                        queue.async { [unowned self] in
-//                            self.semaphore.wait()
-//                            StorageManager.shared.uploadData(pinId: id, data: mediaItem.data, type: mediaItem.type) { result in
-//                                switch result {
-//                                case .success(_):
-//                                    mediaItemsCollection.remove(at: index)
-//                                    mediaItems.items = mediaItemsCollection
-//                                    cache.setObject(mediaItems, forKey: NSString(string: id))
-//                                case .failure(_):
-//                                    break
-//                                }
-//
-//                                if index == mediaItemsCollection.count - 1 {
-//                                    mediaItems.items = mediaItemsCollection
-//                                    cache.removeObject(forKey: NSString(string: id))
-//                                    uploadQueueIds.remove(at: idIndex)
-//                                    UserPreferences.uploadQueue.saveData(of: uploadQueueIds)
-//                                    self.isBusy = false
-//                                }
-//
-//                                semaphore.signal()
-//                            }
-//                        }
-//                    }
-//                } else {
-//                    isBusy = false
-//                }
-//            }
-//        } else {
-////            isBusy = false
-//        }
-//    }
-//
-//}
 
 import Foundation
+import UIKit
 
 final class UploadQueueManager {
     
+    static let shared = UploadQueueManager()
+    
+    private var uploadItemRepository: UploadItemRepository
+    private var queueItemRepository: QueueItemRepository
+
+    private let uploadQueue = DispatchQueue(label: "UploadQueue", qos: .utility, attributes: .concurrent)
+    private let semaphore = DispatchSemaphore(value: 3)
+    private var isBusy = false
+
+    private init() {
+        let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+        let queueItemMapper = QueueItemMapperImpl()
+        let uploadItemMapper = UploadItemMapperImpl()
+        let queueDataSource = QueueItemDataSourceImpl(container: container, queueItemMapper: queueItemMapper, uploadItemMapper: uploadItemMapper)
+        queueItemRepository = QueueItemRepositoryImpl(dataSource: queueDataSource)
+        
+        let uploadDataSource = UploadItemDataSourceImpl(container: container, mapper: uploadItemMapper)
+        uploadItemRepository = UploadItemRepositoryImpl(dataSource: uploadDataSource)
+    }
+    
+    ///Start uploading of all peding queues
+    func synchronizeQueue() {
+        if case .success(let queues) = queueItemRepository.getQueueItems() {
+            for queue in queues {
+                uploadQueueItems(queue)
+            }
+        }
+    }
+    
+    ///Start loading of a given queue
+    func uploadQueueItems(_ queue: QueueItem) {
+        if case .success(let uploadItems) = uploadItemRepository.getUploadItemsByQueue(id: queue.id) {
+            for (itemIndex, uploadItem) in uploadItems.enumerated() {
+                uploadQueue.async {
+                    self.semaphore.wait()
+                    print("🔵Start queue: \(queue.id); item: \(uploadItem.id); index: \(itemIndex)")
+                    StorageManager.shared.uploadData(pinId: queue.id, data: uploadItem.data, type: uploadItem.type) { [weak self] _ in
+                        _ = self?.uploadItemRepository.deleteUploadItem(uploadItem.id)
+                        
+                        if itemIndex == uploadItems.count - 1 {
+                            let qres = self?.queueItemRepository.deleteQueueItem(queue.id)
+                            print("🟣🟣🟣Finish queue: \(queue.id); res: \(qres)"String(describing: ))
+                        }
+                        print("🟣Finish queue: \(queue.id); item: \(uploadItem.id); index: \(itemIndex)")
+                        self?.semaphore.signal()
+                    }
+                }
+            }
+        }
+    }
+
 }

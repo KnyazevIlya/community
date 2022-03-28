@@ -10,7 +10,7 @@ import Foundation
 class UploadItemMapperImpl: UploadItemMapper {
     
     func map(from item: UploadItemCoreDataEntity) throws -> UploadItem {
-        guard let filename = item.filename, let data = item.data else {
+        guard let id = item.id, let filename = item.filename, let data = item.data else {
             throw UploadItemError.MapError
         }
         
@@ -21,7 +21,7 @@ class UploadItemMapperImpl: UploadItemMapper {
             type = .video(filename)
         }
         
-        return UploadItem(type: type, data: data)
+        return UploadItem(id: id, type: type, data: data)
     }
     
     func map(from model: UploadItem, to coreEntity: UploadItemCoreDataEntity) {
@@ -40,7 +40,7 @@ class UploadItemMapperImpl: UploadItemMapper {
         coreEntity.data = model.data
         coreEntity.filename = filename
         coreEntity.isImage = isImage
-        coreEntity.id = UUID().uuidString
+        coreEntity.id = model.id
     }
     
 }
