@@ -51,7 +51,7 @@ final class UploadQueueManager {
                         
                         if itemIndex == uploadItems.count - 1 {
                             let qres = self?.queueItemRepository.deleteQueueItem(queue.id)
-                            print("🟣🟣🟣Finish queue: \(queue.id); res: \(qres)"String(describing: ))
+                            print("🟣🟣🟣Finish queue: \(queue.id); res: \(String(describing: qres))")
                         }
                         print("🟣Finish queue: \(queue.id); item: \(uploadItem.id); index: \(itemIndex)")
                         self?.semaphore.signal()
