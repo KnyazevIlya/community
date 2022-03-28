@@ -11,7 +11,7 @@ class QueueItemMapperImpl: QueueItemMapper {
     
     func map(from item: QueueItemCoreDataEntity) throws -> QueueItem {
         guard let id = item.id, let timestamp = item.timestamp else {
-            throw QueueItemError.FetchError
+            throw QueueItemError.MapError
         }
         
         return QueueItem(
