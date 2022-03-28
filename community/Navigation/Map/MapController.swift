@@ -27,16 +27,6 @@ class MapController: ViewController {
     private let reachabilityAreaBorderWidth: CGFloat = 5
     private var reachabilityOpacity: Float = 0.3
     
-    private var uploadItemRepository: UploadItemRepository {
-        let dataSource = UploadItemDataSourceImpl()
-        return UploadItemRepositoryImpl(dataSource: dataSource)
-    }
-    
-    private var queueItemRepository: QueueItemRepository {
-        let dataSource = QueueItemDataSourceImpl()
-        return QueueItemRepositoryImpl(dataSource: dataSource)
-    }
-    
     init(viewModel: MapViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)

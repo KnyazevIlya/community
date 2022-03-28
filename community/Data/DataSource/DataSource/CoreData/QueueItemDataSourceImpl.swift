@@ -7,18 +7,18 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class QueueItemDataSourceImpl: QueueItemDataSource {
     
-    let container: NSPersistentContainer
+    private let queueItemMapper: QueueItemMapper
+    private let uploadItemMapper: UploadItemMapper
+    private var container: NSPersistentContainer
     
-    init() {
-        container = NSPersistentContainer(name: "Community")
-        container.loadPersistentStores { description, error in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        }
+    init(container: NSPersistentContainer, queueItemMapper: QueueItemMapper, uploadItemMapper:UploadItemMapper) {
+        self.queueItemMapper = queueItemMapper
+        self.uploadItemMapper = uploadItemMapper
+        self.container = container
     }
     
     func getAll() throws -> [QueueItem] {
@@ -28,7 +28,19 @@ class QueueItemDataSourceImpl: QueueItemDataSource {
         
         return try container.viewContext
             .fetch(request)
-            .map(mapToQueueItem)
+            .map(queueItemMapper.map)
+    }
+    
+    func set(item: UploadItem, forQueueId queueID: String) throws {
+        guard let queueItem = try? getEntityById(queueID) else {
+            throw QueueItemError.FetchError
+        }
+        
+        let uploadCoreDataEntity = UploadItemCoreDataEntity(context: container.viewContext)
+        uploadItemMapper.map(from: item, to: uploadCoreDataEntity)
+        uploadCoreDataEntity.queueItem = queueItem
+        
+        saveContext()
     }
     
     func delete(_ id: String) throws {
@@ -45,24 +57,10 @@ class QueueItemDataSourceImpl: QueueItemDataSource {
     
     func create(item: QueueItem) throws {
         let coreDataEntity = QueueItemCoreDataEntity(context: container.viewContext)
-        
-        coreDataEntity.id = item.id
-        coreDataEntity.timestamp = item.timestamp
-        
+        queueItemMapper.map(from: item, to: coreDataEntity)
         saveContext()
     }
-    
-    private func mapToQueueItem(_ item: QueueItemCoreDataEntity) throws -> QueueItem {
-        guard let id = item.id, let timestamp = item.timestamp else {
-            throw QueueItemError.FetchError
-        }
-        
-        return QueueItem(
-            id: id,
-            timestamp: timestamp
-        )
-    }
-    
+
     private func getEntityById(_ id: String) throws -> QueueItemCoreDataEntity? {
         let request = QueueItemCoreDataEntity.fetchRequest()
         request.fetchLimit = 1

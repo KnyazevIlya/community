@@ -24,6 +24,15 @@ class QueueItemRepositoryImpl: QueueItemRepository {
         }
     }
     
+    func set(item: UploadItem, forQueueId queueID: String) -> Result<Bool, QueueItemError> {
+        do {
+            try dataSource.set(item: item, forQueueId: queueID)
+            return .success(true)
+        } catch {
+            return .failure(.CreateError)
+        }
+    }
+    
     func deleteQueueItem(_ id: String) -> Result<Bool, QueueItemError> {
         do {
             try dataSource.delete(id)

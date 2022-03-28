@@ -45,9 +45,21 @@ class PinCreationViewModel: ViewModel, ViewModelType {
     let locationObservable = PublishRelay<String?>()
     private var router: PinCreationRouter!
     
+    private var uploadItemRepository: UploadItemRepository
+    private var queueItemRepository: QueueItemRepository
+    
     init(router: PinCreationRouter, sendTrigger: PublishSubject<Void>) {
         self.router = router
         self.sendTrigger = sendTrigger
+        
+        let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+        let queueItemMapper = QueueItemMapperImpl()
+        let uploadItemMapper = UploadItemMapperImpl()
+        let queueDataSource = QueueItemDataSourceImpl(container: container, queueItemMapper: queueItemMapper, uploadItemMapper: uploadItemMapper)
+        queueItemRepository = QueueItemRepositoryImpl(dataSource: queueDataSource)
+        
+        let uploadDataSource = UploadItemDataSourceImpl(container: container, mapper: uploadItemMapper)
+        uploadItemRepository = UploadItemRepositoryImpl(dataSource: uploadDataSource)
     }
     
     func acceptNewMedia(_ media: MediaCollectionType) {
@@ -56,18 +68,6 @@ class PinCreationViewModel: ViewModel, ViewModelType {
     }
     
     func transform(_ input: Input) -> Output {
-//        let sendTapped = Driver.combineLatest(input.sendTap, input.nameText, input.descriptionText)
-//            .do(onNext: { [weak self] textData in
-//                guard let self = self, let name = textData.1 else { return }
-//
-//                let pin = Pin(
-//                    name: name,
-//                    description: textData.2 ?? "",
-//                    coordinates: GeoPoint(latitude: self.coordinates.latitude, longitude: self.coordinates.longitude)
-//                )
-//                StorageManager.shared.createRecord(data: pin, collectionName: "pins")
-//                self.sendTrigger?.on(.next(()))
-//            })
         
         let sendTapped = input.sendTap
             .do(onNext: { [weak self] in
@@ -83,7 +83,15 @@ class PinCreationViewModel: ViewModel, ViewModelType {
                 StorageManager.shared.createRecord(data: pin, collection: StorageManager.Collection.pins)
                 
                 DispatchQueue.global(qos: .utility).async {
-                    var items: [UploadItem] = []
+                    let queue = QueueItem(id: UUID().uuidString, timestamp: Date())
+                    switch self.queueItemRepository.createQueueItem(queue) {
+                    case .failure(let error):
+                        print("🔴 Error creating a queue: ", error)
+                        return
+                    default:
+                        break
+                    }
+                    
                     for media in self.mediaObservable.value {
                         var item: UploadItem?
                         switch media {
@@ -100,21 +108,10 @@ class PinCreationViewModel: ViewModel, ViewModelType {
                         }
                         
                         if let item = item {
-                            items.append(item)
+                            _ = self.queueItemRepository.set(item: item, forQueueId: queue.id)
                         }
                     }
-                    
-                    var queueIds: [String] = UserPreferences.uploadQueue.getData() ?? []
-                    queueIds.append(id)
-                    UserPreferences.uploadQueue.saveData(of: queueIds)
-                    
-//                    let dataItems = UploadItems(items: items)
-//                    UploadQueueManager.shared.cache(value: dataItems, forKey: NSString(string: id))
-//                    
-//                    print("⏺ \(id)", UploadQueueManager.shared.cache.object(forKey: NSString(string: id)))
-//                    
-//                    UploadQueueManager.shared.synchronizeQueue()
-                    
+
                     DispatchQueue.main.async {
                         self.sendTrigger?.on(.next(()))
                     }

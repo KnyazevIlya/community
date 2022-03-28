@@ -19,4 +19,6 @@ enum UploadItemError: Error {
     
     case FetchError
     
+    case MapError
+    
 }

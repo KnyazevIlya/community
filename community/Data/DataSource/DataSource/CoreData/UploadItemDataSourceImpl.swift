@@ -7,30 +7,28 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class UploadItemDataSourceImpl: UploadItemDataSource {
     
-    let container: NSPersistentContainer
-
-    init() {
-        container = NSPersistentContainer(name: "Community")
-        container.loadPersistentStores { description, error in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        }
+    private let mapper: UploadItemMapper
+    private var container: NSPersistentContainer
+    
+    init(container: NSPersistentContainer, mapper: UploadItemMapper) {
+        self.mapper = mapper
+        self.container = container
     }
 
     func getAll() throws -> [UploadItem] {
         let request = UploadItemCoreDataEntity.fetchRequest()
         return try container.viewContext
             .fetch(request)
-            .map(mapToUploadItem)
+            .map(mapper.map)
     }
 
     func getById(_ id: String) throws -> UploadItem? {
         guard let coreDataEntity = try getEntityById(id) else { return nil }
-        return try mapToUploadItem(coreDataEntity)
+        return try mapper.map(from: coreDataEntity)
     }
     
     func getByQueueId(_ queue: String) throws -> [UploadItem] {
@@ -41,9 +39,9 @@ class UploadItemDataSourceImpl: UploadItemDataSource {
         )
         let context =  container.viewContext
         let queueItemCoreDataEntity = try context.fetch(request)[0]
-        
-        if let result = queueItemCoreDataEntity.uploadItems?.allObjects as? [UploadItem] {
-            return result
+
+        if let result = queueItemCoreDataEntity.uploadItems?.allObjects as? [UploadItemCoreDataEntity] {
+            return try result.map(mapper.map)
         }
         
         throw UploadItemError.FetchError
@@ -63,23 +61,7 @@ class UploadItemDataSourceImpl: UploadItemDataSource {
 
     func create(item: UploadItem) throws {
         let coreDataEntity = UploadItemCoreDataEntity(context: container.viewContext)
-        let filename: String
-        let isImage: Bool
-        
-        switch item.type {
-        case .video(let string):
-            filename = string
-            isImage = false
-        case .image(let string):
-            filename = string
-            isImage = true
-        }
-        
-        coreDataEntity.data = item.data
-        coreDataEntity.filename = filename
-        coreDataEntity.isImage = isImage
-        coreDataEntity.id = UUID().uuidString
-        
+        mapper.map(from: item, to: coreDataEntity)
         saveContext()
     }
     
@@ -92,21 +74,6 @@ class UploadItemDataSourceImpl: UploadItemDataSource {
         let context =  container.viewContext
         let uploadItemCoreDataEntity = try context.fetch(request)[0]
         return uploadItemCoreDataEntity
-    }
-    
-    private func mapToUploadItem(_ item: UploadItemCoreDataEntity) throws -> UploadItem {
-        guard let filename = item.filename, let data = item.data else {
-            throw UploadItemError.FetchError
-        }
-        
-        let type: StorageManager.DataType
-        if item.isImage {
-            type = .image(filename)
-        } else {
-            type = .video(filename)
-        }
-        
-        return UploadItem(type: type, data: data)
     }
     
     private func saveContext() {

@@ -19,4 +19,6 @@ enum QueueItemError: Error {
     
     case FetchError
     
+    case MapError
+    
 }
