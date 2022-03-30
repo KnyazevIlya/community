@@ -15,7 +15,8 @@ import UIKit
 
 final class StorageManager {
     
-    typealias UploadCopletion = (Result<String, Error>) -> ()
+    typealias UploadCopletion = (Result<String, StorageUploadError>) -> ()
+    typealias FetchCompletion = (Result<Data, StorageFetchError>) -> ()
     
     enum Collection: String {
         
@@ -51,13 +52,21 @@ final class StorageManager {
         
     }
     
-    enum UploadError: Error {
+    enum StorageUploadError: Error {
         
         case dataConvertionFailure
         
         case uploadFailure
         
         case downloadUrlFetchingFailure
+        
+    }
+    
+    enum StorageFetchError: Error {
+        
+        case metadataFetchFailure
+        
+        case dataFetchFailure
         
     }
     
@@ -103,13 +112,13 @@ final class StorageManager {
         
         storage.child(path).putData(data, metadata: nil) { metadata, error in
             guard error == nil else {
-                completion(.failure(UploadError.uploadFailure))
+                completion(.failure(.uploadFailure))
                 return
             }
             
             self.storage.child(path).downloadURL { url, error in
                 guard let url = url else {
-                    completion(.failure(UploadError.downloadUrlFetchingFailure))
+                    completion(.failure(.downloadUrlFetchingFailure))
                     return
                 }
                 
@@ -117,4 +126,47 @@ final class StorageManager {
             }
         }
     }
+    
+    func getStorageReferences(forPin pin: Pin, into relay: BehaviorRelay<DataType>) {
+        guard let id = pin.id else {
+            return
+        }
+        
+        let basePath = "media/\(id)"
+        
+        storage.child("\(basePath)/image").listAll { result, error in
+            guard error == nil else { return }
+            
+            for item in result.items {
+                relay.accept(.image(String(describing: item)))
+            }
+        }
+        
+        storage.child("\(basePath)/video").listAll { result, error in
+            guard error == nil else { return }
+
+            for item in result.items {
+                relay.accept(.video(String(describing: item)))
+            }
+        }
+    }
+    
+    func fetchData(forRef ref: StorageReference, completion: @escaping FetchCompletion) {
+        ref.getMetadata { metadata, error in
+            guard let metadata = metadata, error == nil else {
+                completion(.failure(.metadataFetchFailure))
+                return
+            }
+
+            ref.getData(maxSize: metadata.size) { data, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(.dataFetchFailure))
+                    return
+                }
+             
+                completion(.success(data))
+            }
+        }
+    }
+    
 }

@@ -83,6 +83,9 @@ class MapController: ViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        StorageManager.shared.fetchData()
+        
     }
     
     override func bindViewModel() {

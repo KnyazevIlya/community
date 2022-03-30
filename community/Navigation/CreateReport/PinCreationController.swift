@@ -145,7 +145,7 @@ class PinCreationController: ViewController {
         
         viewModel.locationObservable
             .subscribe(onNext: { [weak self] text in
-                self?.animateLocationTextAppearence(text: text)
+                self?.animateTextAppearence(withText: text, forLabel: self?.locationLabel)
             })
             .disposed(by: disposeBag)
         
@@ -223,16 +223,6 @@ class PinCreationController: ViewController {
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         present(ac, animated: true)
-    }
-    
-    private func animateLocationTextAppearence(text: String?) {
-        let animation = CATransition()
-        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        animation.type = CATransitionType.push
-        animation.subtype = CATransitionSubtype.fromTop
-        locationLabel.text = text
-        animation.duration = 0.25
-        locationLabel.layer.add(animation, forKey: CATransitionType.push.rawValue)
     }
     
     private func alertEmptyName() {

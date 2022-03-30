@@ -35,6 +35,9 @@
 		067E119627F1B16D00743D05 /* QueueItemMapperImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067E119527F1B16D00743D05 /* QueueItemMapperImpl.swift */; };
 		067E119927F1B55C00743D05 /* UploadItemMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067E119827F1B55C00743D05 /* UploadItemMapper.swift */; };
 		067E119B27F1B57B00743D05 /* UploadItemMapperImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067E119A27F1B57B00743D05 /* UploadItemMapperImpl.swift */; };
+		067E11A027F309A000743D05 /* ViewReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067E119E27F309A000743D05 /* ViewReportController.swift */; };
+		067E11A127F309A000743D05 /* ViewReportController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 067E119F27F309A000743D05 /* ViewReportController.xib */; };
+		067E11A327F309B100743D05 /* ViewReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067E11A227F309B100743D05 /* ViewReportViewModel.swift */; };
 		067EE08827E50259004456A5 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067EE08727E50259004456A5 /* Pin.swift */; };
 		0684FAE227D4EE5B002BB256 /* VisibilityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0684FAE127D4EE5A002BB256 /* VisibilityButton.swift */; };
 		068F65E127BFF88700F63EB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068F65E027BFF88700F63EB0 /* AppDelegate.swift */; };
@@ -101,6 +104,9 @@
 		067E119527F1B16D00743D05 /* QueueItemMapperImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueItemMapperImpl.swift; sourceTree = "<group>"; };
 		067E119827F1B55C00743D05 /* UploadItemMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemMapper.swift; sourceTree = "<group>"; };
 		067E119A27F1B57B00743D05 /* UploadItemMapperImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemMapperImpl.swift; sourceTree = "<group>"; };
+		067E119E27F309A000743D05 /* ViewReportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewReportController.swift; sourceTree = "<group>"; };
+		067E119F27F309A000743D05 /* ViewReportController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewReportController.xib; sourceTree = "<group>"; };
+		067E11A227F309B100743D05 /* ViewReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewReportViewModel.swift; sourceTree = "<group>"; };
 		067EE08727E50259004456A5 /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		0684FAE127D4EE5A002BB256 /* VisibilityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilityButton.swift; sourceTree = "<group>"; };
 		068F65DD27BFF88700F63EB0 /* community.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = community.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -269,6 +275,16 @@
 			path = Mapping;
 			sourceTree = "<group>";
 		};
+		067E119D27F307F700743D05 /* ViewReport */ = {
+			isa = PBXGroup;
+			children = (
+				067E119E27F309A000743D05 /* ViewReportController.swift */,
+				067E119F27F309A000743D05 /* ViewReportController.xib */,
+				067E11A227F309B100743D05 /* ViewReportViewModel.swift */,
+			);
+			path = ViewReport;
+			sourceTree = "<group>";
+		};
 		067EE08627E501EB004456A5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,6 +383,7 @@
 		06DFE58F27C2E6F9008454A7 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				067E119D27F307F700743D05 /* ViewReport */,
 				062DC20127E9BCE600FCD957 /* Queue */,
 				06DFE59C27C3035E008454A7 /* TabBar */,
 				06DFE59327C2E842008454A7 /* Auth */,
@@ -527,6 +544,7 @@
 				06A75C4927DA645300294369 /* VideoCell.xib in Resources */,
 				069EAD3B27D7D753001619FC /* MediaCell.xib in Resources */,
 				068F65EA27BFF88900F63EB0 /* Assets.xcassets in Resources */,
+				067E11A127F309A000743D05 /* ViewReportController.xib in Resources */,
 				065EFC7C27C0601700EA00E3 /* GoogleService-Info.plist in Resources */,
 				06DFE5D027C55551008454A7 /* MapController.xib in Resources */,
 			);
@@ -594,6 +612,7 @@
 				0623786A27F06EA300D75DBB /* QueueItemDataSourceImpl.swift in Sources */,
 				0684FAE227D4EE5B002BB256 /* VisibilityButton.swift in Sources */,
 				0629A07127D23642005C655A /* CreationAnnotation.swift in Sources */,
+				067E11A027F309A000743D05 /* ViewReportController.swift in Sources */,
 				06A75C5127DB384300294369 /* PlayerView.swift in Sources */,
 				06DFE59927C2F7FF008454A7 /* AuthRouter.swift in Sources */,
 				067EE08827E50259004456A5 /* Pin.swift in Sources */,
@@ -633,6 +652,7 @@
 				0629A07627D28580005C655A /* LocationManager.swift in Sources */,
 				069EAD3527D7D6A2001619FC /* AddMediaCell.swift in Sources */,
 				06DFE58E27C2E4CC008454A7 /* ViewModel.swift in Sources */,
+				067E11A327F309B100743D05 /* ViewReportViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

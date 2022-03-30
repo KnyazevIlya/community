@@ -32,10 +32,12 @@ class PinCreationViewModel: ViewModel, ViewModelType {
     
     var coordinates: CLLocationCoordinate2D! {
         didSet {
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.global(qos: .utility).async { [weak self] in
                 guard let self = self else { return }
-                LocationManager.shared.geocode(coordinates: self.coordinates) {
-                    self.locationObservable.accept($0)
+                LocationManager.shared.geocode(coordinates: self.coordinates) { name in
+                    DispatchQueue.global(qos: .utility).async {
+                        self.locationObservable.accept(name)
+                    }
                 }
             }
         }

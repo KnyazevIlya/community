@@ -30,7 +30,7 @@ final class UploadQueueManager {
         uploadItemRepository = UploadItemRepositoryImpl(dataSource: uploadDataSource)
     }
     
-    ///Start uploading of all peding queues
+    ///Start uploading of all pending queues
     func synchronizeQueue() {
         if case .success(let queues) = queueItemRepository.getQueueItems() {
             for queue in queues {

@@ -14,6 +14,7 @@ class Application {
     
     private init() {
         LocationManager.shared.configure()
+        UploadQueueManager.shared.synchronizeQueue()
     }
     
     func prepareInitialScreen(in window: UIWindow?) {
