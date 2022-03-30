@@ -46,14 +46,14 @@ final class UploadQueueManager {
                 uploadQueue.async {
                     self.semaphore.wait()
                     print("🔵Start queue: \(queue.id); item: \(uploadItem.id); index: \(itemIndex)")
-                    StorageManager.shared.uploadData(pinId: queue.id, data: uploadItem.data, type: uploadItem.type) { [weak self] _ in
+                    StorageManager.shared.uploadData(pinId: queue.id, data: uploadItem.data, type: uploadItem.type) { [weak self] res in
                         _ = self?.uploadItemRepository.deleteUploadItem(uploadItem.id)
                         
                         if itemIndex == uploadItems.count - 1 {
                             let qres = self?.queueItemRepository.deleteQueueItem(queue.id)
                             print("🟣🟣🟣Finish queue: \(queue.id); res: \(String(describing: qres))")
                         }
-                        print("🟣Finish queue: \(queue.id); item: \(uploadItem.id); index: \(itemIndex)")
+                        print("🟣Finish queue: \(queue.id); item: \(uploadItem.id); index: \(itemIndex); res: \(res)")
                         self?.semaphore.signal()
                     }
                 }

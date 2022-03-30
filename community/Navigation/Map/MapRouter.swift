@@ -30,6 +30,12 @@ class MapRouter: Router {
         navigationController?.present(creationNavigation, animated: true)
     }
     
+    func toReportViewer(pin: Pin) {
+        let viewModel = ViewReportViewModel(pin: pin)
+        let controller = ViewReportController(viewModel: viewModel)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     func toQueue() {
         
     }

@@ -83,9 +83,6 @@ class MapController: ViewController {
                 }
             })
             .disposed(by: disposeBag)
-        
-        StorageManager.shared.fetchData()
-        
     }
     
     override func bindViewModel() {
@@ -216,14 +213,13 @@ class MapController: ViewController {
     }
     
     private func addUniquePin(pin: Pin, idBag: inout Set<String>) {
-        guard let id = pin.id else { return }
-        idBag.insert(id)
+        idBag.insert(pin.id)
         
-        if annotationsBag[id] != nil { return }
+        if annotationsBag[pin.id] != nil { return }
         
         let newAnnotation = IncidentAnnotation(pin: pin)
         mapView.addAnnotation(newAnnotation)
-        annotationsBag[id] = newAnnotation
+        annotationsBag[pin.id] = newAnnotation
     }
       
 }
@@ -248,6 +244,16 @@ extension MapController: MKMapViewDelegate {
             annotationView?.canShowCallout = true
             annotationView?.rightCalloutAccessoryView = UIButton(type: .contactAdd)
             annotationView?.titleVisibility = .hidden
+        } else if let annotation = annotation as? IncidentAnnotation {
+            if let incident = mapView.dequeueReusableAnnotationView(withIdentifier: IncidentAnnotation.reuseIdentifier) as? MKMarkerAnnotationView {
+                incident.annotation = annotation
+                annotationView = incident
+            } else {
+                annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: IncidentAnnotation.reuseIdentifier)
+            }
+            
+            annotationView?.canShowCallout = true
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .infoDark)
         }
         
         return annotationView
@@ -273,7 +279,9 @@ extension MapController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if view.annotation is CreationAnnotation, let coordinate = view.annotation?.coordinate {
-            viewModel.pinTrigger.on(.next(coordinate))
+            viewModel.pinCreationTrigger.on(.next(coordinate))
+        } else if let annotation = view.annotation as? IncidentAnnotation {
+            viewModel.pinViewTrigger.on(.next(annotation.pin))
         }
     }
 }

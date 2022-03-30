@@ -5,6 +5,8 @@
 //  Created by Illia Kniaziev on 18.03.2022.
 //
 
+//TODO: separate class responsibilities into separate enteties to respond to SRP
+
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseStorage
@@ -17,6 +19,7 @@ final class StorageManager {
     
     typealias UploadCopletion = (Result<String, StorageUploadError>) -> ()
     typealias FetchCompletion = (Result<Data, StorageFetchError>) -> ()
+    typealias DownloadUrlCompletion = (Result<URL, StorageFetchError>) -> ()
     
     enum Collection: String {
         
@@ -52,6 +55,14 @@ final class StorageManager {
         
     }
     
+    enum DataReference {
+        
+        case image(StorageReference)
+        
+        case video(StorageReference)
+        
+    }
+    
     enum StorageUploadError: Error {
         
         case dataConvertionFailure
@@ -68,6 +79,8 @@ final class StorageManager {
         
         case dataFetchFailure
         
+        case downloadUrlFetchFailure
+        
     }
     
     static let shared = StorageManager()
@@ -82,7 +95,20 @@ final class StorageManager {
         getPins()
     }
     
-    func getPins() {
+    //MARK: - Firestore
+    /// add a new document to the given collection in firestore
+    func createRecord<T: Encodable>(data: T, collection: Collection) {
+        let collectionReference = firestore.collection(collection.rawValue)
+        do {
+            let newReference = try collectionReference.addDocument(from: data)
+            print("🟣 A new pin created with ref: \(newReference)")
+        } catch {
+            print("🔴 Error creating a pin: \(String(describing: error))")
+        }
+    }
+    
+    ///establish a firestore subscription to the pins collection
+    private func getPins() {
         firestore.collection(Collection.pins.rawValue).addSnapshotListener { [weak self] querySnapshot, error in
             guard let documents = querySnapshot?.documents else {
                 print("🔴 Error fetching pins: \(String(describing: error))")
@@ -97,16 +123,8 @@ final class StorageManager {
         }
     }
     
-    func createRecord<T: Encodable>(data: T, collection: Collection) {
-        let collectionReference = firestore.collection(collection.rawValue)
-        do {
-            let newReference = try collectionReference.addDocument(from: data)
-            print("🟣 A new pin created with ref: \(newReference)")
-        } catch {
-            print("🔴 Error creating a pin: \(String(describing: error))")
-        }
-    }
-    
+    //MARK: - Firebase Storage
+    ///upload given data to a corresponding folder of the pin in firebase storage
     func uploadData(pinId: String, data: Data, type: DataType, completion: @escaping UploadCopletion) {
         let path = type.getPath(pinId: pinId)
         
@@ -127,18 +145,14 @@ final class StorageManager {
         }
     }
     
-    func getStorageReferences(forPin pin: Pin, into relay: BehaviorRelay<DataType>) {
-        guard let id = pin.id else {
-            return
-        }
-        
-        let basePath = "media/\(id)"
+    ///fetch and emit references to all images and videos stored in the given pin's folder in firebase storage
+    func getStorageReferences(forPin pin: Pin, into relay: PublishRelay<DataReference>) {
+        let basePath = "media/\(pin.id)"
         
         storage.child("\(basePath)/image").listAll { result, error in
             guard error == nil else { return }
-            
             for item in result.items {
-                relay.accept(.image(String(describing: item)))
+                relay.accept(.image(item))
             }
         }
         
@@ -146,11 +160,12 @@ final class StorageManager {
             guard error == nil else { return }
 
             for item in result.items {
-                relay.accept(.video(String(describing: item)))
+                relay.accept(.video(item))
             }
         }
     }
     
+    ///download a file from a given firebase storage reference
     func fetchData(forRef ref: StorageReference, completion: @escaping FetchCompletion) {
         ref.getMetadata { metadata, error in
             guard let metadata = metadata, error == nil else {
@@ -166,6 +181,17 @@ final class StorageManager {
              
                 completion(.success(data))
             }
+        }
+    }
+    
+    func getDownloadUrl(forRef ref: StorageReference, completion: @escaping DownloadUrlCompletion) {
+        ref.downloadURL { url, error in
+            guard let url = url, error == nil else {
+                completion(.failure(.downloadUrlFetchFailure))
+                return
+            }
+
+            completion(.success(url))
         }
     }
     

@@ -27,6 +27,12 @@ class ViewReportController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        configureCollectionView()
+    }
+    
     override func bindViewModel() {
         reportNameLabel.text = viewModel.pin.name
         reportDescription.text = viewModel.pin.description
@@ -36,6 +42,54 @@ class ViewReportController: ViewController {
                 self?.animateTextAppearence(withText: text, forLabel: self?.locationName)
             })
             .disposed(by: disposeBag)
+        
+        viewModel.mediaObservable.bind(to: mediaCollection.rx.items) { collectionView, index, element in
+            let indexPath = IndexPath(item: index, section: 0)
+
+            switch element {
+            case .add:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMediaCell.identifier, for: indexPath) as! AddMediaCell
+                return cell
+            case .photo(let image):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MediaCell.identifier, for: indexPath) as! MediaCell
+                cell.image = image
+                return cell
+            case .video(let url):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.identifier, for: indexPath) as! VideoCell
+                cell.configure(withVideoUrl: url)
+                return cell
+            }
+        }
+        .disposed(by: disposeBag)
     }
     
+    private func configureCollectionView() {
+        mediaCollection.register(
+            AddMediaCell.self,
+            MediaCell.self,
+            VideoCell.self
+        )
+        
+        mediaCollection.delegate = self
+        
+        mediaCollection.backgroundColor = .secondaryGray.withAlphaComponent(0.2)
+        mediaCollection.layer.cornerRadius = 5
+        mediaCollection.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        mediaCollection.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 2, bottom: -2, right: 2)
+    }
+    
+}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+extension ViewReportController: UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.frame.height - 10
+        let width = height * (3 / 4)
+        return CGSize(width: width, height: height)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let verticalIndicatorView = (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0])
+        verticalIndicatorView.backgroundColor = .systemBlue.withAlphaComponent(0.8)
+    }
 }

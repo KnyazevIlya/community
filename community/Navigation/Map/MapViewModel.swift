@@ -19,7 +19,8 @@ class MapViewModel: ViewModel, ViewModelType {
         let queueTapped: Driver<Void>
     }
     
-    let pinTrigger = PublishSubject<CLLocationCoordinate2D>()
+    let pinCreationTrigger = PublishSubject<CLLocationCoordinate2D>()
+    let pinViewTrigger = PublishSubject<Pin>()
     let sendTrigger = PublishSubject<Void>()
     
     private let router: MapRouter
@@ -29,11 +30,16 @@ class MapViewModel: ViewModel, ViewModelType {
         self.router = router
         super.init()
         
-        pinTrigger
+        pinCreationTrigger
             .subscribe(onNext: { [weak self] coords in
                 guard let self = self else { return }
                 self.router.toPinCreation(with: coords, sendTrigger: self.sendTrigger)
             })
+            .disposed(by: disposeBag)
+        
+        pinViewTrigger.subscribe(onNext: { [weak self] pin in
+            self?.router.toReportViewer(pin: pin)
+        })
             .disposed(by: disposeBag)
     }
     
