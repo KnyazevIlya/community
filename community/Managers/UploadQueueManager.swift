@@ -55,6 +55,11 @@ final class UploadQueueManager {
     ///Start loading of a given queue
     func uploadQueueItems(_ queue: QueueItem) {
         if case .success(let uploadItems) = uploadItemRepository.getUploadItemsByQueue(id: queue.id) {
+            if UserDefaults.standard.value(forKey: queue.id) == nil {
+                let progress = UploadProgressItem(uploadedCount: 0, totalCount: uploadItems.count)
+                UserDefaults.saveData(of: progress, forKey: queue.id)
+            }
+            
             for (itemIndex, uploadItem) in uploadItems.enumerated() {
                 uploadQueue.async { [weak self] in
                     self?.semaphore.wait()
@@ -65,14 +70,21 @@ final class UploadQueueManager {
                         
                         if itemIndex == uploadItems.count - 1 {
                             self?.queueEventReceiver.accept(.queueFinished(queue.id))
+                            _ = self?.queueItemRepository.deleteQueueItem(queue.id)
+                            UserDefaults.remove(forKey: queue.id)
                         }
                         
-                        var isFailed = false
+                        var isSucceded = false
                         if case .success(_) = res {
-                            isFailed = true
+                            isSucceded = true
                         }
                         
-                        self?.queueEventReceiver.accept(.queueItemFinished(uploadItem.id, isFailed))
+                        if var record: UploadProgressItem = UserDefaults.getData(forKey: queue.id) {
+                            record.uploadedCount += 1
+                            UserDefaults.saveData(of: record, forKey: queue.id)
+                        }
+                        
+                        self?.queueEventReceiver.accept(.queueItemFinished(queue.id, isSucceded))
                         self?.semaphore.signal()
                     }
                 }

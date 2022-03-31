@@ -50,18 +50,11 @@ class PinCreationViewModel: ViewModel, ViewModelType {
     private var uploadItemRepository: UploadItemRepository
     private var queueItemRepository: QueueItemRepository
     
-    init(router: PinCreationRouter, sendTrigger: PublishSubject<Void>) {
+    init(router: PinCreationRouter, sendTrigger: PublishSubject<Void>, uploadItemRepository: UploadItemRepository, queueItemRepository: QueueItemRepository) {
         self.router = router
         self.sendTrigger = sendTrigger
-        
-        let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-        let queueItemMapper = QueueItemMapperImpl()
-        let uploadItemMapper = UploadItemMapperImpl()
-        let queueDataSource = QueueItemDataSourceImpl(container: container, queueItemMapper: queueItemMapper, uploadItemMapper: uploadItemMapper)
-        queueItemRepository = QueueItemRepositoryImpl(dataSource: queueDataSource)
-        
-        let uploadDataSource = UploadItemDataSourceImpl(container: container, mapper: uploadItemMapper)
-        uploadItemRepository = UploadItemRepositoryImpl(dataSource: uploadDataSource)
+        self.uploadItemRepository = uploadItemRepository
+        self.queueItemRepository = queueItemRepository
     }
     
     func acceptNewMedia(_ media: MediaCollectionType) {
@@ -85,7 +78,7 @@ class PinCreationViewModel: ViewModel, ViewModelType {
                 StorageManager.shared.createRecord(data: pin, collection: StorageManager.Collection.pins)
                 
                 DispatchQueue.global(qos: .utility).async {
-                    let queue = QueueItem(id: id, timestamp: Date())
+                    let queue = QueueItem(id: id, name: pin.name, timestamp: Date())
                     switch self.queueItemRepository.createQueueItem(queue) {
                     case .failure(let error):
                         print("🔴 Error creating a queue: ", error)

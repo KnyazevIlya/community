@@ -9,5 +9,6 @@ import Foundation
 
 struct QueueItem {
     let id: String
+    let name: String
     let timestamp: Date
 }

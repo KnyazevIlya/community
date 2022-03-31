@@ -37,7 +37,18 @@ class MapRouter: Router {
     }
     
     func toQueue() {
+        let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+        let queueItemMapper = QueueItemMapperImpl()
+        let uploadItemMapper = UploadItemMapperImpl()
+        let queueDataSource = QueueItemDataSourceImpl(container: container, queueItemMapper: queueItemMapper, uploadItemMapper: uploadItemMapper)
+        let queueItemRepository = QueueItemRepositoryImpl(dataSource: queueDataSource)
+        let uploadDataSource = UploadItemDataSourceImpl(container: container, mapper: uploadItemMapper)
+        let uploadItemRepository = UploadItemRepositoryImpl(dataSource: uploadDataSource)
         
+        let viewModel = QueueViewModel(uploadItemRepository: uploadItemRepository, queueItemRepository: queueItemRepository)
+        let controller = QueueController(viewModel: viewModel)
+        
+        navigationController?.present(controller, animated: true)
     }
     
 }

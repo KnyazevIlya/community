@@ -28,6 +28,13 @@
 		062DC20027E9B2A600FCD957 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062DC1FF27E9B2A600FCD957 /* UserDefaults+Extension.swift */; };
 		062DC20327E9CC0700FCD957 /* UploadQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062DC20227E9CC0700FCD957 /* UploadQueueManager.swift */; };
 		065EFC7C27C0601700EA00E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 065EFC7B27C0601700EA00E3 /* GoogleService-Info.plist */; };
+		0667F6EC27F5B4F1006DD537 /* QueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0667F6EA27F5B4F1006DD537 /* QueueController.swift */; };
+		0667F6ED27F5B4F1006DD537 /* QueueController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0667F6EB27F5B4F1006DD537 /* QueueController.xib */; };
+		0667F6EF27F5B69B006DD537 /* QueueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0667F6EE27F5B69B006DD537 /* QueueViewModel.swift */; };
+		0667F6F427F5EEE3006DD537 /* QueueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0667F6F227F5EEE3006DD537 /* QueueTableViewCell.swift */; };
+		0667F6F527F5EEE3006DD537 /* QueueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0667F6F327F5EEE3006DD537 /* QueueTableViewCell.xib */; };
+		0667F6F727F5FA63006DD537 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0667F6F627F5FA63006DD537 /* UITableView+Extension.swift */; };
+		0667F6F927F614E5006DD537 /* UploadProgressItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0667F6F827F614E4006DD537 /* UploadProgressItem.swift */; };
 		0673BD3B27D4F8BC00F744BD /* eye.json in Resources */ = {isa = PBXBuildFile; fileRef = 0673BD3A27D4F8BC00F744BD /* eye.json */; };
 		0677ECAA27E5DA5600B018B9 /* IncidentAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0677ECA927E5DA5600B018B9 /* IncidentAnnotation.swift */; };
 		067E118F27F0E42100743D05 /* QueueItemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067E118E27F0E42100743D05 /* QueueItemError.swift */; };
@@ -97,6 +104,13 @@
 		062DC1FF27E9B2A600FCD957 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		062DC20227E9CC0700FCD957 /* UploadQueueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadQueueManager.swift; sourceTree = "<group>"; };
 		065EFC7B27C0601700EA00E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0667F6EA27F5B4F1006DD537 /* QueueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueController.swift; sourceTree = "<group>"; };
+		0667F6EB27F5B4F1006DD537 /* QueueController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QueueController.xib; sourceTree = "<group>"; };
+		0667F6EE27F5B69B006DD537 /* QueueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueViewModel.swift; sourceTree = "<group>"; };
+		0667F6F227F5EEE3006DD537 /* QueueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTableViewCell.swift; sourceTree = "<group>"; };
+		0667F6F327F5EEE3006DD537 /* QueueTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QueueTableViewCell.xib; sourceTree = "<group>"; };
+		0667F6F627F5FA63006DD537 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		0667F6F827F614E4006DD537 /* UploadProgressItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProgressItem.swift; sourceTree = "<group>"; };
 		0673BD3A27D4F8BC00F744BD /* eye.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eye.json; sourceTree = "<group>"; };
 		0677ECA927E5DA5600B018B9 /* IncidentAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentAnnotation.swift; sourceTree = "<group>"; };
 		067E118E27F0E42100743D05 /* QueueItemError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueItemError.swift; sourceTree = "<group>"; };
@@ -253,8 +267,21 @@
 		062DC20127E9BCE600FCD957 /* Queue */ = {
 			isa = PBXGroup;
 			children = (
+				0667F6F127F5EECA006DD537 /* Cells */,
+				0667F6EA27F5B4F1006DD537 /* QueueController.swift */,
+				0667F6EE27F5B69B006DD537 /* QueueViewModel.swift */,
+				0667F6EB27F5B4F1006DD537 /* QueueController.xib */,
 			);
 			path = Queue;
+			sourceTree = "<group>";
+		};
+		0667F6F127F5EECA006DD537 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0667F6F227F5EEE3006DD537 /* QueueTableViewCell.swift */,
+				0667F6F327F5EEE3006DD537 /* QueueTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		067E119227F1B08400743D05 /* Mapping */ = {
@@ -291,6 +318,7 @@
 				0623786227F0686400D75DBB /* QueueItem */,
 				0623785B27EF7B6800D75DBB /* UploadDataItem */,
 				067EE08727E50259004456A5 /* Pin.swift */,
+				0667F6F827F614E4006DD537 /* UploadProgressItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -345,6 +373,7 @@
 				06BDDD9F27D8F56000D7C7A4 /* UIView+Extension.swift */,
 				06BDDDA127D8F6B000D7C7A4 /* UICollectionView+Extension.swift */,
 				062DC1FF27E9B2A600FCD957 /* UserDefaults+Extension.swift */,
+				0667F6F627F5FA63006DD537 /* UITableView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -409,9 +438,9 @@
 			isa = PBXGroup;
 			children = (
 				068F65F827C0351300F63EB0 /* GoogleAuthManager.swift */,
-				0629A07227D2599D005C655A /* FeedbackManager.swift */,
 				0629A07527D28580005C655A /* LocationManager.swift */,
 				062A4B3E27E4D29C0007AC8E /* StorageManager.swift */,
+				0629A07227D2599D005C655A /* FeedbackManager.swift */,
 				062DC20227E9CC0700FCD957 /* UploadQueueManager.swift */,
 			);
 			path = Managers;
@@ -541,6 +570,8 @@
 				069EAD3627D7D6A2001619FC /* AddMediaCell.xib in Resources */,
 				068F65ED27BFF88900F63EB0 /* LaunchScreen.storyboard in Resources */,
 				0629A06E27D1F43A005C655A /* PinCreationController.xib in Resources */,
+				0667F6ED27F5B4F1006DD537 /* QueueController.xib in Resources */,
+				0667F6F527F5EEE3006DD537 /* QueueTableViewCell.xib in Resources */,
 				06A75C4927DA645300294369 /* VideoCell.xib in Resources */,
 				069EAD3B27D7D753001619FC /* MediaCell.xib in Resources */,
 				068F65EA27BFF88900F63EB0 /* Assets.xcassets in Resources */,
@@ -602,19 +633,23 @@
 				069EAD3227D7477B001619FC /* CoreLocation+Extension.swift in Sources */,
 				06A75C4827DA645300294369 /* VideoCell.swift in Sources */,
 				06DFE5CA27C554FA008454A7 /* MapRouter.swift in Sources */,
+				0667F6F427F5EEE3006DD537 /* QueueTableViewCell.swift in Sources */,
 				06DFE59527C2E9DB008454A7 /* Router.swift in Sources */,
 				067E119B27F1B57B00743D05 /* UploadItemMapperImpl.swift in Sources */,
 				062DC20027E9B2A600FCD957 /* UserDefaults+Extension.swift in Sources */,
 				06DFE5A327C30AEF008454A7 /* AuthController.swift in Sources */,
 				06DFE58C27C2E3CA008454A7 /* ViewController.swift in Sources */,
+				0667F6EF27F5B69B006DD537 /* QueueViewModel.swift in Sources */,
 				0623786427F0687600D75DBB /* QueueItem.swift in Sources */,
 				06DFE5A727C39294008454A7 /* UIColor + Extension.swift in Sources */,
 				0623786A27F06EA300D75DBB /* QueueItemDataSourceImpl.swift in Sources */,
+				0667F6EC27F5B4F1006DD537 /* QueueController.swift in Sources */,
 				0684FAE227D4EE5B002BB256 /* VisibilityButton.swift in Sources */,
 				0629A07127D23642005C655A /* CreationAnnotation.swift in Sources */,
 				067E11A027F309A000743D05 /* ViewReportController.swift in Sources */,
 				06A75C5127DB384300294369 /* PlayerView.swift in Sources */,
 				06DFE59927C2F7FF008454A7 /* AuthRouter.swift in Sources */,
+				0667F6F727F5FA63006DD537 /* UITableView+Extension.swift in Sources */,
 				067EE08827E50259004456A5 /* Pin.swift in Sources */,
 				0623785A27EF56D400D75DBB /* UploadItemRepositoryImpl.swift in Sources */,
 				0629A06D27D1F43A005C655A /* PinCreationController.swift in Sources */,
@@ -651,6 +686,7 @@
 				0623785D27EF803500D75DBB /* UploadItemError.swift in Sources */,
 				0629A07627D28580005C655A /* LocationManager.swift in Sources */,
 				069EAD3527D7D6A2001619FC /* AddMediaCell.swift in Sources */,
+				0667F6F927F614E5006DD537 /* UploadProgressItem.swift in Sources */,
 				06DFE58E27C2E4CC008454A7 /* ViewModel.swift in Sources */,
 				067E11A327F309B100743D05 /* ViewReportViewModel.swift in Sources */,
 			);

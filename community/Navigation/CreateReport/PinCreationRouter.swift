@@ -26,7 +26,15 @@ class PinCreationRouter: Router {
     }
     
     func toSelf() {
-        let viewModel = PinCreationViewModel(router: self, sendTrigger: sendTrigger)
+        let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+        let queueItemMapper = QueueItemMapperImpl()
+        let uploadItemMapper = UploadItemMapperImpl()
+        let queueDataSource = QueueItemDataSourceImpl(container: container, queueItemMapper: queueItemMapper, uploadItemMapper: uploadItemMapper)
+        let queueItemRepository = QueueItemRepositoryImpl(dataSource: queueDataSource)
+        let uploadDataSource = UploadItemDataSourceImpl(container: container, mapper: uploadItemMapper)
+        let uploadItemRepository = UploadItemRepositoryImpl(dataSource: uploadDataSource)
+        
+        let viewModel = PinCreationViewModel(router: self, sendTrigger: sendTrigger, uploadItemRepository: uploadItemRepository, queueItemRepository: queueItemRepository)
         viewModel.coordinates = coordinates
         let controller = PinCreationController(viewModel: viewModel)
         navigationController?.pushViewController(controller, animated: true)

@@ -7,29 +7,22 @@
 
 import Foundation
 
-public enum UserPreferences: String, CaseIterable {
+extension UserDefaults {
     
-    case uploadQueue = "com.community.uploadQueue"
+    static func saveData<T: Encodable>(of object: T, forKey key: String) {
+        let data = try? JSONEncoder().encode(object)
+        UserDefaults.standard.set(data, forKey: key)
+    }
     
-    func getData<T: Decodable>() -> T? {
-        guard let data = UserDefaults.standard.object(forKey: rawValue) as? Data else {
+    static func getData<T: Decodable>(forKey key: String) -> T? {
+        guard let data = UserDefaults.standard.object(forKey: key) as? Data else {
             return nil
         }
         return try? JSONDecoder().decode(T.self, from: data)
     }
     
-    func saveData<T: Encodable>(of json: T) {
-        let data = try? JSONEncoder().encode(json)
-        UserDefaults.standard.set(data, forKey: rawValue)
+    static func remove(forKey key: String) {
+        UserDefaults.standard.set(nil, forKey: key)
     }
     
-    func remove() {
-        UserDefaults.standard.set(nil, forKey: rawValue)
-    }
-    
-    static func removeAll() {
-        for item in UserPreferences.allCases {
-            item.remove()
-        }
-    }
 }
