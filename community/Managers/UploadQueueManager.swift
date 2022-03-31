@@ -7,10 +7,23 @@
 
 import Foundation
 import UIKit
+import RxRelay
 
 final class UploadQueueManager {
     
+    enum QueueEvent {
+        
+        case queueStarted(String)
+        
+        case queueItemFinished(String, Bool)
+        
+        case queueFinished(String)
+        
+    }
+    
     static let shared = UploadQueueManager()
+    
+    let queueEventReceiver = PublishRelay<QueueEvent>()
     
     private var uploadItemRepository: UploadItemRepository
     private var queueItemRepository: QueueItemRepository
@@ -43,17 +56,23 @@ final class UploadQueueManager {
     func uploadQueueItems(_ queue: QueueItem) {
         if case .success(let uploadItems) = uploadItemRepository.getUploadItemsByQueue(id: queue.id) {
             for (itemIndex, uploadItem) in uploadItems.enumerated() {
-                uploadQueue.async {
-                    self.semaphore.wait()
-                    print("🔵Start queue: \(queue.id); item: \(uploadItem.id); index: \(itemIndex)")
-                    StorageManager.shared.uploadData(pinId: queue.id, data: uploadItem.data, type: uploadItem.type) { [weak self] res in
+                uploadQueue.async { [weak self] in
+                    self?.semaphore.wait()
+                    
+                    self?.queueEventReceiver.accept(.queueStarted(queue.id))
+                    StorageManager.shared.uploadData(pinId: queue.id, data: uploadItem.data, type: uploadItem.type) { res in
                         _ = self?.uploadItemRepository.deleteUploadItem(uploadItem.id)
                         
                         if itemIndex == uploadItems.count - 1 {
-                            let qres = self?.queueItemRepository.deleteQueueItem(queue.id)
-                            print("🟣🟣🟣Finish queue: \(queue.id); res: \(String(describing: qres))")
+                            self?.queueEventReceiver.accept(.queueFinished(queue.id))
                         }
-                        print("🟣Finish queue: \(queue.id); item: \(uploadItem.id); index: \(itemIndex); res: \(res)")
+                        
+                        var isFailed = false
+                        if case .success(_) = res {
+                            isFailed = true
+                        }
+                        
+                        self?.queueEventReceiver.accept(.queueItemFinished(uploadItem.id, isFailed))
                         self?.semaphore.signal()
                     }
                 }

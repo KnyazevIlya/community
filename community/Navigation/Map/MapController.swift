@@ -239,7 +239,7 @@ extension MapController: MKMapViewDelegate {
                 annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: CreationAnnotation.reuseIdentifier)
             }
             
-            annotationView?.tintColor = .systemBlue
+            annotationView?.markerTintColor = .systemBlue
             annotationView?.glyphImage = UIImage(systemName: "plus")
             annotationView?.canShowCallout = true
             annotationView?.rightCalloutAccessoryView = UIButton(type: .contactAdd)
@@ -252,6 +252,8 @@ extension MapController: MKMapViewDelegate {
                 annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: IncidentAnnotation.reuseIdentifier)
             }
             
+            annotationView?.glyphTintColor = .white
+            annotationView?.glyphImage = UIImage(systemName: "exclamationmark.triangle")
             annotationView?.canShowCallout = true
             annotationView?.rightCalloutAccessoryView = UIButton(type: .infoDark)
         }
