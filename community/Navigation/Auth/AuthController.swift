@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleSignIn
+import RxSwift
 
 class AuthController: ViewController {
 
@@ -15,8 +16,11 @@ class AuthController: ViewController {
     @IBOutlet weak var contentViewBottomOffset: NSLayoutConstraint!
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var loadingStack: UIStackView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private let viewModel: AuthViewModel
+    private let disposeBag = DisposeBag()
     
     init(viewModel: AuthViewModel) {
         self.viewModel = viewModel
@@ -38,9 +42,20 @@ class AuthController: ViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         contentView.layer.cornerRadius = 20
+        loadingStack.isHidden = true
         
         prepareGoogleButton()
         animateLogInAppearence()
+        
+        GoogleAuthManager.shared.state
+            .subscribe(onNext: { [weak self] event in
+                if event == .inProgress {
+                    self?.toggleLoading(isShown: true)
+                } else {
+                    self?.toggleLoading(isShown: false)
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     private func prepareGoogleButton() {
@@ -60,6 +75,15 @@ class AuthController: ViewController {
             UIView.animate(withDuration: 1) {
                 self.view.layoutSubviews()
             }
+        }
+    }
+    
+    private func toggleLoading(isShown: Bool) {
+        loadingStack.isHidden = !isShown
+        if isShown {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
         }
     }
 

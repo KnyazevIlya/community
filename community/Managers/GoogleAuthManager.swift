@@ -14,6 +14,7 @@ final class GoogleAuthManager {
     
     enum SignInState {
         case signedIn
+        case inProgress
         case signedOut
     }
     
@@ -66,7 +67,8 @@ final class GoogleAuthManager {
         guard let authentication = user?.authentication, let idToken = authentication.idToken else { return }
 
         let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
-
+        
+        state.on(.next(.inProgress))
         Auth.auth().signIn(with: credential) { [unowned self] (_, error) in
             if let error = error {
                 print(error.localizedDescription)
