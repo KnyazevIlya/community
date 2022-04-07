@@ -15,6 +15,13 @@ import RxSwift
 import CoreLocation
 import UIKit
 
+class DataItem {
+    let data: Data
+    init(data: Data) {
+        self.data = data
+    }
+}
+
 final class StorageManager {
     
     typealias UploadCopletion = (Result<String, StorageUploadError>) -> ()
@@ -87,6 +94,7 @@ final class StorageManager {
     
     private let firestore = Firestore.firestore()
     private let storage = Storage.storage().reference()
+    private let cache = NSCache<NSString, DataItem>()
     
     private let pinsRelay = BehaviorRelay<[Pin]>(value: [])
     lazy private(set) var pins = pinsRelay.asObservable().share(replay: 1, scope: .forever)
@@ -124,10 +132,8 @@ final class StorageManager {
     }
     
     //MARK: - Firebase Storage
-    ///upload given data to a corresponding folder of the pin in firebase storage
-    func uploadData(pinId: String, data: Data, type: DataType, completion: @escaping UploadCopletion) {
-        let path = type.getPath(pinId: pinId)
-        
+    ///upload given data to a corresponding path in firebase storage
+    func uploadData(path: String, data: Data, completion: @escaping UploadCopletion = {_ in}) {
         storage.child(path).putData(data, metadata: nil) { metadata, error in
             guard error == nil else {
                 completion(.failure(.uploadFailure))
@@ -165,20 +171,30 @@ final class StorageManager {
         }
     }
     
+    func getStorageReference(forUserId userId: String) -> StorageReference {
+        return storage.child("users/\(userId)")
+    }
+    
     ///download a file from a given firebase storage reference
     func fetchData(forRef ref: StorageReference, completion: @escaping FetchCompletion) {
+        if let cachedItem = cache.object(forKey: NSString(string: ref.fullPath)) {
+            completion(.success(cachedItem.data))
+            return
+        }
+        
         ref.getMetadata { metadata, error in
             guard let metadata = metadata, error == nil else {
                 completion(.failure(.metadataFetchFailure))
                 return
             }
 
-            ref.getData(maxSize: metadata.size) { data, error in
+            ref.getData(maxSize: metadata.size) { [weak self] data, error in
                 guard let data = data, error == nil else {
                     completion(.failure(.dataFetchFailure))
                     return
                 }
-             
+                
+                self?.cache.setObject(DataItem(data: data), forKey: NSString(string: ref.fullPath))
                 completion(.success(data))
             }
         }

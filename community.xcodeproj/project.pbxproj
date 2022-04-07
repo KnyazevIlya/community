@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		060B51CA27FC4D520084EE21 /* MomentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 060B51C927FC4D520084EE21 /* MomentsView.xib */; };
+		060B51CC27FC4E2E0084EE21 /* MomentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060B51CB27FC4E2E0084EE21 /* MomentsView.swift */; };
+		060B51CE27FC4FFC0084EE21 /* MomentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060B51CD27FC4FFC0084EE21 /* MomentsViewModel.swift */; };
+		060B51D227FC83160084EE21 /* MomentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060B51D027FC83160084EE21 /* MomentCollectionViewCell.swift */; };
+		060B51D327FC83160084EE21 /* MomentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 060B51D127FC83160084EE21 /* MomentCollectionViewCell.xib */; };
 		0623784727EB46D400D75DBB /* UploadDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623784627EB46D400D75DBB /* UploadDataItem.swift */; };
 		0623784A27EE064300D75DBB /* Community.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0623784827EE064300D75DBB /* Community.xcdatamodeld */; };
 		0623785127EF541E00D75DBB /* UploadItemDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623785027EF541E00D75DBB /* UploadItemDataSource.swift */; };
@@ -83,6 +88,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		060B51C927FC4D520084EE21 /* MomentsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MomentsView.xib; sourceTree = "<group>"; };
+		060B51CB27FC4E2E0084EE21 /* MomentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsView.swift; sourceTree = "<group>"; };
+		060B51CD27FC4FFC0084EE21 /* MomentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsViewModel.swift; sourceTree = "<group>"; };
+		060B51D027FC83160084EE21 /* MomentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentCollectionViewCell.swift; sourceTree = "<group>"; };
+		060B51D127FC83160084EE21 /* MomentCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MomentCollectionViewCell.xib; sourceTree = "<group>"; };
 		0623784627EB46D400D75DBB /* UploadDataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDataItem.swift; sourceTree = "<group>"; };
 		0623784927EE064300D75DBB /* Community.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Community.xcdatamodel; sourceTree = "<group>"; };
 		0623785027EF541E00D75DBB /* UploadItemDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemDataSource.swift; sourceTree = "<group>"; };
@@ -174,6 +184,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		060B51C827FC4D140084EE21 /* Moments */ = {
+			isa = PBXGroup;
+			children = (
+				060B51CF27FC83010084EE21 /* Cells */,
+				060B51C927FC4D520084EE21 /* MomentsView.xib */,
+				060B51CB27FC4E2E0084EE21 /* MomentsView.swift */,
+				060B51CD27FC4FFC0084EE21 /* MomentsViewModel.swift */,
+			);
+			path = Moments;
+			sourceTree = "<group>";
+		};
+		060B51CF27FC83010084EE21 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				060B51D027FC83160084EE21 /* MomentCollectionViewCell.swift */,
+				060B51D127FC83160084EE21 /* MomentCollectionViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		0623784D27EF4CB400D75DBB /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +356,7 @@
 		0684FAE027D4EDFA002BB256 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				060B51C827FC4D140084EE21 /* Moments */,
 				0684FAE127D4EE5A002BB256 /* VisibilityButton.swift */,
 			);
 			path = Subviews;
@@ -569,6 +600,7 @@
 				06DFE5A427C30AEF008454A7 /* AuthController.xib in Resources */,
 				069EAD3627D7D6A2001619FC /* AddMediaCell.xib in Resources */,
 				068F65ED27BFF88900F63EB0 /* LaunchScreen.storyboard in Resources */,
+				060B51D327FC83160084EE21 /* MomentCollectionViewCell.xib in Resources */,
 				0629A06E27D1F43A005C655A /* PinCreationController.xib in Resources */,
 				0667F6ED27F5B4F1006DD537 /* QueueController.xib in Resources */,
 				0667F6F527F5EEE3006DD537 /* QueueTableViewCell.xib in Resources */,
@@ -577,6 +609,7 @@
 				068F65EA27BFF88900F63EB0 /* Assets.xcassets in Resources */,
 				067E11A127F309A000743D05 /* ViewReportController.xib in Resources */,
 				065EFC7C27C0601700EA00E3 /* GoogleService-Info.plist in Resources */,
+				060B51CA27FC4D520084EE21 /* MomentsView.xib in Resources */,
 				06DFE5D027C55551008454A7 /* MapController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -650,12 +683,15 @@
 				06A75C5127DB384300294369 /* PlayerView.swift in Sources */,
 				06DFE59927C2F7FF008454A7 /* AuthRouter.swift in Sources */,
 				0667F6F727F5FA63006DD537 /* UITableView+Extension.swift in Sources */,
+				060B51D227FC83160084EE21 /* MomentCollectionViewCell.swift in Sources */,
 				067EE08827E50259004456A5 /* Pin.swift in Sources */,
 				0623785A27EF56D400D75DBB /* UploadItemRepositoryImpl.swift in Sources */,
+				060B51CC27FC4E2E0084EE21 /* MomentsView.swift in Sources */,
 				0629A06D27D1F43A005C655A /* PinCreationController.swift in Sources */,
 				0623785F27F063F200D75DBB /* QueueItemRepository.swift in Sources */,
 				069EAD3A27D7D753001619FC /* MediaCell.swift in Sources */,
 				068F65F527BFF8B700F63EB0 /* Application.swift in Sources */,
+				060B51CE27FC4FFC0084EE21 /* MomentsViewModel.swift in Sources */,
 				06BDDD9E27D8B5B200D7C7A4 /* Observable+Extension.swift in Sources */,
 				0623785827EF56C800D75DBB /* UploadItemRepository.swift in Sources */,
 				0623784727EB46D400D75DBB /* UploadDataItem.swift in Sources */,

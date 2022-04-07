@@ -65,7 +65,7 @@ final class UploadQueueManager {
                     self?.semaphore.wait()
                     
                     self?.queueEventReceiver.accept(.queueStarted(queue.id))
-                    StorageManager.shared.uploadData(pinId: queue.id, data: uploadItem.data, type: uploadItem.type) { res in
+                    StorageManager.shared.uploadData(path: uploadItem.type.getPath(pinId: queue.id) , data: uploadItem.data) { res in
                         _ = self?.uploadItemRepository.deleteUploadItem(uploadItem.id)
                         
                         if itemIndex == uploadItems.count - 1 {

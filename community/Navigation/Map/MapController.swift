@@ -17,15 +17,22 @@ class MapController: ViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var queueButton: VisibilityButton!
     
+    private var momentsView: MomentsView = {
+        let view = Bundle.main.loadNibNamed("MomentsView", owner: nil)?.first as! MomentsView
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let disposeBag = DisposeBag()
     private var idsOnMap = Set<String>()
     private var annotationsBag = [String : IncidentAnnotation]()
     private let viewModel: MapViewModel
     
-    private let spanDelta: CLLocationDegrees = 0.125
+    private let spanDelta:           CLLocationDegrees = 0.125
     private let reachabilityRadius: CLLocationDistance = 3000 //3km
-    private let reachabilityAreaBorderWidth: CGFloat = 5
-    private var reachabilityOpacity: Float = 0.3
+    private let reachabilityAreaBorderWidth:   CGFloat = 5
+    private let momentsHeight:                 CGFloat = 75
+    private var reachabilityOpacity:             Float = 0.3
     
     init(viewModel: MapViewModel) {
         self.viewModel = viewModel
@@ -37,11 +44,22 @@ class MapController: ViewController {
     }
     
     //MARK: - life cycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureGesture()
         prepareMapView()
+        configureMomentsView()
         
         StorageManager.shared.pins
             .subscribe(onNext: { [weak self] pins in
@@ -140,6 +158,28 @@ class MapController: ViewController {
         popover.popoverType = .left
         popover.arrowSize = CGSize(width: 10, height: 5)
         popover.show(popoverView, point: popoverOrigin)
+    }
+    
+    //MARK: - moments views
+    func configureMomentsView() {
+        let topOffset = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first?.windows
+            .filter { $0.isKeyWindow }
+            .first?.rootViewController?.view
+            .safeAreaInsets.top ?? 0
+        
+        momentsView.topOffsetConstraint.constant = topOffset
+        
+        view.addSubview(momentsView)
+        NSLayoutConstraint.activate([
+            momentsView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            momentsView.topAnchor.constraint(equalTo: view.topAnchor),
+            momentsView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            momentsView.heightAnchor.constraint(equalToConstant: momentsHeight + topOffset)
+        ])
+        
+        momentsView.configure(withHeight: momentsHeight)
     }
     
     //MARK: - gestures

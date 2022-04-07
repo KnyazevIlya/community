@@ -27,7 +27,7 @@ class Application {
             let router = AuthRouter(navigationController: navigationController)
             router.toSelf()
         }
-        
+        navigationController.isNavigationBarHidden = true
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }

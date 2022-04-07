@@ -14,4 +14,5 @@ struct Pin: Codable {
     let name: String
     let description: String
     let coordinates: GeoPoint
+    let authorId: String
 }

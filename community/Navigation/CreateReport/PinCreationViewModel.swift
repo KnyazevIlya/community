@@ -9,6 +9,7 @@ import RxSwift
 import RxCocoa
 import CoreLocation
 import FirebaseFirestore
+import GoogleSignIn
 
 class PinCreationViewModel: ViewModel, ViewModelType {
     
@@ -66,14 +67,17 @@ class PinCreationViewModel: ViewModel, ViewModelType {
         
         let sendTapped = input.sendTap
             .do(onNext: { [weak self] in
-                guard let self = self, !self.nameRelay.value.isEmpty else { return }
+                guard let self = self,
+                      let userId = GIDSignIn.sharedInstance.currentUser?.userID,
+                      !self.nameRelay.value.isEmpty else { return }
                 
                 let id = UUID().uuidString
                 let pin = Pin(
                     id: id,
                     name: self.nameRelay.value,
                     description: self.descriptionRelay.value,
-                    coordinates: GeoPoint(latitude: self.coordinates.latitude, longitude: self.coordinates.longitude)
+                    coordinates: GeoPoint(latitude: self.coordinates.latitude, longitude: self.coordinates.longitude),
+                    authorId: userId
                 )
                 StorageManager.shared.createRecord(data: pin, collection: StorageManager.Collection.pins)
                 

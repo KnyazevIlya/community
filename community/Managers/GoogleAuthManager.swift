@@ -51,8 +51,7 @@ final class GoogleAuthManager {
             GIDSignIn.sharedInstance.restorePreviousSignIn { [unowned self] user, error in
                 authenticateUser(for: user, with: error)
             }
-            let user = GIDSignIn.sharedInstance.currentUser
-            print(user?.profile?.name ?? "):")
+            saveProfilePictre()
         }
         
         return GIDSignIn.sharedInstance.hasPreviousSignIn()
@@ -74,9 +73,26 @@ final class GoogleAuthManager {
                 print(error.localizedDescription)
             } else {
                 state.on(.next(.signedIn))
-                let user = GIDSignIn.sharedInstance.currentUser
-                print(user?.profile?.name ?? "):")
+                saveProfilePictre()
             }
         }
     }
+    
+    private func saveProfilePictre() {
+        if let user = GIDSignIn.sharedInstance.currentUser, let userId = user.userID {
+            print("🟢User id: \(userId)")
+            
+            DispatchQueue.global(qos: .utility).async {
+                let imageUrl = user.profile?.imageURL(withDimension: 256)
+                
+                DispatchQueue.global(qos: .utility).async {
+                    guard let url = imageUrl, let data = try? Data(contentsOf: url) else { return }
+                    
+                    let path = "users/\(userId)"
+                    StorageManager.shared.uploadData(path: path, data: data)
+                }
+            }
+        }
+    }
+    
 }

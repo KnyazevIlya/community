@@ -14,6 +14,7 @@ class ViewReportController: ViewController {
     @IBOutlet weak var locationName: UILabel!
     @IBOutlet weak var reportDescription: UILabel!
     @IBOutlet weak var mediaCollection: UICollectionView!
+    @IBOutlet weak var authorAvatarImageView: UIImageView!
     
     private let viewModel: ViewReportViewModel
     private let disposeBag = DisposeBag()
@@ -33,6 +34,12 @@ class ViewReportController: ViewController {
         configureCollectionView()
     }
     
+    override func customizeInterface() {
+        super.customizeInterface()
+        
+        authorAvatarImageView.layer.cornerRadius = authorAvatarImageView.frame.height / 2
+    }
+    
     override func bindViewModel() {
         reportNameLabel.text = viewModel.pin.name
         reportDescription.text = viewModel.pin.description
@@ -41,6 +48,10 @@ class ViewReportController: ViewController {
             .subscribe(onNext: { [weak self] text in
                 self?.animateTextAppearence(withText: text, forLabel: self?.locationName)
             })
+            .disposed(by: disposeBag)
+        
+        viewModel.authorAvatarObservable
+            .bind(to: authorAvatarImageView.rx.image)
             .disposed(by: disposeBag)
         
         viewModel.mediaObservable.bind(to: mediaCollection.rx.items) { collectionView, index, element in

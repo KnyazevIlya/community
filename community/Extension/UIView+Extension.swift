@@ -28,4 +28,14 @@ extension UIView {
             rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
     }
+    
+    func center(inView view: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(self)
+        NSLayoutConstraint.activate([
+            centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
 }

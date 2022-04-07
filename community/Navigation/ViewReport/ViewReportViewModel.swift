@@ -19,6 +19,7 @@ class ViewReportViewModel: ViewModel {
     }
     
     let locationObservable = PublishRelay<String?>()
+    let authorAvatarObservable = PublishRelay<UIImage?>()
     let mediaObservable = BehaviorRelay<[MediaCollectionType]>(value: [.add])
     let pin: Pin
     
@@ -27,7 +28,9 @@ class ViewReportViewModel: ViewModel {
     init(pin: Pin) {
         self.pin = pin
         super.init()
+        geocodePin()
         fetchMedia()
+        getAuthorAvatar()
     }
     
     func acceptNewMedia(_ media: MediaCollectionType) {
@@ -69,6 +72,18 @@ class ViewReportViewModel: ViewModel {
                 }
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func getAuthorAvatar() {
+        let ref = StorageManager.shared.getStorageReference(forUserId: pin.authorId)
+        StorageManager.shared.fetchData(forRef: ref) { [weak self] result in
+            if case .success(let data) = result {
+                DispatchQueue.main.async {
+                    let image = UIImage(data: data)
+                    self?.authorAvatarObservable.accept(image)
+                }
+            }
+        }
     }
     
 }

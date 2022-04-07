@@ -38,6 +38,15 @@ class VideoCell: UICollectionViewCell {
         return blurView
     }()
     
+    let activityIndicator: UIActivityIndicatorView = {
+       let indicator = UIActivityIndicatorView()
+        indicator.style = .large
+        indicator.color = .systemBlue
+        indicator.startAnimating()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpUI()
@@ -57,6 +66,7 @@ class VideoCell: UICollectionViewCell {
         containerView.pin(toView: self)
         backgroundPlayerView.pin(toView: containerView)
         blurView.pin(toView: containerView)
+        activityIndicator.center(inView: containerView)
         playerView.pin(toView: containerView)
     }
     
