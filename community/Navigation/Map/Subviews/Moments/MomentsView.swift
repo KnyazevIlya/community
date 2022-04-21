@@ -13,7 +13,9 @@ class MomentsView: UIView {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var topOffsetConstraint: NSLayoutConstraint!
     
+    var viewModel: MomentsViewModel?
     private let itemOffset: CGFloat = 5
+    private let disposeBag = DisposeBag()
 
     func configure(withHeight height: CGFloat) {
         collectionView.register(MomentCollectionViewCell.self)
@@ -21,14 +23,30 @@ class MomentsView: UIView {
         collectionView.contentInset = UIEdgeInsets(top: itemOffset, left: itemOffset, bottom: itemOffset, right: itemOffset)
         collectionView.showsHorizontalScrollIndicator = false
         
-        let o = Observable<String>.of("ssssaflefwmkl")
         let itemHeight = height - itemOffset * 2
         
-        o.bind(to: collectionView.rx.items) { c, i, e in
-            let cell = c.dequeueReusableCell(withReuseIdentifier: MomentCollectionViewCell.identifier, for: IndexPath(item: i, section: 0)) as! MomentCollectionViewCell
-            cell.configure(withHeight: itemHeight)
-            return cell
-        }
+        viewModel?.momentsObservable
+            .bind(to: collectionView.rx.items) { cell, index, pin in
+                let cell = cell.dequeueReusableCell(
+                    withReuseIdentifier: MomentCollectionViewCell.identifier,
+                    for: IndexPath(item: index, section: 0)) as! MomentCollectionViewCell
+                cell.configure(withHeight: itemHeight)
+                
+                StorageManager.shared.getStorageReference(forPinPreview: pin) { ref in
+                    if let ref = ref {
+                        StorageManager.shared.fetchData(forRef: ref) { result in
+                            if case .success(let data) = result {
+                                DispatchQueue.main.async { [weak cell] in
+                                    cell?.imageView.image = UIImage(data: data)
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                return cell
+            }
+            .disposed(by: disposeBag)
     }
 
 }

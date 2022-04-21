@@ -23,15 +23,17 @@ class MapController: ViewController {
         return view
     }()
     
+    private let viewModel: MapViewModel
     private let disposeBag = DisposeBag()
     private var idsOnMap = Set<String>()
     private var annotationsBag = [String : IncidentAnnotation]()
-    private let viewModel: MapViewModel
-    
+    private var needsInitialMomentsViewUpdate = true
+    private weak var momentsViewModel: MomentsViewModel?
+
     private let spanDelta:           CLLocationDegrees = 0.125
     private let reachabilityRadius: CLLocationDistance = 3000 //3km
     private let reachabilityAreaBorderWidth:   CGFloat = 5
-    private let momentsHeight:                 CGFloat = 75
+    private let momentsHeight:                 CGFloat = 100
     private var reachabilityOpacity:             Float = 0.3
     
     init(viewModel: MapViewModel) {
@@ -60,6 +62,7 @@ class MapController: ViewController {
         configureGesture()
         prepareMapView()
         configureMomentsView()
+        configureRegionChangeHandling()
         
         StorageManager.shared.pins
             .subscribe(onNext: { [weak self] pins in
@@ -82,6 +85,11 @@ class MapController: ViewController {
                 }
                 
                 self.idsOnMap = idBag
+                
+                if self.needsInitialMomentsViewUpdate {
+                    self.needsInitialMomentsViewUpdate.toggle()
+                    self.updateMomentsView()
+                }
             })
             .disposed(by: disposeBag)
         
@@ -161,7 +169,7 @@ class MapController: ViewController {
     }
     
     //MARK: - moments views
-    func configureMomentsView() {
+    private func configureMomentsView() {
         let topOffset = UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .first?.windows
@@ -179,7 +187,25 @@ class MapController: ViewController {
             momentsView.heightAnchor.constraint(equalToConstant: momentsHeight + topOffset)
         ])
         
+        let momentsViewModel = MomentsViewModel()
+        momentsView.viewModel = momentsViewModel
         momentsView.configure(withHeight: momentsHeight)
+        
+        self.momentsViewModel = momentsViewModel
+    }
+    
+    private func updateMomentsView() {
+        let mapRect = mapView.visibleMapRect
+        let pins = mapView.annotations(in: mapRect)
+            .compactMap { ($0 as? IncidentAnnotation)?.pin }
+            .sorted { lhsPin, rhsPin in
+                guard let lhs = lhsPin.timestamp?.dateValue(),
+                      let rhs = rhsPin.timestamp?.dateValue() else { return false }
+                
+                return lhs < rhs
+            }
+        
+        momentsViewModel?.momentsObservable.accept(pins)
     }
     
     //MARK: - gestures
@@ -262,6 +288,20 @@ class MapController: ViewController {
         annotationsBag[pin.id] = newAnnotation
     }
       
+    private func configureRegionChangeHandling() {
+        let gustureRecognizer = UIPanGestureRecognizer()
+        gustureRecognizer.delegate = self
+        mapView.addGestureRecognizer(gustureRecognizer)
+        
+        gustureRecognizer
+            .rx.event.bind(onNext: { [weak self] gestureRecognizer in
+                if gestureRecognizer.state == .ended {
+                    self?.updateMomentsView()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+
 }
 
 //MARK: - MKMapViewDelegate
@@ -325,5 +365,11 @@ extension MapController: MKMapViewDelegate {
         } else if let annotation = view.annotation as? IncidentAnnotation {
             viewModel.pinViewTrigger.on(.next(annotation.pin))
         }
+    }
+}
+
+extension MapController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
     }
 }

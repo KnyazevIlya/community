@@ -96,7 +96,7 @@ final class StorageManager {
     private let storage = Storage.storage().reference()
     private let cache = NSCache<NSString, DataItem>()
     
-    private let pinsRelay = BehaviorRelay<[Pin]>(value: [])
+    private let pinsRelay = PublishRelay<[Pin]>()
     lazy private(set) var pins = pinsRelay.asObservable().share(replay: 1, scope: .forever)
     
     private init() {
@@ -167,6 +167,22 @@ final class StorageManager {
 
             for item in result.items {
                 relay.accept(.video(item))
+            }
+        }
+    }
+    
+    func getStorageReference(forPinPreview pin: Pin, completion: @escaping (StorageReference?) -> Void) {
+        let basePath = "media/\(pin.id)/image"
+        
+        storage.child(basePath).listAll { result, error in
+            guard error == nil else {
+                completion(nil)
+                return
+            }
+            
+            for item in result.items {
+                completion(item)
+                return
             }
         }
     }

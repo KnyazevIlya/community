@@ -11,11 +11,6 @@ class MomentCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
     func configure(withHeight height: CGFloat) {
         imageView.backgroundColor = .systemBlue
         imageView.layer.cornerRadius = height / 2
