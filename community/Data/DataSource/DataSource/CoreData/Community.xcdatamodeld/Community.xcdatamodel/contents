@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="QueueItemCoreDataEntity" representedClassName="QueueItemCoreDataEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="uploadItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UploadItemCoreDataEntity" inverseName="queueItem" inverseEntity="UploadItemCoreDataEntity"/>
+    </entity>
+    <entity name="UploadItemCoreDataEntity" representedClassName="UploadItemCoreDataEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="data" attributeType="Binary"/>
+        <attribute name="filename" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="isImage" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="queueItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QueueItemCoreDataEntity" inverseName="uploadItems" inverseEntity="QueueItemCoreDataEntity"/>
+    </entity>
+    <elements>
+        <element name="QueueItemCoreDataEntity" positionX="-4212" positionY="-594" width="128" height="103"/>
+        <element name="UploadItemCoreDataEntity" positionX="-3943.199768066406" positionY="-660.8251953125" width="128" height="104"/>
+    </elements>
+</model>

@@ -21,8 +21,16 @@ class AuthRouter: Router {
     }
     
     func toMainFlow() {
+        guard let navigationController = navigationController else {
+            return
+        }
+        
+        var controllers = navigationController.viewControllers
+        controllers.remove(at: 0)
+        navigationController.viewControllers = controllers
+        
         let controller = TabBarController(initialTab: .map)
-        navigationController?.pushViewController(controller, animated: true)
+        navigationController.pushViewController(controller, animated: true)
     }
     
 }

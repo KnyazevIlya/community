@@ -12,3 +12,4 @@ protocol Router {
     init(navigationController: UINavigationController?)
     func toSelf()
 }
+

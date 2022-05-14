@@ -6,13 +6,16 @@
 //
 
 import UIKit
-
+import DropDown
 
 class Application {
     
     static let shared = Application()
     
-    private init() {}
+    private init() {
+        LocationManager.shared.configure()
+        UploadQueueManager.shared.synchronizeQueue()
+    }
     
     func prepareInitialScreen(in window: UIWindow?) {
         let navigationController = UINavigationController()
@@ -24,8 +27,16 @@ class Application {
             let router = AuthRouter(navigationController: navigationController)
             router.toSelf()
         }
-        
+        navigationController.isNavigationBarHidden = true
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+    }
+    
+    func configureDropDown() {
+        DropDown.startListeningToKeyboard()
+        DropDown.appearance().backgroundColor = .mainGray
+        DropDown.appearance().textColor = .secondaryGray
+        DropDown.appearance().selectionBackgroundColor = .secondaryGray
+        DropDown.appearance().selectedTextColor = .mainGray
     }
 }

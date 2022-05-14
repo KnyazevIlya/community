@@ -10,10 +10,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthController" customModule="community" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="beX-8w-Xcv" id="EzQ-E2-h4J"/>
                 <outlet property="backgroundImage" destination="77F-UJ-Dez" id="tgq-BL-8xS"/>
                 <outlet property="contentView" destination="DcH-iI-ozW" id="wAF-eG-epm"/>
                 <outlet property="contentViewBottomOffset" destination="u5v-lG-czh" id="cBg-NH-bRU"/>
                 <outlet property="contentViewHeightConstraint" destination="FKa-7a-LfI" id="pKK-gl-LE3"/>
+                <outlet property="loadingStack" destination="Egz-tt-Gb8" id="kfc-Op-DWT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,9 +35,30 @@
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DcH-iI-ozW">
                     <rect key="frame" x="0.0" y="896" width="414" height="500"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Egz-tt-Gb8">
+                            <rect key="frame" x="149.5" y="221.5" width="115" height="57.5"/>
+                            <subviews>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="beX-8w-Xcv">
+                                    <rect key="frame" x="0.0" y="0.0" width="115" height="37"/>
+                                </activityIndicatorView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authorisation..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sl8-js-EDZ">
+                                    <rect key="frame" x="0.0" y="37" width="115" height="20.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="115" id="AAI-sR-Qdj"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
                     <color key="backgroundColor" white="0.8048675952314519" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="500" id="FKa-7a-LfI"/>
+                        <constraint firstItem="Egz-tt-Gb8" firstAttribute="centerY" secondItem="DcH-iI-ozW" secondAttribute="centerY" id="Gnn-5y-xfZ"/>
+                        <constraint firstItem="Egz-tt-Gb8" firstAttribute="centerX" secondItem="DcH-iI-ozW" secondAttribute="centerX" id="Ujq-hs-Hxd"/>
                     </constraints>
                 </view>
             </subviews>
