@@ -33,12 +33,14 @@ class MomentsView: UIView {
                 cell.configure(withHeight: itemHeight)
                 cell.imageView.image = nil
                 
-                StorageManager.shared.getStorageReference(forPinPreview: pin) { ref in
-                    if let ref = ref {
-                        StorageManager.shared.fetchData(forRef: ref) { result in
-                            if case .success(let data) = result {
-                                DispatchQueue.main.async { [weak cell] in
-                                    cell?.imageView.image = UIImage(data: data)
+                DispatchQueue.global(qos: .userInitiated).async {
+                    StorageManager.shared.getStorageReference(forPinPreview: pin) { ref in
+                        if let ref = ref {
+                            StorageManager.shared.fetchData(forRef: ref) { result in
+                                if case .success(let data) = result {
+                                    DispatchQueue.main.async { [weak cell] in
+                                        cell?.imageView.image = UIImage(data: data)
+                                    }
                                 }
                             }
                         }
