@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>63100897575-redivdftr44v1p0hcslk2ebja06bujbl.apps.googleusercontent.com</string>
+	<string>987413801234-kncvl6a99rlolihhdoqahkg9dkgsrl08.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.63100897575-redivdftr44v1p0hcslk2ebja06bujbl</string>
+	<string>com.googleusercontent.apps.987413801234-kncvl6a99rlolihhdoqahkg9dkgsrl08</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBpKd8C00ksWvqsb66szRwqNXuU2O47pzw</string>
+	<string>AIzaSyCj-pU_gc-qkjHborhJrMFxVjl7BKHxVgM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>63100897575</string>
+	<string>987413801234</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.lastivky.community</string>
+	<string>com.lastivky.community.app</string>
 	<key>PROJECT_ID</key>
-	<string>community-2ce28</string>
+	<string>community-lastivky</string>
 	<key>STORAGE_BUCKET</key>
-	<string>community-2ce28.appspot.com</string>
+	<string>community-lastivky.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:63100897575:ios:3760fd2e9645b840408102</string>
+	<string>1:987413801234:ios:e7cf647475b1292644abcb</string>
 </dict>
 </plist>
