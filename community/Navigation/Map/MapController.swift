@@ -199,10 +199,7 @@ class MapController: ViewController {
         let pins = mapView.annotations(in: mapRect)
             .compactMap { ($0 as? IncidentAnnotation)?.pin }
             .sorted { lhsPin, rhsPin in
-                guard let lhs = lhsPin.timestamp?.dateValue(),
-                      let rhs = rhsPin.timestamp?.dateValue() else { return false }
-                
-                return lhs < rhs
+                return lhsPin.name < rhsPin.name
             }
         
         momentsViewModel?.momentsObservable.accept(pins)
