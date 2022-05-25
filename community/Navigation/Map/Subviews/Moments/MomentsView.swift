@@ -31,6 +31,7 @@ class MomentsView: UIView {
                     withReuseIdentifier: MomentCollectionViewCell.identifier,
                     for: IndexPath(item: index, section: 0)) as! MomentCollectionViewCell
                 cell.configure(withHeight: itemHeight)
+                cell.imageView.image = nil
                 
                 StorageManager.shared.getStorageReference(forPinPreview: pin) { ref in
                     if let ref = ref {
