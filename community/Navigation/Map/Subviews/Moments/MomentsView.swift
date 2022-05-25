@@ -42,7 +42,7 @@ class MomentsView: UIView {
                                         cell?.imageView.image = UIImage(data: data)
                                     }
                                 }
-                            }
+                            }   
                         }
                     }
                 }

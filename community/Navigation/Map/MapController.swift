@@ -10,6 +10,7 @@ import MapKit
 import RxSwift
 import Popover
 import Lottie
+import FirebaseStorage
 
 class MapController: ViewController {
 
@@ -202,7 +203,20 @@ class MapController: ViewController {
                 return lhsPin.name < rhsPin.name
             }
         
-        momentsViewModel?.momentsObservable.accept(pins)
+        var pinsWithPreview: [Pin] = []
+        DispatchQueue.global(qos: .userInitiated).async {
+            for pin in pins {
+                StorageManager.shared.getStorageReference(forPinPreview: pin) { ref in
+                    if ref != nil {
+                        pinsWithPreview.append(pin)
+                    }
+                }
+            }
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.momentsViewModel?.momentsObservable.accept(pinsWithPreview)
+            }
+        }
     }
     
     //MARK: - gestures
