@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="PinInFeedCell" customModule="community" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="340" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="340" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uDC-2N-fEG">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="uDC-2N-fEG" secondAttribute="height" multiplier="1:1" id="9HA-Xg-a3t"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ca-oa-XHg">
+                        <rect key="frame" x="108" y="55" width="212" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="TeW-TI-NFf"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" name="mainGray"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MXA-4N-rFj">
+                        <rect key="frame" x="108" y="26" width="212" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="yuL-HQ-noJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" name="secondaryGray"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="uDC-2N-fEG" secondAttribute="bottom" id="1ld-N9-Slo"/>
+                    <constraint firstItem="uDC-2N-fEG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6a9-Cc-ccv"/>
+                    <constraint firstItem="MXA-4N-rFj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="26" id="7FT-eb-cOU"/>
+                    <constraint firstItem="6ca-oa-XHg" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="AlK-Nn-WJe"/>
+                    <constraint firstItem="MXA-4N-rFj" firstAttribute="leading" secondItem="uDC-2N-fEG" secondAttribute="trailing" constant="8" symbolic="YES" id="CqJ-O5-qkF"/>
+                    <constraint firstItem="uDC-2N-fEG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hTz-Mk-EEl"/>
+                    <constraint firstItem="6ca-oa-XHg" firstAttribute="leading" secondItem="uDC-2N-fEG" secondAttribute="trailing" constant="8" symbolic="YES" id="kuK-wM-mUe"/>
+                    <constraint firstAttribute="trailing" secondItem="MXA-4N-rFj" secondAttribute="trailing" constant="20" symbolic="YES" id="qrh-gW-juC"/>
+                    <constraint firstItem="6ca-oa-XHg" firstAttribute="top" secondItem="MXA-4N-rFj" secondAttribute="bottom" constant="8" symbolic="YES" id="uWE-Qp-sgq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="pinDescriptionLabel" destination="6ca-oa-XHg" id="nif-Mu-T1Y"/>
+                <outlet property="pinImage" destination="uDC-2N-fEG" id="TCN-EG-jIh"/>
+                <outlet property="pinNameLabel" destination="MXA-4N-rFj" id="KEC-YU-AaE"/>
+            </connections>
+            <point key="canvasLocation" x="152.17391304347828" y="127.90178571428571"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="mainGray">
+            <color red="0.17299999296665192" green="0.17299999296665192" blue="0.18000000715255737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="secondaryGray">
+            <color red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
