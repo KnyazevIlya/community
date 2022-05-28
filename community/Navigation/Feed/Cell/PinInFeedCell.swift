@@ -6,13 +6,19 @@
 //
 
 import UIKit
+import RxCocoa
+import CoreLocation
+import RxSwift
 
 class PinInFeedCell: UITableViewCell {
     
     static let cellId = "pinInFeedCell"
     
+    private let disposeBag = DisposeBag()
+    
     @IBOutlet weak var pinImage: UIImageView!
     @IBOutlet weak var pinNameLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var pinDescriptionLabel: UILabel!
 
     override func awakeFromNib() {
@@ -42,6 +48,18 @@ class PinInFeedCell: UITableViewCell {
                 }
             }
         }
+        
+        //load location
+        locationLabel.text = "Loading..."
+        let coordinates = CLLocationCoordinate2D(firestoreCoordinates: data.coordinates)
+        LocationManager.shared.geocode(coordinates: coordinates) { name in
+            DispatchQueue.main.async {
+                if let name = name {
+                    self.locationLabel.text = "📍 \(name)"
+                }
+            }
+        }
+        //fix reloading
     }
     
 }

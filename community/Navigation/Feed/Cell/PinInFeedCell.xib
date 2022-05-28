@@ -23,17 +23,8 @@
                             <constraint firstAttribute="width" secondItem="uDC-2N-fEG" secondAttribute="height" multiplier="1:1" id="9HA-Xg-a3t"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ca-oa-XHg">
-                        <rect key="frame" x="108" y="55" width="212" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="TeW-TI-NFf"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" name="mainGray"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MXA-4N-rFj">
-                        <rect key="frame" x="108" y="26" width="212" height="21"/>
+                        <rect key="frame" x="108" y="16" width="212" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="yuL-HQ-noJ"/>
                         </constraints>
@@ -41,22 +32,43 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ca-oa-XHg">
+                        <rect key="frame" x="108" y="68" width="212" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="TeW-TI-NFf"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" name="mainGray"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ppm-T2-7GH">
+                        <rect key="frame" x="108" y="45" width="212" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="M7U-oL-gFO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" name="secondaryGray"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="uDC-2N-fEG" secondAttribute="bottom" id="1ld-N9-Slo"/>
                     <constraint firstItem="uDC-2N-fEG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6a9-Cc-ccv"/>
-                    <constraint firstItem="MXA-4N-rFj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="26" id="7FT-eb-cOU"/>
+                    <constraint firstItem="MXA-4N-rFj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="7FT-eb-cOU"/>
                     <constraint firstItem="6ca-oa-XHg" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="AlK-Nn-WJe"/>
                     <constraint firstItem="MXA-4N-rFj" firstAttribute="leading" secondItem="uDC-2N-fEG" secondAttribute="trailing" constant="8" symbolic="YES" id="CqJ-O5-qkF"/>
+                    <constraint firstItem="Ppm-T2-7GH" firstAttribute="leading" secondItem="uDC-2N-fEG" secondAttribute="trailing" constant="8" symbolic="YES" id="IcM-kg-Gxt"/>
+                    <constraint firstAttribute="trailing" secondItem="Ppm-T2-7GH" secondAttribute="trailing" constant="20" symbolic="YES" id="SUB-Wx-oRL"/>
                     <constraint firstItem="uDC-2N-fEG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hTz-Mk-EEl"/>
                     <constraint firstItem="6ca-oa-XHg" firstAttribute="leading" secondItem="uDC-2N-fEG" secondAttribute="trailing" constant="8" symbolic="YES" id="kuK-wM-mUe"/>
+                    <constraint firstItem="6ca-oa-XHg" firstAttribute="top" secondItem="Ppm-T2-7GH" secondAttribute="bottom" constant="2" id="ldv-pe-ieK"/>
                     <constraint firstAttribute="trailing" secondItem="MXA-4N-rFj" secondAttribute="trailing" constant="20" symbolic="YES" id="qrh-gW-juC"/>
-                    <constraint firstItem="6ca-oa-XHg" firstAttribute="top" secondItem="MXA-4N-rFj" secondAttribute="bottom" constant="8" symbolic="YES" id="uWE-Qp-sgq"/>
+                    <constraint firstItem="Ppm-T2-7GH" firstAttribute="top" secondItem="MXA-4N-rFj" secondAttribute="bottom" constant="8" symbolic="YES" id="y8x-Z0-Bxs"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="locationLabel" destination="Ppm-T2-7GH" id="hvN-96-urM"/>
                 <outlet property="pinDescriptionLabel" destination="6ca-oa-XHg" id="nif-Mu-T1Y"/>
                 <outlet property="pinImage" destination="uDC-2N-fEG" id="TCN-EG-jIh"/>
                 <outlet property="pinNameLabel" destination="MXA-4N-rFj" id="KEC-YU-AaE"/>
