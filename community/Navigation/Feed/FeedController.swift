@@ -20,8 +20,7 @@ class FeedController: UIViewController, UITableViewDelegate {
         
         pinsTable.register(UINib(nibName: "PinInFeedCell", bundle: nil), forCellReuseIdentifier: PinInFeedCell.cellId)
         pinsTable.delegate = self
-        pinsTable.contentInset = UIEdgeInsets(top: itemOffset, left: itemOffset, bottom: itemOffset, right: itemOffset)
-        pinsTable.showsHorizontalScrollIndicator = false
+        pinsTable.showsVerticalScrollIndicator = false
         
         StorageManager.shared.pins.bind(to: pinsTable.rx.items) { cell, index, pin in
             let cell = cell.dequeueReusableCell(withIdentifier: PinInFeedCell.cellId,for: IndexPath(item: index, section: 0)) as! PinInFeedCell
@@ -29,5 +28,7 @@ class FeedController: UIViewController, UITableViewDelegate {
             return cell
         }.disposed(by: disposeBag)
     }
+    
+    
 
 }
