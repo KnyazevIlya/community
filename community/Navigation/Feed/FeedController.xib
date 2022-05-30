@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedController" customModule="community" customModuleProvider="target">
+            <connections>
+                <outlet property="dropDownHeight" destination="gMf-PD-YDy" id="nFV-3h-OzQ"/>
+                <outlet property="dropDownListArrowImage" destination="TCj-av-8Z6" id="5b3-Yv-zIY"/>
+                <outlet property="dropDownListButton" destination="pfK-ea-XfE" id="St8-CR-KQw"/>
+                <outlet property="dropDownListTable" destination="XR1-YC-qhs" id="8N8-5F-Q6v"/>
+                <outlet property="pinsTable" destination="Rmd-jj-hXC" id="GeQ-Hw-XaY"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gd7-hE-xlE">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="3TE-eH-LIE"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Rmd-jj-hXC">
+                    <rect key="frame" x="0.0" y="120" width="375" height="547"/>
+                    <color key="backgroundColor" name="mainGray"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfK-ea-XfE">
+                    <rect key="frame" x="70" y="58" width="195" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="qCO-r0-99Z"/>
+                    </constraints>
+                    <color key="tintColor" name="secondaryGray"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Global">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="dropDownListAction:" destination="-1" eventType="touchUpInside" id="OgN-07-DYC"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="XR1-YC-qhs">
+                    <rect key="frame" x="70" y="102" width="235" height="150"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="gMf-PD-YDy"/>
+                    </constraints>
+                </tableView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TCj-av-8Z6">
+                    <rect key="frame" x="264" y="70" width="31" height="21.5"/>
+                    <color key="tintColor" name="secondaryGray"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="TCj-av-8Z6" secondAttribute="height" multiplier="1:1" id="Mt2-R3-GjL"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="XR1-YC-qhs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="70" id="1CU-iQ-aps"/>
+                <constraint firstItem="pfK-ea-XfE" firstAttribute="top" secondItem="gd7-hE-xlE" secondAttribute="bottom" constant="-62" id="1j4-Uf-uwl"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Rmd-jj-hXC" secondAttribute="trailing" id="4pN-nl-F4M"/>
+                <constraint firstItem="pfK-ea-XfE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="70" id="7fx-S4-dej"/>
+                <constraint firstItem="TCj-av-8Z6" firstAttribute="top" secondItem="gd7-hE-xlE" secondAttribute="bottom" constant="-55" id="DJ6-6G-79O"/>
+                <constraint firstItem="Rmd-jj-hXC" firstAttribute="top" secondItem="gd7-hE-xlE" secondAttribute="bottom" id="DrS-4t-RUX"/>
+                <constraint firstItem="gd7-hE-xlE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="F8A-q8-CVy"/>
+                <constraint firstItem="XR1-YC-qhs" firstAttribute="top" secondItem="pfK-ea-XfE" secondAttribute="bottom" id="KrR-1l-rTu"/>
+                <constraint firstItem="Rmd-jj-hXC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="MAk-7s-OMc"/>
+                <constraint firstItem="gd7-hE-xlE" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="SvG-0X-yfr"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Rmd-jj-hXC" secondAttribute="bottom" id="VWY-v9-bsN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XR1-YC-qhs" secondAttribute="trailing" constant="70" id="c2k-HE-s0w"/>
+                <constraint firstItem="TCj-av-8Z6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="264" id="haS-oe-QFK"/>
+                <constraint firstItem="gd7-hE-xlE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mWV-DG-sJv"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TCj-av-8Z6" secondAttribute="trailing" constant="80" id="w4C-O7-RKG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pfK-ea-XfE" secondAttribute="trailing" constant="110" id="zuC-Cc-44s"/>
+            </constraints>
+            <point key="canvasLocation" x="138.40000000000001" y="109.29535232383809"/>
+        </view>
+        <tapGestureRecognizer id="fAZ-Ay-fTL">
+            <connections>
+                <action selector="tapToSpaceAction:" destination="-1" id="gTl-Qw-yPe"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <namedColor name="mainGray">
+            <color red="0.17299999296665192" green="0.17299999296665192" blue="0.18000000715255737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="secondaryGray">
+            <color red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

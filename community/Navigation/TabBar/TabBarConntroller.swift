@@ -23,8 +23,9 @@ class TabBarController: UITabBarController {
         initialTab = tab
         
         let feedNavigation = UINavigationController()
-        let feedController = UIViewController()
-        feedController.view.backgroundColor = .systemBlue
+//        let feedController = UIViewController()
+//        feedController.view.backgroundColor = .systemBlue
+        let feedController = FeedController()
         feedNavigation.pushViewController(feedController, animated: false)
         
         let mapNavigation = UINavigationController()

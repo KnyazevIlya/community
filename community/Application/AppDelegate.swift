@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import Firebase
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         Application.shared.configureDropDown()
+        //new code
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.requestAuthorization(options: [.alert,.sound,.alert]) { granted, error in
+            guard granted else { return }
+            notificationCenter.getNotificationSettings { settings in
+                guard settings.authorizationStatus == .authorized else { return }
+            }
+        }
+        notificationCenter.delegate = self
+        //end new code
         return true
     }
 
@@ -80,3 +91,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+//new code
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.sound, .alert])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        //click on notification
+    }
+    
+}
