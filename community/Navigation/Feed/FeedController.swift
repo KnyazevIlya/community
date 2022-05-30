@@ -62,7 +62,6 @@ class FeedController: UIViewController {
     
     private func pushNotification(withTitle title: String, withBody body: String) {
         let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.delegate = self
         
         let content = UNMutableNotificationContent()
         content.title = title
@@ -76,19 +75,6 @@ class FeedController: UIViewController {
         notificationCenter.add(request) { error in
             //ERROR
         }
-    }
-    
-}
-
-
-extension FeedController: UNUserNotificationCenterDelegate {
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.sound])
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        //click on notification
     }
     
 }

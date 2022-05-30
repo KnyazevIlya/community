@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 guard settings.authorizationStatus == .authorized else { return }
             }
         }
+        notificationCenter.delegate = self
         //end new code
         return true
     }
@@ -90,3 +91,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+//new code
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.sound, .alert])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        //click on notification
+    }
+    
+}
