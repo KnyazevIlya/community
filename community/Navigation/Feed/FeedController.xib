@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedController" customModule="community" customModuleProvider="target">
             <connections>
+                <outlet property="DropDownListButton" destination="pfK-ea-XfE" id="St8-CR-KQw"/>
+                <outlet property="dropDownListTable" destination="XR1-YC-qhs" id="8N8-5F-Q6v"/>
                 <outlet property="pinsTable" destination="Rmd-jj-hXC" id="GeQ-Hw-XaY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,30 +23,64 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gd7-hE-xlE">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                     <color key="backgroundColor" name="mainGray"/>
+                    <gestureRecognizers/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="3TE-eH-LIE"/>
+                        <constraint firstAttribute="height" constant="120" id="3TE-eH-LIE"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Rmd-jj-hXC">
-                    <rect key="frame" x="0.0" y="100" width="375" height="567"/>
+                    <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                     <color key="backgroundColor" name="secondaryGray"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfK-ea-XfE">
+                    <rect key="frame" x="70" y="58" width="235" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="qCO-r0-99Z"/>
+                    </constraints>
+                    <color key="tintColor" name="secondaryGray"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Global">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="dropDownListAction:" destination="-1" eventType="touchUpInside" id="OgN-07-DYC"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="XR1-YC-qhs">
+                    <rect key="frame" x="70" y="102" width="235" height="150"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="gMf-PD-YDy"/>
+                    </constraints>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <gestureRecognizers/>
             <constraints>
+                <constraint firstItem="XR1-YC-qhs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="70" id="1CU-iQ-aps"/>
+                <constraint firstItem="pfK-ea-XfE" firstAttribute="top" secondItem="gd7-hE-xlE" secondAttribute="bottom" constant="-62" id="1j4-Uf-uwl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Rmd-jj-hXC" secondAttribute="trailing" id="4pN-nl-F4M"/>
+                <constraint firstItem="pfK-ea-XfE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="70" id="7fx-S4-dej"/>
                 <constraint firstItem="Rmd-jj-hXC" firstAttribute="top" secondItem="gd7-hE-xlE" secondAttribute="bottom" id="DrS-4t-RUX"/>
                 <constraint firstItem="gd7-hE-xlE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="F8A-q8-CVy"/>
+                <constraint firstItem="XR1-YC-qhs" firstAttribute="top" secondItem="pfK-ea-XfE" secondAttribute="bottom" id="KrR-1l-rTu"/>
                 <constraint firstItem="Rmd-jj-hXC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="MAk-7s-OMc"/>
                 <constraint firstItem="gd7-hE-xlE" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="SvG-0X-yfr"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Rmd-jj-hXC" secondAttribute="bottom" id="VWY-v9-bsN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XR1-YC-qhs" secondAttribute="trailing" constant="70" id="c2k-HE-s0w"/>
                 <constraint firstItem="gd7-hE-xlE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mWV-DG-sJv"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pfK-ea-XfE" secondAttribute="trailing" constant="70" id="zuC-Cc-44s"/>
             </constraints>
             <point key="canvasLocation" x="138.40000000000001" y="109.29535232383809"/>
         </view>
+        <tapGestureRecognizer id="fAZ-Ay-fTL">
+            <connections>
+                <action selector="tapToSpaceAction:" destination="-1" id="gTl-Qw-yPe"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <namedColor name="mainGray">

@@ -13,6 +13,7 @@ import RxSwift
 class PinInFeedCell: UITableViewCell {
     
     static let cellId = "pinInFeedCell"
+    static let nibName = "PinInFeedCell"
     
     private let disposeBag = DisposeBag()
     

@@ -86,6 +86,10 @@
 		06DFE5CF27C55551008454A7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DFE5CD27C55551008454A7 /* MapController.swift */; };
 		06DFE5D027C55551008454A7 /* MapController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06DFE5CE27C55551008454A7 /* MapController.xib */; };
 		141DCED475F813B7B2F3D047 /* Pods_community.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F438ACEC52939E9CBD57FD05 /* Pods_community.framework */; };
+		FF8EDAE02843950300630BFB /* DropDownListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EDADE2843950300630BFB /* DropDownListCell.swift */; };
+		FF8EDAE12843950300630BFB /* DropDownListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8EDADF2843950300630BFB /* DropDownListCell.xib */; };
+		FF8EDAE32844EC4600630BFB /* DropDownListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EDAE22844EC4600630BFB /* DropDownListDelegate.swift */; };
+		FF8EDAE52844ECE000630BFB /* DropDownListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EDAE42844ECE000630BFB /* DropDownListModel.swift */; };
 		FFD52E39283FC4D200687ED2 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD52E37283FC4D200687ED2 /* FeedController.swift */; };
 		FFD52E3A283FC4D200687ED2 /* FeedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFD52E38283FC4D200687ED2 /* FeedController.xib */; };
 		FFD52E3E283FC86C00687ED2 /* PinInFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD52E3C283FC86C00687ED2 /* PinInFeedCell.swift */; };
@@ -176,6 +180,10 @@
 		0D72C95A8C9D01F30441929C /* Pods-community.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-community.release.xcconfig"; path = "Target Support Files/Pods-community/Pods-community.release.xcconfig"; sourceTree = "<group>"; };
 		F438ACEC52939E9CBD57FD05 /* Pods_community.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_community.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F51FCB8BA6875150603E6570 /* Pods-community.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-community.debug.xcconfig"; path = "Target Support Files/Pods-community/Pods-community.debug.xcconfig"; sourceTree = "<group>"; };
+		FF8EDADE2843950300630BFB /* DropDownListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownListCell.swift; sourceTree = "<group>"; };
+		FF8EDADF2843950300630BFB /* DropDownListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropDownListCell.xib; sourceTree = "<group>"; };
+		FF8EDAE22844EC4600630BFB /* DropDownListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownListDelegate.swift; sourceTree = "<group>"; };
+		FF8EDAE42844ECE000630BFB /* DropDownListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownListModel.swift; sourceTree = "<group>"; };
 		FFD52E37283FC4D200687ED2 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
 		FFD52E38283FC4D200687ED2 /* FeedController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedController.xib; sourceTree = "<group>"; };
 		FFD52E3C283FC86C00687ED2 /* PinInFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinInFeedCell.swift; sourceTree = "<group>"; };
@@ -548,9 +556,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FF8EDADB284394AB00630BFB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FF8EDADE2843950300630BFB /* DropDownListCell.swift */,
+				FF8EDADF2843950300630BFB /* DropDownListCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		FFD52E36283FC48F00687ED2 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				FFD52E402842763000687ED2 /* DropDownList */,
 				FFD52E3B283FC83F00687ED2 /* Cell */,
 				FFD52E37283FC4D200687ED2 /* FeedController.swift */,
 				FFD52E38283FC4D200687ED2 /* FeedController.xib */,
@@ -565,6 +583,16 @@
 				FFD52E3D283FC86C00687ED2 /* PinInFeedCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		FFD52E402842763000687ED2 /* DropDownList */ = {
+			isa = PBXGroup;
+			children = (
+				FF8EDADB284394AB00630BFB /* Cell */,
+				FF8EDAE22844EC4600630BFB /* DropDownListDelegate.swift */,
+				FF8EDAE42844ECE000630BFB /* DropDownListModel.swift */,
+			);
+			path = DropDownList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -629,6 +657,7 @@
 			files = (
 				0673BD3B27D4F8BC00F744BD /* eye.json in Resources */,
 				06DFE5A427C30AEF008454A7 /* AuthController.xib in Resources */,
+				FF8EDAE12843950300630BFB /* DropDownListCell.xib in Resources */,
 				069EAD3627D7D6A2001619FC /* AddMediaCell.xib in Resources */,
 				FFD52E3F283FC86C00687ED2 /* PinInFeedCell.xib in Resources */,
 				068F65ED27BFF88900F63EB0 /* LaunchScreen.storyboard in Resources */,
@@ -697,6 +726,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				069EAD3227D7477B001619FC /* CoreLocation+Extension.swift in Sources */,
+				FF8EDAE52844ECE000630BFB /* DropDownListModel.swift in Sources */,
 				06A75C4827DA645300294369 /* VideoCell.swift in Sources */,
 				06DFE5CA27C554FA008454A7 /* MapRouter.swift in Sources */,
 				0667F6F427F5EEE3006DD537 /* QueueTableViewCell.swift in Sources */,
@@ -745,6 +775,7 @@
 				062DC20327E9CC0700FCD957 /* UploadQueueManager.swift in Sources */,
 				0623786127F065AA00D75DBB /* QueueItemDataSource.swift in Sources */,
 				067E119627F1B16D00743D05 /* QueueItemMapperImpl.swift in Sources */,
+				FF8EDAE32844EC4600630BFB /* DropDownListDelegate.swift in Sources */,
 				0623786827F06E8700D75DBB /* QueueItemRepositoryImpl.swift in Sources */,
 				06BDDDA227D8F6B000D7C7A4 /* UICollectionView+Extension.swift in Sources */,
 				062A4B3F27E4D29C0007AC8E /* StorageManager.swift in Sources */,
@@ -755,6 +786,7 @@
 				068F65E327BFF88700F63EB0 /* SceneDelegate.swift in Sources */,
 				06DFE5CF27C55551008454A7 /* MapController.swift in Sources */,
 				067E119427F1B09700743D05 /* QueueItemMapper.swift in Sources */,
+				FF8EDAE02843950300630BFB /* DropDownListCell.swift in Sources */,
 				0623785D27EF803500D75DBB /* UploadItemError.swift in Sources */,
 				0629A07627D28580005C655A /* LocationManager.swift in Sources */,
 				069EAD3527D7D6A2001619FC /* AddMediaCell.swift in Sources */,
