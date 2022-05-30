@@ -12,7 +12,7 @@ class DropDownListModel {
     private(set) var isOpen = false
     let list: [String]
     let countOfBlocks: CGFloat
-    private let dropDownListDelegate: DropDownListDelegate
+    private weak var dropDownListDelegate: DropDownListDelegate!
     
     init?(list: [String], countOfBlocks: Int = 4, delegate: DropDownListDelegate) {
         self.list = list
@@ -38,6 +38,10 @@ class DropDownListModel {
     func selectItem(index: Int) {
         changeList(isOpen: false)
         dropDownListDelegate.setButtonName(list[index])
+    }
+    
+    deinit {
+        print("🔴 DropDownListModel deinit")
     }
     
 }

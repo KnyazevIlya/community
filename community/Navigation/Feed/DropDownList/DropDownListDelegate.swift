@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol DropDownListDelegate {
+protocol DropDownListDelegate: AnyObject {
     func changeList(isOpen: Bool)
     func setButtonName(_ name: String)
 }

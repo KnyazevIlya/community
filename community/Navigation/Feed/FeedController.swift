@@ -15,6 +15,7 @@ class FeedController: UIViewController {
     @IBOutlet weak var dropDownListTable: UITableView!
     @IBOutlet weak var dropDownListButton: UIButton!
     @IBOutlet weak var dropDownListArrowImage: UIImageView!
+    @IBOutlet weak var dropDownHeight: NSLayoutConstraint!
     private var dropDownListModel: DropDownListModel!
     
     @IBOutlet weak var pinsTable: UITableView!
@@ -26,7 +27,7 @@ class FeedController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.setNavigationBarHidden(true, animated: false)
         //init table
         pinsTable.register(UINib(nibName: PinInFeedCell.nibName, bundle: nil), forCellReuseIdentifier: PinInFeedCell.cellId)
         pinsTable.delegate = self
@@ -46,7 +47,7 @@ class FeedController: UIViewController {
         dropDownListTable.delegate = self
         dropDownListTable.dataSource = self
         dropDownListTable.showsVerticalScrollIndicator = false
-        dropDownListTable.transform = CGAffineTransform(scaleX: 1, y: 0)
+        dropDownHeight.constant = 0
         
         //init drop-down list model
         dropDownListModel = DropDownListModel(list: ["Global","Ukraine","Sumy region","Shostka"], countOfBlocks: 3, delegate: self)!
@@ -128,12 +129,14 @@ extension FeedController: DropDownListDelegate {
         let delay: TimeInterval = 0.2
         if isOpen { //bad animation
             UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn) {
-                self.dropDownListTable.transform = .identity
+                self.dropDownHeight.constant = 150
+                self.view.layoutIfNeeded()
                 self.dropDownListArrowImage.transform = CGAffineTransform(rotationAngle: Double.pi)
             }
         } else {
             UIView.animate(withDuration: duration, delay: delay, options: .curveEaseOut) {
-                self.dropDownListTable.transform = CGAffineTransform(scaleX: 1, y: 0)
+                self.dropDownHeight.constant = 0
+                self.view.layoutIfNeeded()
                 self.dropDownListArrowImage.transform = .identity
             }
         }
