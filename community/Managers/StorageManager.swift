@@ -95,6 +95,7 @@ final class StorageManager {
     private let firestore = Firestore.firestore()
     private let storage = Storage.storage().reference()
     private let cache = NSCache<NSString, DataItem>()
+    private var previewReferences = [String : StorageReference]()
     
     private let pinsRelay = PublishRelay<[Pin]>()
     lazy private(set) var pins = pinsRelay.asObservable().share(replay: 1, scope: .forever)
@@ -155,9 +156,12 @@ final class StorageManager {
     func getStorageReferences(forPin pin: Pin, into relay: PublishRelay<DataReference>) {
         let basePath = "media/\(pin.id)"
         
-        storage.child("\(basePath)/image").listAll { result, error in
+        storage.child("\(basePath)/image").listAll { [weak self] result, error in
             guard error == nil else { return }
             for item in result.items {
+                if self?.previewReferences[pin.id] == nil {
+                    self?.previewReferences[pin.id] = item
+                }
                 relay.accept(.image(item))
             }
         }
@@ -172,17 +176,24 @@ final class StorageManager {
     }
     
     func getStorageReference(forPinPreview pin: Pin, completion: @escaping (StorageReference?) -> Void) {
+        if let preview = previewReferences[pin.id] {
+            completion(preview)
+            return
+        }
+        
         let basePath = "media/\(pin.id)/image"
         
-        storage.child(basePath).listAll { result, error in
+        storage.child(basePath).listAll { [weak self] result, error in
             guard error == nil else {
                 completion(nil)
                 return
             }
             
-            for item in result.items {
-                completion(item)
-                return
+            if let firstImage = result.items.first {
+                self?.previewReferences[pin.id] = firstImage
+                completion(firstImage)
+            } else {
+                completion(nil)
             }
         }
     }
