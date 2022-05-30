@@ -14,10 +14,15 @@ class DropDownListModel {
     let countOfBlocks: CGFloat
     private let dropDownListDelegate: DropDownListDelegate
     
-    init(list: [String], countOfBlocks: Int = 4, delegate: DropDownListDelegate) {
+    init?(list: [String], countOfBlocks: Int = 4, delegate: DropDownListDelegate) {
         self.list = list
         self.countOfBlocks = CGFloat(countOfBlocks)
         dropDownListDelegate = delegate
+        if list.count > 0 && countOfBlocks > 1 {
+            dropDownListDelegate.setButtonName(list[0])
+        } else {
+            return nil
+        }
     }
     
     func changeList(isOpen: Bool) {

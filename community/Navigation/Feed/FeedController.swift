@@ -12,7 +12,7 @@ class FeedController: UIViewController {
     
     //drop-down list
     @IBOutlet weak var dropDownListTable: UITableView!
-    @IBOutlet weak var DropDownListButton: UIButton!
+    @IBOutlet weak var dropDownListButton: UIButton!
     private var dropDownListModel: DropDownListModel!
     
     @IBOutlet weak var pinsTable: UITableView!
@@ -47,17 +47,15 @@ class FeedController: UIViewController {
         dropDownListTable.transform = CGAffineTransform(scaleX: 1, y: 0)
         
         //init drop-down list model
-        dropDownListModel = DropDownListModel(list: ["Global","Ukraine","Sumy region","Shostka"], countOfBlocks: 3, delegate: self)
+        dropDownListModel = DropDownListModel(list: ["Global","Ukraine","Sumy region","Shostka"], countOfBlocks: 3, delegate: self)!
     }
     
     @IBAction func dropDownListAction(_ sender: Any) {
         dropDownListModel.changeList()
-        print("button")
     }
     
     @IBAction func tapToSpaceAction(_ sender: Any) {
         dropDownListModel.changeList(isOpen: false)
-        print("space")
     }
     
 }
@@ -78,7 +76,6 @@ extension FeedController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("cell")
         if tableView.tag == 0 { //if use pins table
             if dropDownListModel.isOpen {
                 dropDownListModel.changeList(isOpen: false)
@@ -115,7 +112,8 @@ extension FeedController: DropDownListDelegate {
     }
     
     func setButtonName(_ name: String) {
-        DropDownListButton.setTitle(name, for: .normal)
+        let attributedText = NSAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 25)!])
+        dropDownListButton.setAttributedTitle(attributedText, for: .normal)
     }
 
 }
