@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import UserNotifications
 
 class FeedController: UIViewController {
     
@@ -59,6 +60,37 @@ class FeedController: UIViewController {
         dropDownListModel.changeList(isOpen: false)
     }
     
+    private func pushNotification(withTitle title: String, withBody body: String) {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.delegate = self
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "notification", content: content, trigger: trigger)
+        
+        notificationCenter.add(request) { error in
+            //ERROR
+        }
+    }
+    
+}
+
+
+extension FeedController: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        //click on notification
+    }
+    
 }
 
 extension FeedController: UITableViewDelegate, UITableViewDataSource {
@@ -82,6 +114,7 @@ extension FeedController: UITableViewDelegate, UITableViewDataSource {
                 dropDownListModel.changeList(isOpen: false)
             } else {
                 if let pin = pins[indexPath.row] {
+                    pushNotification(withTitle: pin.name, withBody: pin.description)
                     let viewModel = ViewReportViewModel(pin: pin)
                     let controller = ViewReportController(viewModel: viewModel)
                     present(controller, animated: true)
