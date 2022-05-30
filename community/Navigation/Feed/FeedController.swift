@@ -13,6 +13,7 @@ class FeedController: UIViewController {
     //drop-down list
     @IBOutlet weak var dropDownListTable: UITableView!
     @IBOutlet weak var dropDownListButton: UIButton!
+    @IBOutlet weak var dropDownListArrowImage: UIImageView!
     private var dropDownListModel: DropDownListModel!
     
     @IBOutlet weak var pinsTable: UITableView!
@@ -104,10 +105,18 @@ extension FeedController: UITableViewDelegate, UITableViewDataSource {
 extension FeedController: DropDownListDelegate {
     
     func changeList(isOpen: Bool) {
-        if isOpen {
-            dropDownListTable.transform = .identity
+        let duration: TimeInterval = 0.5
+        let delay: TimeInterval = 0.2
+        if isOpen { //bad animation
+            UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn) {
+                self.dropDownListTable.transform = .identity
+                self.dropDownListArrowImage.transform = CGAffineTransform(rotationAngle: Double.pi)
+            }
         } else {
-            dropDownListTable.transform = CGAffineTransform(scaleX: 1, y: 0)
+            UIView.animate(withDuration: duration, delay: delay, options: .curveEaseOut) {
+                self.dropDownListTable.transform = CGAffineTransform(scaleX: 1, y: 0)
+                self.dropDownListArrowImage.transform = .identity
+            }
         }
     }
     
