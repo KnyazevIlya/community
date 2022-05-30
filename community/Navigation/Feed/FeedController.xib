@@ -25,7 +25,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gd7-hE-xlE">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
-                    <color key="backgroundColor" name="mainGray"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <gestureRecognizers/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="3TE-eH-LIE"/>
@@ -33,7 +33,7 @@
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Rmd-jj-hXC">
                     <rect key="frame" x="0.0" y="120" width="375" height="547"/>
-                    <color key="backgroundColor" name="secondaryGray"/>
+                    <color key="backgroundColor" name="mainGray"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfK-ea-XfE">
                     <rect key="frame" x="70" y="58" width="195" height="44"/>
@@ -57,7 +57,7 @@
                     </constraints>
                 </tableView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TCj-av-8Z6">
-                    <rect key="frame" x="264" y="65" width="41" height="31.5"/>
+                    <rect key="frame" x="264" y="70" width="31" height="21.5"/>
                     <color key="tintColor" name="secondaryGray"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="TCj-av-8Z6" secondAttribute="height" multiplier="1:1" id="Mt2-R3-GjL"/>
@@ -72,7 +72,7 @@
                 <constraint firstItem="pfK-ea-XfE" firstAttribute="top" secondItem="gd7-hE-xlE" secondAttribute="bottom" constant="-62" id="1j4-Uf-uwl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Rmd-jj-hXC" secondAttribute="trailing" id="4pN-nl-F4M"/>
                 <constraint firstItem="pfK-ea-XfE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="70" id="7fx-S4-dej"/>
-                <constraint firstItem="TCj-av-8Z6" firstAttribute="top" secondItem="gd7-hE-xlE" secondAttribute="bottom" constant="-60" id="DJ6-6G-79O"/>
+                <constraint firstItem="TCj-av-8Z6" firstAttribute="top" secondItem="gd7-hE-xlE" secondAttribute="bottom" constant="-55" id="DJ6-6G-79O"/>
                 <constraint firstItem="Rmd-jj-hXC" firstAttribute="top" secondItem="gd7-hE-xlE" secondAttribute="bottom" id="DrS-4t-RUX"/>
                 <constraint firstItem="gd7-hE-xlE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="F8A-q8-CVy"/>
                 <constraint firstItem="XR1-YC-qhs" firstAttribute="top" secondItem="pfK-ea-XfE" secondAttribute="bottom" id="KrR-1l-rTu"/>
@@ -82,7 +82,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XR1-YC-qhs" secondAttribute="trailing" constant="70" id="c2k-HE-s0w"/>
                 <constraint firstItem="TCj-av-8Z6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="264" id="haS-oe-QFK"/>
                 <constraint firstItem="gd7-hE-xlE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mWV-DG-sJv"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TCj-av-8Z6" secondAttribute="trailing" constant="70" id="w4C-O7-RKG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TCj-av-8Z6" secondAttribute="trailing" constant="80" id="w4C-O7-RKG"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pfK-ea-XfE" secondAttribute="trailing" constant="110" id="zuC-Cc-44s"/>
             </constraints>
             <point key="canvasLocation" x="138.40000000000001" y="109.29535232383809"/>

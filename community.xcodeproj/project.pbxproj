@@ -90,6 +90,10 @@
 		FF8EDAE12843950300630BFB /* DropDownListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8EDADF2843950300630BFB /* DropDownListCell.xib */; };
 		FF8EDAE32844EC4600630BFB /* DropDownListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EDAE22844EC4600630BFB /* DropDownListDelegate.swift */; };
 		FF8EDAE52844ECE000630BFB /* DropDownListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EDAE42844ECE000630BFB /* DropDownListModel.swift */; };
+		FF8EDAEB2845129C00630BFB /* ReactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EDAE92845129C00630BFB /* ReactionCell.swift */; };
+		FF8EDAEC2845129C00630BFB /* ReactionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8EDAEA2845129C00630BFB /* ReactionCell.xib */; };
+		FF8EDAEE284515CD00630BFB /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EDAED284515CD00630BFB /* Reaction.swift */; };
+		FF8EDAF028451A0700630BFB /* ReactionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EDAEF28451A0700630BFB /* ReactionManager.swift */; };
 		FFD52E39283FC4D200687ED2 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD52E37283FC4D200687ED2 /* FeedController.swift */; };
 		FFD52E3A283FC4D200687ED2 /* FeedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFD52E38283FC4D200687ED2 /* FeedController.xib */; };
 		FFD52E3E283FC86C00687ED2 /* PinInFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD52E3C283FC86C00687ED2 /* PinInFeedCell.swift */; };
@@ -184,6 +188,10 @@
 		FF8EDADF2843950300630BFB /* DropDownListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropDownListCell.xib; sourceTree = "<group>"; };
 		FF8EDAE22844EC4600630BFB /* DropDownListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownListDelegate.swift; sourceTree = "<group>"; };
 		FF8EDAE42844ECE000630BFB /* DropDownListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownListModel.swift; sourceTree = "<group>"; };
+		FF8EDAE92845129C00630BFB /* ReactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionCell.swift; sourceTree = "<group>"; };
+		FF8EDAEA2845129C00630BFB /* ReactionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionCell.xib; sourceTree = "<group>"; };
+		FF8EDAED284515CD00630BFB /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
+		FF8EDAEF28451A0700630BFB /* ReactionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionManager.swift; sourceTree = "<group>"; };
 		FFD52E37283FC4D200687ED2 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
 		FFD52E38283FC4D200687ED2 /* FeedController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedController.xib; sourceTree = "<group>"; };
 		FFD52E3C283FC86C00687ED2 /* PinInFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinInFeedCell.swift; sourceTree = "<group>"; };
@@ -565,9 +573,29 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		FF8EDAE72845125F00630BFB /* Reactions */ = {
+			isa = PBXGroup;
+			children = (
+				FF8EDAE82845128100630BFB /* Cell */,
+				FF8EDAED284515CD00630BFB /* Reaction.swift */,
+				FF8EDAEF28451A0700630BFB /* ReactionManager.swift */,
+			);
+			path = Reactions;
+			sourceTree = "<group>";
+		};
+		FF8EDAE82845128100630BFB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FF8EDAE92845129C00630BFB /* ReactionCell.swift */,
+				FF8EDAEA2845129C00630BFB /* ReactionCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		FFD52E36283FC48F00687ED2 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				FF8EDAE72845125F00630BFB /* Reactions */,
 				FFD52E402842763000687ED2 /* DropDownList */,
 				FFD52E3B283FC83F00687ED2 /* Cell */,
 				FFD52E37283FC4D200687ED2 /* FeedController.swift */,
@@ -673,6 +701,7 @@
 				065EFC7C27C0601700EA00E3 /* GoogleService-Info.plist in Resources */,
 				060B51CA27FC4D520084EE21 /* MomentsView.xib in Resources */,
 				06DFE5D027C55551008454A7 /* MapController.xib in Resources */,
+				FF8EDAEC2845129C00630BFB /* ReactionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,6 +770,7 @@
 				06DFE5A727C39294008454A7 /* UIColor + Extension.swift in Sources */,
 				0623786A27F06EA300D75DBB /* QueueItemDataSourceImpl.swift in Sources */,
 				0667F6EC27F5B4F1006DD537 /* QueueController.swift in Sources */,
+				FF8EDAEE284515CD00630BFB /* Reaction.swift in Sources */,
 				0684FAE227D4EE5B002BB256 /* VisibilityButton.swift in Sources */,
 				0629A07127D23642005C655A /* CreationAnnotation.swift in Sources */,
 				067E11A027F309A000743D05 /* ViewReportController.swift in Sources */,
@@ -758,6 +788,7 @@
 				068F65F527BFF8B700F63EB0 /* Application.swift in Sources */,
 				FFD52E3E283FC86C00687ED2 /* PinInFeedCell.swift in Sources */,
 				060B51CE27FC4FFC0084EE21 /* MomentsViewModel.swift in Sources */,
+				FF8EDAEB2845129C00630BFB /* ReactionCell.swift in Sources */,
 				06BDDD9E27D8B5B200D7C7A4 /* Observable+Extension.swift in Sources */,
 				0623785827EF56C800D75DBB /* UploadItemRepository.swift in Sources */,
 				0623784727EB46D400D75DBB /* UploadDataItem.swift in Sources */,
@@ -777,6 +808,7 @@
 				067E119627F1B16D00743D05 /* QueueItemMapperImpl.swift in Sources */,
 				FF8EDAE32844EC4600630BFB /* DropDownListDelegate.swift in Sources */,
 				0623786827F06E8700D75DBB /* QueueItemRepositoryImpl.swift in Sources */,
+				FF8EDAF028451A0700630BFB /* ReactionManager.swift in Sources */,
 				06BDDDA227D8F6B000D7C7A4 /* UICollectionView+Extension.swift in Sources */,
 				062A4B3F27E4D29C0007AC8E /* StorageManager.swift in Sources */,
 				0623785527EF548900D75DBB /* UploadItemDataSourceImpl.swift in Sources */,

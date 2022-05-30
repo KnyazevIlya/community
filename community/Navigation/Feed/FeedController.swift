@@ -34,7 +34,7 @@ class FeedController: UIViewController {
         //load data
         StorageManager.shared.pins.bind(to: pinsTable.rx.items) { cell, index, pin in
             let cell = cell.dequeueReusableCell(withIdentifier: PinInFeedCell.cellId,for: IndexPath(item: index, section: 0)) as! PinInFeedCell
-            cell.uploadData(pin)
+            cell.uploadData(pin, reactions: ReactionManager.shared.getReactions(byPinName: pin.name))
             self.pins[index] = pin
             return cell
         }.disposed(by: disposeBag)
